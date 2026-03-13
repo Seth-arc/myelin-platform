@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myelin TMS - Module 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Base Styles (Shared) -->
+    <style>
+        :root {
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --border-color: rgba(15, 23, 42, 0.08);
+            --text-heading: #0f172a;
+            --text-body: #475569;
+            --text-muted: #8492a6;
+            --brand-main: #0A1C30;
+            --brand-accent: #0A1C30;
+            --brand-accent-hover: #1e293b;
+            --brand-light: #f1f5f9;
+            --success: #10b981;
+            --success-bg: #ecfdf5;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --shadow-subtle: 0 4px 20px rgba(15, 23, 42, 0.04);
+            --shadow-float: 0 20px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        body.dark {
+            --bg-base: #050505;
+            --bg-surface: rgba(5, 5, 5, 0.8);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --text-heading: #FFFFFF;
+            --text-body: #E5E5E5;
+            --text-muted: #A3A3A3;
+            --brand-main: #FFFFFF;
+            --brand-accent: #FFFFFF;
+            --brand-accent-hover: #E5E5E5;
+            --brand-light: rgba(255, 255, 255, 0.05);
+            --success-bg: rgba(16, 185, 129, 0.1);
+            --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --shadow-float: 0 20px 40px rgba(0, 0, 0, 0.8);
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%) fixed;
+            background-color: #050505;
+        }
+
+        body.dark .sidebar,
+        body.dark .topbar,
+        body.dark .minimal-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        body.dark .btn-primary {
+            background: #FFFFFF;
+            color: #000000;
+            border-color: #FFFFFF;
+        }
+
+        body.dark .btn-primary:hover {
+            background: #E5E5E5;
+            border-color: #E5E5E5;
+            color: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-body);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            font-size: 14px;
+            letter-spacing: -0.01em;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* --- Layout --- */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .brand {
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            text-decoration: none;
+        }
+
+        .brand i {
+            font-size: 1.5rem;
+            color: var(--brand-accent);
+        }
+
+        .nav-menu {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-item {
+            padding: 0.8rem 1rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .nav-item i {
+            font-size: 1.25rem;
+        }
+
+        .nav-item:hover {
+            background: #f8fafc;
+            color: var(--text-heading);
+        }
+
+        .nav-item.active {
+            background: var(--brand-light);
+            color: var(--brand-accent);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            background: transparent;
+        }
+
+        .user-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--bg-surface);
+        }
+
+        .topbar {
+            height: 70px;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumbs a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--brand-accent);
+        }
+
+        .breadcrumbs strong {
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* --- Workspace --- */
+        .workspace {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .workspace::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .workspace::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .workspace::-webkit-scrollbar-thumb {
+            background: rgba(15, 23, 42, 0.1);
+            border-radius: 10px;
+        }
+
+        body.dark .workspace::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-md);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-subtle);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--brand-accent);
+            color: white;
+            border-color: var(--brand-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--brand-accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: var(--bg-surface);
+            border-color: var(--border-color);
+            color: var(--text-body);
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .minimal-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        /* Module Specific Layout */
+        .module-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 0;
+        }
+
+        .module-sidebar {
+            width: 350px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 2rem;
+        }
+
+        /* Lock Screen container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #f8fafc;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            border: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body.dark .video-container {
+            background: #1a1a1a;
+        }
+
+        .simulation-prompt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 5;
+            color: var(--text-heading);
+        }
+
+        .simulation-prompt i {
+            font-size: 3rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .simulation-prompt h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .simulation-prompt p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 400px;
+        }
+
+        /* Syllabus List */
+        .syllabus-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: default;
+            transition: all 0.2s;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+
+        .syllabus-item:last-child {
+            border-bottom: none;
+        }
+
+        .syllabus-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .syllabus-icon.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .syllabus-icon.current {
+            background: var(--brand-accent);
+            color: white;
+        }
+
+        .syllabus-icon.locked {
+            border: 1px dashed var(--text-muted);
+            color: var(--text-muted);
+            background: transparent;
+        }
+
+        .syllabus-text {
+            flex: 1;
+        }
+
+        .syllabus-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 4px;
+        }
+
+        .syllabus-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .content-card {
+            padding: 2rem;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .content-card h2 {
+            font-size: 1.5rem;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .content-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-body);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-heading);
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
+        .content-card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .content-card li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="ai-study-buddy-mockup.html" class="brand">Myelin TMS</a>
+        <div class="nav-menu">
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-squares-four"></i> Dashboard</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item active"><i class="ph ph-map-trifold"></i> Learning
+                Pathway</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-cube"></i> Virtual Simulator</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-book-open-text"></i> Workplace
+                Logbook</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-folder-open"></i> e-Portfolio</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-users-three"></i> Peer Review</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-robot"></i> Learning Coach</a>
+            <a href="ai-study-buddy-mockup.html" class="nav-item"><i class="ph ph-certificate"></i> Statement of
+                Results</a>
+        </div>
+
+        <div class="sidebar-footer">
+            <div style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; margin: -12px; border-radius: var(--radius-md); transition: background 0.2s;"
+                onmouseover="this.style.background='var(--brand-light)'"
+                onmouseout="this.style.background='transparent'">
+                <img src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=240&q=80"
+                    class="user-avatar" style="object-fit: cover;">
+                <div style="flex: 1;">
+                    <div style="font-weight: 600; color: var(--text-heading); font-size: 0.9rem; margin-bottom: 2px;">
+                        Thabo Lekota</div>
+                    <div
+                        style="font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 4px;">
+                        Learner Account</div>
+                </div>
+                <i class="ph-bold ph-gear" style="color: var(--text-muted); font-size: 1.1rem;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="topbar">
+            <div class="breadcrumbs">
+                <a href="ai-study-buddy-mockup.html">Programmes</a> <i class="ph ph-caret-right"></i>
+                <a href="ai-study-buddy-mockup.html">Mobile Device Repair Level 4</a> <i class="ph ph-caret-right"></i>
+                <strong>Module 4: Process Equipment Maintenance</strong>
+            </div>
+            <div class="topbar-actions">
+                <i class="ph ph-moon" id="darkModeToggle" title="Toggle Dark Mode"
+                    style="font-size: 1.5rem; color: var(--text-muted); cursor: pointer; transition: color 0.2s;"></i>
+                <i class="ph ph-bell"
+                    style="font-size: 1.5rem; color: var(--text-muted); cursor: pointer; transition: color 0.2s;"></i>
+            </div>
+        </div>
+
+        <div class="workspace">
+
+            <!-- Main Module Content -->
+            <div class="module-content">
+                <!-- Lock Area -->
+                <div class="video-container">
+                    <div class="simulation-prompt">
+                        <i class="ph-bold ph-lock-key"></i>
+                        <h2>Module Locked</h2>
+                        <p>You must complete Module 3 (Advanced Safety Protocol Sandbox) to unlock this module.</p>
+                    </div>
+                </div>
+
+                <!-- Content Info -->
+                <div class="minimal-panel content-card">
+                    <h2>4.0 Introduction to Pump Teardowns (Locked)</h2>
+                    <p>This module will guide you through the process of diagnosing, disassembling, repairing, and
+                        reassembling standard industrial process equipment like centrifugal pumps.</p>
+
+                    <h3>What You Will Learn:</h3>
+                    <ul>
+                        <li>Safe casing disassembly procedures without damaging seals.</li>
+                        <li>Bearing inspection and failure analysis.</li>
+                        <li>Mechanical seal replacement and installation alignment.</li>
+                        <li>Torque sequence for correct casing reassembly.</li>
+                    </ul>
+
+                    <p>Ensure you have access to a clean workspace and your standard toolkit before starting this
+                        module's practical components.</p>
+                </div>
+
+                <!-- Navigation -->
+                <div class="nav-buttons">
+                    <a href="module-3.html" class="btn btn-outline" style="min-width: 140px;">
+                        <i class="ph-bold ph-arrow-left"></i> Previous Module
+                    </a>
+                </div>
+            </div>
+
+            <!-- Module Sidebar / Syllabus -->
+            <div class="module-sidebar">
+                <div class="minimal-panel" style="opacity: 0.6;">
+                    <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
+                        <h3
+                            style="font-size: 1.1rem; font-weight: 700; color: var(--text-heading); margin-bottom: 8px;">
+                            Module 4: Process Equipment M...</h3>
+
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted);">
+                            <span>Course Progress</span>
+                            <span style="color: var(--brand-accent);">0%</span>
+                        </div>
+                        <div
+                            style="width: 100%; height: 4px; background: var(--bg-base); border-radius: 2px; overflow: hidden;">
+                            <div style="width: 0%; height: 100%; background: var(--success); border-radius: 2px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Syllabus Items -->
+                    <div style="display: flex; flex-direction: column;">
+
+                        <div class="syllabus-item">
+                            <div class="syllabus-icon locked">
+                                <i class="ph-fill ph-video-camera"></i>
+                            </div>
+                            <div class="syllabus-text">
+                                <div class="syllabus-title">4.0 Centrifugal Pump Anatomy</div>
+                                <div class="syllabus-meta">
+                                    <span>Locked</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="syllabus-item">
+                            <div class="syllabus-icon locked">
+                                <i class="ph-fill ph-video-camera"></i>
+                            </div>
+                            <div class="syllabus-text">
+                                <div class="syllabus-title">4.1 Bearing Failure Analysis</div>
+                                <div class="syllabus-meta">
+                                    <span>Locked</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="syllabus-item">
+                            <div class="syllabus-icon locked">
+                                <i class="ph-fill ph-file-text"></i>
+                            </div>
+                            <div class="syllabus-text">
+                                <div class="syllabus-title">Quiz: Bearings & Seals</div>
+                                <div class="syllabus-meta">
+                                    <span>Locked</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="syllabus-item">
+                            <div class="syllabus-icon locked">
+                                <i class="ph-fill ph-cloud-arrow-up"></i>
+                            </div>
+                            <div class="syllabus-text">
+                                <div class="syllabus-title">Assignment: Pump Rebuild logs</div>
+                                <div class="syllabus-meta">
+                                    <span>Locked</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            darkModeToggle.classList.replace('ph-moon', 'ph-sun');
+        }
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.classList.replace('ph-moon', 'ph-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.classList.replace('ph-sun', 'ph-moon');
+            }
+        });
+    </script>
+</body>
+
+</html>

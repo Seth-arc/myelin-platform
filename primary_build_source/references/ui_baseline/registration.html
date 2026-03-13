@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Your Account | ITS Construct</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --brand-accent: #0A1C30;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #E5E5E5;
+            overflow-x: hidden;
+        }
+
+        .activation-card {
+            background: rgba(10, 28, 48, 0.15);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-subtle);
+            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .input-group {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .input-group:focus-within {
+            border-color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .step-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .step-indicator.active {
+            background: #FFFFFF;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-xl">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <div class="w-6 h-6 bg-white rounded-sm rotate-45 flex items-center justify-center">
+                    <i class="ph-fill ph-hexagon text-black -rotate-45 text-xs"></i>
+                </div>
+                <span class="font-bold tracking-tighter text-white">ITS CONSTRUCT</span>
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white mb-2">Welcome to the Simulator</h1>
+            <p class="text-neutral-500">Initialize your account to begin Module 3 training.</p>
+        </div>
+
+        <div class="activation-card rounded-3xl p-10 shadow-2xl">
+            <div class="flex items-center gap-3 mb-10">
+                <div class="step-indicator active"></div>
+                <div class="step-indicator"></div>
+                <div class="step-indicator"></div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-neutral-500 ml-2">Step 1: Identity
+                    Verification</span>
+            </div>
+
+            <form class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Learner
+                            ID</label>
+                        <div class="input-group flex items-center px-4 py-3 rounded-xl">
+                            <i class="ph ph-identification-badge text-neutral-400 mr-3"></i>
+                            <input type="text" placeholder="e.g. TL-2026-99"
+                                class="bg-transparent w-full text-sm outline-none text-white placeholder:text-neutral-700">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Temporary
+                            Password</label>
+                        <div class="input-group flex items-center px-4 py-3 rounded-xl">
+                            <i class="ph ph-key text-neutral-400 mr-3"></i>
+                            <input type="password" placeholder="From your email"
+                                class="bg-transparent w-full text-sm outline-none text-white placeholder:text-neutral-700">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-neutral-900">
+
+                <div class="space-y-6">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Set New Secure
+                            Password</label>
+                        <div class="input-group flex items-center px-4 py-3 rounded-xl">
+                            <i class="ph ph-shield-check text-neutral-400 mr-3"></i>
+                            <input type="password" placeholder="Create a strong password"
+                                class="bg-transparent w-full text-sm outline-none text-white placeholder:text-neutral-700">
+                        </div>
+                        <div class="flex gap-1 mt-2">
+                            <div class="h-1 flex-1 bg-white rounded-full"></div>
+                            <div class="h-1 flex-1 bg-neutral-800 rounded-full"></div>
+                            <div class="h-1 flex-1 bg-neutral-800 rounded-full"></div>
+                            <div class="h-1 flex-1 bg-neutral-800 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-900/50 p-4 rounded-xl border border-white/5">
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox"
+                            class="mt-1 rounded border-neutral-800 bg-neutral-950 text-white focus:ring-0">
+                        <span class="text-xs text-neutral-400 leading-relaxed">
+                            I agree to the <a href="#" class="text-white underline">POPIA Data Consent</a> and
+                            acknowledge that simulator performance data will be shared with <strong>Tshwane South
+                                TVET</strong> mentors.
+                        </span>
+                    </label>
+                </div>
+
+                <button type="button"
+                    class="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-neutral-200 transition-all flex items-center justify-center gap-2 group">
+                    Initialize Profile
+                    <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="mt-10 flex items-center justify-between px-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-neutral-900 flex items-center justify-center text-neutral-500">
+                    <i class="ph ph-question"></i>
+                </div>
+                <span class="text-xs text-neutral-500">Need help activating? <a href="#"
+                        class="text-white hover:underline">Contact Support</a></span>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-700">Ver. 2026.1.0</span>
+        </div>
+    </div>
+
+</body>
+
+</html>

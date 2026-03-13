@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myelin TMS - Admin UI Baseline</title>
+    <link rel="stylesheet" href="../../assets/styles/myelin-tokens.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--myelin-font-sans);
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-base);
+            color: var(--text-body);
+            display: flex;
+            letter-spacing: var(--myelin-letter-tight);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            padding: 24px 28px;
+            color: var(--text-heading);
+            font-size: 1.06rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand i {
+            color: var(--brand-accent);
+            font-size: 1.3rem;
+        }
+
+        .role-pill {
+            margin: 0 20px 12px;
+            border: 1px solid var(--border-color);
+            background: var(--brand-light);
+            color: var(--brand-accent);
+            border-radius: var(--myelin-radius-pill);
+            padding: 8px 12px;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 10px;
+        }
+
+        .nav-item {
+            background: transparent;
+            border: 0;
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            text-align: left;
+            cursor: pointer;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background var(--myelin-motion-fast), color var(--myelin-motion-fast);
+        }
+
+        .nav-item:hover {
+            color: var(--text-heading);
+            background: var(--brand-light);
+        }
+
+        .nav-item.active {
+            color: var(--brand-accent);
+            background: var(--brand-light);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding: 18px 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .app {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .topbar {
+            height: 70px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .topbar-left {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .crumbs {
+            color: var(--text-muted);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .crumbs strong {
+            color: var(--text-heading);
+        }
+
+        .context-select,
+        .search-input {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            color: var(--text-heading);
+            height: 38px;
+            font-size: 13px;
+        }
+
+        .context-select {
+            padding: 0 10px;
+            min-width: 170px;
+        }
+
+        .search-wrap {
+            min-width: 240px;
+            max-width: 360px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0 12px 0 34px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn {
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-heading);
+            border-radius: var(--radius-md);
+            padding: 9px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn.primary {
+            border-color: var(--brand-accent);
+            background: var(--brand-accent);
+            color: #fff;
+        }
+
+        body.dark .btn.primary {
+            color: #000;
+        }
+
+        .workspace {
+            padding: 20px 24px 24px;
+            overflow: auto;
+            display: grid;
+            gap: 14px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .kpi {
+            padding: 14px;
+        }
+
+        .kpi-label {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            color: var(--text-heading);
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .kpi-meta {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .panel {
+            padding: 16px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .panel-header h2 {
+            color: var(--text-heading);
+            font-size: 17px;
+            line-height: 1.2;
+        }
+
+        .panel-sub {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .split {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .triple {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: 1.4fr 1fr 1fr;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .table th,
+        .table td {
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+
+        .table th {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-block;
+            border-radius: var(--myelin-radius-pill);
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .status.ok {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .status.warn {
+            background: rgba(245, 158, 11, 0.14);
+            color: var(--warning);
+        }
+
+        .status.alert {
+            background: rgba(239, 68, 68, 0.14);
+            color: var(--danger);
+        }
+
+        .status.info {
+            background: rgba(37, 99, 235, 0.14);
+            color: var(--myelin-info);
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-row:last-child {
+            border-bottom: 0;
+        }
+
+        .setting-copy {
+            display: grid;
+            gap: 3px;
+        }
+
+        .setting-title {
+            color: var(--text-heading);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .setting-meta {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .feed-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .feed-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 10px 11px;
+        }
+
+        .feed-title {
+            color: var(--text-heading);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .feed-meta {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .meter {
+            margin-bottom: 10px;
+        }
+
+        .meter:last-child {
+            margin-bottom: 0;
+        }
+
+        .meter-head {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .meter-track {
+            height: 8px;
+            border-radius: 99px;
+            background: var(--brand-light);
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: var(--brand-accent);
+        }
+
+        .checklist {
+            list-style: none;
+            display: grid;
+            gap: 8px;
+        }
+
+        .check-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 10px 11px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .mini-note {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 1520px) {
+            .kpi-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .triple {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .split {
+                grid-template-columns: 1fr;
+            }
+
+            .search-wrap {
+                display: none;
+            }
+
+            .context-select {
+                min-width: 140px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand"><i class="ph-bold ph-shield-check"></i> Myelin TMS</div>
+        <div class="role-pill">Admin Baseline</div>
+        <div class="nav-menu">
+            <button class="nav-item active"><i class="ph ph-chart-line-up"></i> Institution Overview</button>
+            <button class="nav-item"><i class="ph ph-users-three"></i> User and Role Management</button>
+            <button class="nav-item"><i class="ph ph-sliders-horizontal"></i> Programme Configuration</button>
+            <button class="nav-item"><i class="ph ph-certificate"></i> Results and Compliance</button>
+            <button class="nav-item"><i class="ph ph-file-arrow-down"></i> Reporting Exports</button>
+            <button class="nav-item"><i class="ph ph-bell-ringing"></i> Notification Templates</button>
+            <button class="nav-item"><i class="ph ph-lock-key"></i> Security and Audit Logs</button>
+        </div>
+        <div class="sidebar-footer">
+            <div>Tenant: Tshwane South TVET</div>
+            <div>Mode: Baseline Reference</div>
+        </div>
+    </aside>
+
+    <main class="app">
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="crumbs">Admin Console <i class="ph ph-caret-right"></i> <strong>Institution Overview</strong></div>
+                <select class="context-select" aria-label="Campus scope">
+                    <option>All Campuses</option>
+                    <option>Pretoria West</option>
+                    <option>Centurion</option>
+                    <option>Atteridgeville</option>
+                </select>
+                <select class="context-select" aria-label="Reporting period">
+                    <option>Last 30 Days</option>
+                    <option>Current Term</option>
+                    <option>Current Quarter</option>
+                </select>
+                <div class="search-wrap">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input class="search-input" type="search" placeholder="Search learners, lecturers, audits">
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <button class="btn">Export Snapshot</button>
+                <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="ph ph-moon"></i></button>
+                <button class="icon-btn" title="Notifications"><i class="ph ph-bell"></i></button>
+            </div>
+        </header>
+
+        <section class="workspace">
+            <div class="kpi-grid">
+                <article class="card kpi">
+                    <div class="kpi-label">Active Campuses</div>
+                    <div class="kpi-value">18</div>
+                    <div class="kpi-meta">+2 since previous term</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Active Learners</div>
+                    <div class="kpi-value">12,480</div>
+                    <div class="kpi-meta">92% profile completion</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Lecturer Accounts</div>
+                    <div class="kpi-value">436</div>
+                    <div class="kpi-meta">17 pending invites</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Pathway Completion</div>
+                    <div class="kpi-value">67%</div>
+                    <div class="kpi-meta">+4% month-over-month</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Critical Risk Items</div>
+                    <div class="kpi-value">09</div>
+                    <div class="kpi-meta">Requires action today</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Report Exports (24h)</div>
+                    <div class="kpi-value">142</div>
+                    <div class="kpi-meta">1 failed job</div>
+                </article>
+            </div>
+
+            <div class="split">
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Risk and Action Queue</h2>
+                        <button class="btn">Open Full Queue</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Queue Item</th>
+                                <th>Owner</th>
+                                <th>SLA</th>
+                                <th>Impact</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>QCTO export schema mismatch on results file</td>
+                                <td>Compliance Admin</td>
+                                <td>Today</td>
+                                <td>High</td>
+                                <td><span class="status alert">Critical</span></td>
+                            </tr>
+                            <tr>
+                                <td>Mentor sign-off backlog exceeding 72 hours</td>
+                                <td>Placement Office</td>
+                                <td>Tomorrow</td>
+                                <td>Medium</td>
+                                <td><span class="status warn">At Risk</span></td>
+                            </tr>
+                            <tr>
+                                <td>Peer review moderation queue overflow</td>
+                                <td>Faculty Lead</td>
+                                <td>2 days</td>
+                                <td>Medium</td>
+                                <td><span class="status warn">At Risk</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dormant lecturer SSO accounts requiring cleanup</td>
+                                <td>Identity Ops</td>
+                                <td>3 days</td>
+                                <td>Low</td>
+                                <td><span class="status ok">On Track</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Policy Controls</h2>
+                        <button class="btn primary">Edit Policies</button>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-copy">
+                            <div class="setting-title">Funding at registration</div>
+                            <div class="setting-meta">Institution-level enrollment guard</div>
+                        </div>
+                        <span class="status warn">Warn</span>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-copy">
+                            <div class="setting-title">SSO mode</div>
+                            <div class="setting-meta">Primary identity provider policy</div>
+                        </div>
+                        <span class="status info">OIDC</span>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-copy">
+                            <div class="setting-title">AI guidance in assessments</div>
+                            <div class="setting-meta">Safety-constrained response mode</div>
+                        </div>
+                        <span class="status ok">Constrained</span>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-copy">
+                            <div class="setting-title">Data retention profile</div>
+                            <div class="setting-meta">Learner, audit, and records lifecycle</div>
+                        </div>
+                        <span class="status info">10 Years</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="triple">
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Campus Readiness Matrix</h2>
+                        <button class="btn">View Campus Detail</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Campus</th>
+                                <th>Enrollment</th>
+                                <th>LOTO Pass Rate</th>
+                                <th>Sign-off SLA</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pretoria West</td>
+                                <td>2,406</td>
+                                <td>71%</td>
+                                <td>94%</td>
+                                <td><span class="status ok">Healthy</span></td>
+                            </tr>
+                            <tr>
+                                <td>Centurion</td>
+                                <td>1,932</td>
+                                <td>66%</td>
+                                <td>83%</td>
+                                <td><span class="status warn">Watch</span></td>
+                            </tr>
+                            <tr>
+                                <td>Atteridgeville</td>
+                                <td>1,118</td>
+                                <td>58%</td>
+                                <td>74%</td>
+                                <td><span class="status alert">Intervene</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Export Jobs</h2>
+                        <button class="btn">Run New Export</button>
+                    </div>
+                    <ul class="feed-list">
+                        <li class="feed-item">
+                            <div class="feed-title">DHET Learner Outcomes - 2026-Q1</div>
+                            <div class="feed-meta">Completed 12m ago | 54,102 rows</div>
+                        </li>
+                        <li class="feed-item">
+                            <div class="feed-title">SETA Workplace Evidence Rollup</div>
+                            <div class="feed-meta">Running | ETA 6m</div>
+                        </li>
+                        <li class="feed-item">
+                            <div class="feed-title">QCTO Statement-of-Results Pack</div>
+                            <div class="feed-meta">Failed | Schema mismatch</div>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Recent Audit Feed</h2>
+                        <button class="btn">Open Logs</button>
+                    </div>
+                    <ul class="feed-list">
+                        <li class="feed-item">
+                            <div class="feed-title">Role policy changed</div>
+                            <div class="feed-meta">Super Admin | 09:41 | Permission scope updated</div>
+                        </li>
+                        <li class="feed-item">
+                            <div class="feed-title">Result statement amended</div>
+                            <div class="feed-meta">Admin | 08:13 | Version 2 issued</div>
+                        </li>
+                        <li class="feed-item">
+                            <div class="feed-title">Bulk notification template edited</div>
+                            <div class="feed-meta">Comms Manager | 07:52 | SMS reminder policy</div>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="split">
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Notification Delivery Performance</h2>
+                        <button class="btn">Open Channel Analytics</button>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>Email delivery</span><span>98.4%</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:98.4%"></div></div>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>SMS delivery</span><span>93.1%</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:93.1%"></div></div>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>Avg acknowledgment latency</span><span>2h 16m</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:74%"></div></div>
+                    </div>
+                    <div class="mini-note">Delivery metrics are scoped to active campuses and include learner and mentor channels.</div>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Release Readiness Checklist</h2>
+                        <button class="btn primary">Start Sign-off</button>
+                    </div>
+                    <ul class="checklist">
+                        <li class="check-item"><span>RLS isolation tests</span><span class="status ok">Pass</span></li>
+                        <li class="check-item"><span>QCTO export validation</span><span class="status warn">Review</span></li>
+                        <li class="check-item"><span>Notification fallback routing</span><span class="status ok">Pass</span></li>
+                        <li class="check-item"><span>AI safety policy suite</span><span class="status info">Pending</span></li>
+                        <li class="check-item"><span>Pilot campus onboarding</span><span class="status warn">In Progress</span></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function initTheme() {
+            const body = document.body;
+            const btn = document.getElementById("themeToggle");
+            const icon = btn.querySelector("i");
+            const stored = localStorage.getItem("myelin-theme");
+            if (stored === "dark") {
+                body.classList.add("dark");
+                icon.className = "ph ph-sun";
+            }
+            btn.addEventListener("click", function () {
+                body.classList.toggle("dark");
+                const dark = body.classList.contains("dark");
+                localStorage.setItem("myelin-theme", dark ? "dark" : "light");
+                icon.className = dark ? "ph ph-sun" : "ph ph-moon";
+            });
+        })();
+    </script>
+</body>
+
+</html>

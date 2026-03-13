@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT — MYELIN TMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@300;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%) fixed;
+            background-color: #050505;
+            color: #E5E5E5;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        #surface {
+            display: flex;
+            width: 500vw;
+            transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 8vw;
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .bg-kinetic {
+            position: absolute;
+            font-size: 20vw;
+            font-weight: 900;
+            opacity: 0.02;
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-style: italic;
+        }
+
+        .text-gradient {
+            background: linear-gradient(180deg, #FFFFFF 0%, #A3A3A3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal-box {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .reveal-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            filter: grayscale(100%) contrast(120%);
+            transition: all 0.8s;
+        }
+
+        .reveal-box:hover img {
+            opacity: 0.9;
+            filter: grayscale(0%);
+        }
+
+        .btn-next {
+            position: relative;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            color: white;
+            border-radius: 9999px;
+            background-color: rgba(23, 23, 23, 0.8);
+            border: 1px solid #404040;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .btn-next:hover {
+            border-color: white;
+            background-color: rgba(40, 40, 40, 0.8);
+        }
+
+        #progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background: #fff;
+            width: 25%;
+            transition: width 0.4s;
+            z-index: 100;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="fixed w-full z-50 glass-nav px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2 font-bold text-xl tracking-tighter">
+            <div class="w-6 h-6 bg-white rounded-sm rotate-45"></div>
+            MYELIN
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-neutral-400">
+            <a href="index.html" class="hover:text-white transition">Home</a>
+            <a href="#" class="hover:text-white transition">Simulator</a>
+            <a href="#" class="hover:text-white transition">Curriculum</a>
+        </div>
+        <a href="index.html"
+            class="hidden md:inline-block bg-white text-black px-5 py-2 rounded-full text-sm font-bold hover:bg-neutral-200 transition">
+            Request Demo
+        </a>
+    </nav>
+
+    <div id="surface">
+        <section class="slide">
+            <div class="bg-kinetic">MANDATE</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full z-10">
+                <div class="max-w-3xl">
+                    <span class="mono text-[10px] text-zinc-500 mb-4 block uppercase tracking-[0.4em]">Section_01 // The
+                        Core Philosophy</span>
+                    <h1
+                        class="text-7xl md:text-9xl font-extrabold tracking-tighter text-gradient leading-[0.8] mb-8 pb-2">
+                        Failure is <br>Non-Fatal.
+                    </h1>
+                    <p class="mono text-sm text-zinc-400 leading-loose max-w-xl">
+                        In heavy industry, the cost of a mistake is measured in lives and millions in downtime. Myelin
+                        TMS
+                        is an AI-driven simulation platform architected to provide a "failure-safe" environment. Here,
+                        South
+                        African engineering trade learners master the **Lockout/Tagout (LOTO)** 7-step protocol through
+                        recursive, high-fidelity practice, bridging the gap between classroom theory and real-world
+                        QCTO-registered qualifications.
+                    </p>
+                    <div class="mt-12">
+                        <button onclick="scrollToSlide(1)" class="btn-next mono">Initialize_Sequence</button>
+                    </div>
+                </div>
+                <div class="reveal-box">
+                    <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200"
+                        alt="Industrial Engineering">
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="bg-kinetic">SOVEREIGN</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full z-10">
+                <div>
+                    <span class="mono text-[10px] text-zinc-500 mb-4 block uppercase tracking-[0.4em]">Section_02 //
+                        Technical Architecture</span>
+                    <h2 class="text-6xl font-extrabold tracking-tight mb-8 uppercase text-gradient">The WebGL
+                        <br>Ecosystem.
+                    </h2>
+                    <p class="mono text-xs text-zinc-400 leading-loose mb-6">
+                        Engineered for the constraints of the local landscape, our engine delivers high-fidelity 3D
+                        assets optimized for low-bandwidth mobile environments. Using **Three.js** and **GSAP**, we
+                        provide a "butter-smooth" 60FPS experience that ensures visual precision is never compromised by
+                        connectivity.
+                    </p>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="text-2xl font-bold">ISO-14118</div>
+                            <div class="mono text-[9px] text-zinc-500 uppercase">Protocol Compliance</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="text-2xl font-bold">&lt; 5.0MB</div>
+                            <div class="mono text-[9px] text-zinc-500 uppercase">Initial Runtime Load</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal-box">
+                    <img src="assets/simulator_demo.webp" alt="Myelin TMS Simulation Demo">
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="bg-kinetic">NOMVULA</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full z-10">
+                <div class="reveal-box order-2 md:order-1">
+
+                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200"
+                        alt="AI Interface">
+                </div>
+                <div class="order-1 md:order-2">
+                    <span class="mono text-[10px] text-zinc-500 mb-4 block uppercase tracking-[0.4em]">Section_03 //
+                        Cognitive Augmentation</span>
+                    <h2 class="text-7xl font-extrabold tracking-tight mb-8 uppercase text-gradient">The AI <br>Coach.
+                    </h2>
+                    <p class="mono text-sm text-zinc-400 leading-loose">
+                        Nomvula is more than an interface; she is a persistent learning partner. By analyzing real-time
+                        interaction data within the 3D sandbox, the AI provides adaptive scaffolding—offering hints when
+                        a
+                        learner falters, answering questions about safety protocols, and deep-diving into the physics of
+                        trapped pressure when they succeed.
+                    </p>
+                    <button onclick="scrollToSlide(3)" class="btn-next mono mt-10">View_Assessments</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="bg-kinetic">SCALABLE</div>
+            <div class="z-10 w-full max-w-5xl">
+                <span class="mono text-[10px] text-zinc-500 mb-4 block uppercase tracking-[0.4em]">Section_04 //
+                    Outcomes</span>
+                <h2 class="text-8xl font-extrabold tracking-tight mb-12 uppercase text-gradient">Verified
+                    <br>Competence.
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-8 border border-zinc-900 bg-zinc-950/50">
+                        <h4 class="mono text-zinc-500 text-[10px] uppercase mb-4 tracking-widest">e-Portfolio</h4>
+                        <div class="text-5xl font-extrabold mb-2">Video</div>
+                        <p class="mono text-[10px] text-zinc-400 leading-relaxed">Learners record LOTO procedures and
+                            submit them for grading and Peer Review assessment.</p>
+                    </div>
+                    <div class="p-8 border border-zinc-900 bg-zinc-950/50">
+                        <h4 class="mono text-zinc-500 text-[10px] uppercase mb-4 tracking-widest">Logbook</h4>
+                        <div class="text-5xl font-extrabold mb-2">Tracked</div>
+                        <p class="mono text-[10px] text-zinc-400 leading-relaxed">Link an employer placement to track
+                            hours seamlessly, requesting mentor sign-offs on the fly.</p>
+                    </div>
+                    <div class="p-8 border border-zinc-900 bg-zinc-950/50">
+                        <h4 class="mono text-zinc-500 text-[10px] uppercase mb-4 tracking-widest">Compliance</h4>
+                        <div class="text-5xl font-extrabold mb-2">QCTO</div>
+                        <p class="mono text-[10px] text-zinc-400 leading-relaxed">Achieve alignment with SAQA
+                            Engineering Trade unit standards leading to an official Statement of Results.</p>
+                    </div>
+                </div>
+                <div class="mt-20 flex justify-between items-center border-t border-zinc-900 pt-10">
+                    <div class="mono text-[10px] text-zinc-500">MYELIN_TMS // CORE_INFRASTRUCTURE</div>
+                    <button onclick="scrollToSlide(4)" class="btn-next mono">Next_Sequence</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide">
+            <div class="bg-kinetic">INITIATE</div>
+            <div class="z-10 max-w-3xl text-center mx-auto">
+                <span class="mono text-[10px] text-zinc-500 mb-4 block uppercase tracking-[0.4em]">Section_05 //
+                    Engagement</span>
+                <h2 class="text-7xl md:text-9xl font-extrabold tracking-tighter text-gradient leading-[0.8] mb-8 pb-2">
+                    Ready to <br>Deploy?
+                </h2>
+                <p class="mono text-sm text-zinc-400 leading-loose max-w-xl mx-auto mb-12">
+                    Experience the high-fidelity simulator firsthand. See how Myelin TMS transforms heavy industry
+                    training with verifiable QCTO compliance.
+                </p>
+                <div class="flex gap-6 justify-center">
+                    <a href="index.html"
+                        class="inline-block bg-white text-black px-8 py-3 rounded-full text-sm font-bold hover:bg-neutral-200 transition shadow-2xl uppercase tracking-widest">Request
+                        Demo</a>
+                    <button onclick="scrollToSlide(0)" class="btn-next mono">Return_to_Origin</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="progress-bar"></div>
+
+    <script>
+        const surface = document.getElementById('surface');
+        const progressBar = document.getElementById('progress-bar');
+        const slides = document.querySelectorAll('.slide');
+        let currentIdx = 0;
+        let isScrolling = false;
+
+        function scrollToSlide(idx) {
+            if (isScrolling) return;
+            isScrolling = true;
+
+            currentIdx = idx;
+            surface.style.transform = `translateX(-${idx * 100}vw)`;
+            // Initialize progress bar correctly if width is missing
+            if (progressBar) {
+                progressBar.style.width = `${((idx + 1) / slides.length) * 100}%`;
+            }
+
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1200); // Match CSS transition duration
+        }
+
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+
+            if (e.deltaY > 0 && currentIdx < slides.length - 1) {
+                scrollToSlide(currentIdx + 1);
+            } else if (e.deltaY < 0 && currentIdx > 0) {
+                scrollToSlide(currentIdx - 1);
+            }
+        }, { passive: true });
+
+        window.addEventListener('keydown', (e) => {
+            if (isScrolling) return;
+
+            if ((e.key === 'ArrowDown' || e.key === 'ArrowRight') && currentIdx < slides.length - 1) {
+                scrollToSlide(currentIdx + 1);
+            } else if ((e.key === 'ArrowUp' || e.key === 'ArrowLeft') && currentIdx > 0) {
+                scrollToSlide(currentIdx - 1);
+            }
+        });
+    </script>
+</body>
+
+</html>

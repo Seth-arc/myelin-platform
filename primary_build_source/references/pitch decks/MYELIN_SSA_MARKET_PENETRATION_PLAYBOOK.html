@@ -1,0 +1,3706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myelin SSA Market Penetration Playbook and Operating Manual</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:wght@600;700&display=swap");
+
+    :root {
+      --ink-900: #0f1b2a;
+      --ink-700: #223a55;
+      --ink-500: #3d607f;
+      --bg-100: #f7fafc;
+      --bg-200: #eef4f8;
+      --brand-700: #005f73;
+      --brand-500: #0a9396;
+      --accent-500: #ee9b00;
+      --accent-700: #ca6702;
+      --good-700: #2f7d32;
+      --warn-700: #8d4f00;
+      --bad-700: #b42318;
+      --card-shadow: 0 14px 34px rgba(15, 27, 42, 0.12);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --max-w: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(170deg, #f7fafc 0%, #f1f8f9 45%, #fff7ea 100%);
+      color: var(--ink-900);
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 9% 8%, rgba(10, 147, 150, 0.09), transparent 38%),
+        radial-gradient(circle at 90% 14%, rgba(238, 155, 0, 0.1), transparent 36%),
+        radial-gradient(circle at 83% 84%, rgba(0, 95, 115, 0.11), transparent 40%);
+      z-index: -1;
+    }
+
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 28px 18px 64px;
+      animation: rise 560ms ease both;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(132deg, #023047 0%, #005f73 55%, #0a9396 100%);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -10% -40% auto auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 68%);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 10px;
+      line-height: 1.2;
+      font-family: "Source Serif 4", "Georgia", serif;
+    }
+
+    h1 {
+      font-size: clamp(1.95rem, 2.8vw, 2.7rem);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+      color: var(--ink-900);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      color: var(--ink-700);
+    }
+
+    .subhead {
+      max-width: 980px;
+      margin: 8px 0 20px;
+      color: #e7f7f7;
+      font-size: 1.02rem;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      font-size: 0.9rem;
+      letter-spacing: 0.01em;
+    }
+
+    .toc {
+      margin: 22px 0 4px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid #d6e3ea;
+      border-radius: var(--radius-md);
+      box-shadow: 0 7px 20px rgba(15, 27, 42, 0.08);
+      padding: 16px 18px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 16px;
+      margin-top: 10px;
+    }
+
+    .toc a {
+      color: var(--ink-700);
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(34, 58, 85, 0.35);
+      padding-bottom: 2px;
+    }
+
+    .toc a:hover {
+      color: var(--brand-700);
+      border-bottom-color: var(--brand-700);
+    }
+
+    section {
+      margin-top: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid #d9e6ec;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 30px rgba(15, 27, 42, 0.07);
+      padding: 22px 22px 20px;
+      animation: rise 700ms ease both;
+    }
+
+    .muted {
+      color: var(--ink-500);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid #d9e7ef;
+      border-radius: var(--radius-md);
+      background: #fafdff;
+      padding: 14px;
+    }
+
+    .card strong {
+      color: var(--ink-700);
+    }
+
+    .phase {
+      border-left: 6px solid var(--brand-500);
+      background: linear-gradient(95deg, #f1fafa 0%, #ffffff 100%);
+    }
+
+    .phase h3 {
+      margin-bottom: 6px;
+      color: var(--brand-700);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.96rem;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+    }
+
+    th,
+    td {
+      border: 1px solid #d4e3ec;
+      padding: 9px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e8f2f6;
+      color: var(--ink-700);
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8fcff;
+    }
+
+    ul,
+    ol {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    .kpi {
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid #d6e6ef;
+      background: #ffffff;
+    }
+
+    .kpi h3 {
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--brand-700);
+    }
+
+    .good {
+      color: var(--good-700);
+      font-weight: 700;
+    }
+
+    .warn {
+      color: var(--warn-700);
+      font-weight: 700;
+    }
+
+    .bad {
+      color: var(--bad-700);
+      font-weight: 700;
+    }
+
+    .agent-stack {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .agent {
+      border-radius: var(--radius-md);
+      border: 1px solid #d6e8ee;
+      padding: 12px;
+      background: linear-gradient(155deg, #f9fdff 0%, #f0f8fa 100%);
+    }
+
+    .agent h3 {
+      margin-bottom: 8px;
+      color: var(--brand-700);
+    }
+
+    .agent small {
+      display: block;
+      color: var(--ink-500);
+      margin-top: 8px;
+    }
+
+    .footer {
+      margin-top: 16px;
+      color: var(--ink-500);
+      font-size: 0.92rem;
+    }
+
+    .manual-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .step-card {
+      border: 1px solid #d4e6f0;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      padding: 12px;
+    }
+
+    .step-card h3 {
+      color: var(--brand-700);
+      margin-bottom: 6px;
+    }
+
+    .checklist {
+      margin-top: 8px;
+      border: 1px dashed #b8d5e4;
+      border-radius: var(--radius-sm);
+      background: #f8fcff;
+      padding: 10px 12px;
+    }
+
+    .small {
+      font-size: 0.93rem;
+      color: var(--ink-500);
+    }
+
+    .mono {
+      margin-top: 8px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      background: #f2f7fb;
+      border: 1px solid #d5e3ed;
+      border-radius: 8px;
+      padding: 10px 12px;
+      line-height: 1.45;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .lane {
+      border: 1px solid #d8e6ef;
+      border-radius: var(--radius-md);
+      background: linear-gradient(170deg, #ffffff 0%, #f4fbff 100%);
+      padding: 12px;
+    }
+
+    .lane h3 {
+      color: var(--brand-700);
+      margin-bottom: 8px;
+    }
+
+    .calc-shell {
+      border: 1px solid #cfe2ee;
+      border-radius: var(--radius-md);
+      background: linear-gradient(170deg, #fbfeff 0%, #f2f9fd 100%);
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .calc-form {
+      border: 1px solid #d7e8f0;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      padding: 12px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field label {
+      font-size: 0.9rem;
+      color: var(--ink-700);
+      font-weight: 600;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #c9dce8;
+      border-radius: 8px;
+      padding: 8px 9px;
+      font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink-900);
+      background: #ffffff;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: 2px solid rgba(10, 147, 150, 0.25);
+      border-color: #8cc5d3;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .calc-summary {
+      border: 1px solid #d7e8f0;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+      padding: 12px;
+    }
+
+    .quote-num {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--brand-700);
+    }
+
+    .pill-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      border: 1px solid #9fc2d3;
+      border-radius: 999px;
+      background: #eaf6fb;
+      color: var(--ink-700);
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .pill-btn:hover {
+      background: #dff0f8;
+    }
+
+    .calc-actions {
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      border: 1px solid #7eaec1;
+      border-radius: 8px;
+      background: #0a9396;
+      color: #ffffff;
+      padding: 7px 11px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .action-btn.secondary {
+      background: #e6f2f8;
+      color: var(--ink-700);
+      border-color: #acc9d8;
+    }
+
+    .results-table td strong {
+      color: var(--ink-700);
+    }
+
+    @media (max-width: 960px) {
+      .grid-2,
+      .grid-3,
+      .manual-grid,
+      .timeline,
+      .calc-grid,
+      .field-row,
+      .agent-stack,
+      .toc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        padding: 16px 12px 38px;
+      }
+
+      section,
+      .hero,
+      .toc {
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>Myelin Sub-Saharan Africa Market Penetration Playbook and Operating Manual</h1>
+      <p class="subhead">
+        Detailed execution manual for market penetration through focused beachhead countries, partner-led distribution,
+        and a Claw-like AI agent operating layer that compresses execution cycles in sales, delivery, compliance, and expansion.
+      </p>
+      <div class="chip-row">
+        <span class="chip">Horizon: 18 months</span>
+        <span class="chip">Initial markets: Rwanda, Kenya, Nigeria (+ Zambia expansion lane)</span>
+        <span class="chip">Model: B2B SaaS + service-led onboarding</span>
+        <span class="chip">Last updated: March 12, 2026</span>
+      </div>
+    </header>
+
+    <nav class="toc">
+      <strong>Contents</strong>
+      <div class="toc-grid">
+        <a href="#north-star">1. North Star</a>
+        <a href="#country-selection">2. Country Selection</a>
+        <a href="#roadmap">3. 18-Month Roadmap</a>
+        <a href="#gtm">4. GTM and Packaging</a>
+        <a href="#partner-model">5. Partner Strategy</a>
+        <a href="#ai-agent-os">6. AI Agent Operating System</a>
+        <a href="#pilot-blueprint">7. Pilot Blueprint</a>
+        <a href="#compliance">8. Compliance Blueprint</a>
+        <a href="#kpis">9. KPI Framework</a>
+        <a href="#org">10. Org Design</a>
+        <a href="#risks">11. Risk Register</a>
+        <a href="#next-90">12. Immediate 90-Day Plan</a>
+        <a href="#cadence-manual">13. Operating Cadence Manual</a>
+        <a href="#sales-manual">14. Sales Execution Manual</a>
+        <a href="#delivery-manual">15. Pilot Delivery Manual</a>
+        <a href="#agent-manual">16. AI Agent Manual</a>
+        <a href="#country-manual">17. Country Execution Packs</a>
+        <a href="#partner-manual">18. Partner Program Manual</a>
+        <a href="#commercial-manual">19. Commercial Controls</a>
+        <a href="#finance-manual">20. Finance and Unit Economics</a>
+        <a href="#talent-manual">21. Talent and QA Manual</a>
+        <a href="#appendix-templates">22. Templates and Scripts</a>
+        <a href="#branding-manual">23. Branding System Manual</a>
+        <a href="#marketing-manual">24. Marketing Engine Manual</a>
+        <a href="#quote-calculator">25. Quote Calculator and Proposals</a>
+        <a href="#business-setup">26. Business Setup and Infrastructure</a>
+        <a href="#utility-moat">27. Utility Technical Skills Moat</a>
+        <a href="#simulation-learning">28. Simulation Learning Engine</a>
+      </div>
+    </nav>
+
+    <section id="north-star">
+      <h2>1) North Star</h2>
+      <p class="muted">
+        Objective: become the default AI agent workflow layer for growth and operations teams in digital-first SSA companies.
+      </p>
+      <div class="grid-3">
+        <article class="kpi">
+          <h3>Revenue Target</h3>
+          <p><strong>$2.5M ARR</strong> by month 18 with at least 65% recurring subscription revenue.</p>
+          <span class="tag">Commercial</span>
+        </article>
+        <article class="kpi">
+          <h3>Penetration Target</h3>
+          <p><strong>75 paid logos</strong> across 6 countries with at least 30 national, institutional, or utility logos.</p>
+          <span class="tag">Market Share</span>
+        </article>
+        <article class="kpi">
+          <h3>Retention Target</h3>
+          <p><strong>NRR 120%+</strong> and logo churn under 8% in core markets.</p>
+          <span class="tag">Durability</span>
+        </article>
+      </div>
+      <div class="card" style="margin-top: 12px;">
+        <strong>Primary wedge:</strong> AI-agent automation for institutional service delivery in national education departments,
+        TVET colleges, and public utilities (learner support, admissions, citizen service desks, field operations, and compliance reporting).
+      </div>
+    </section>
+
+    <section id="country-selection">
+      <h2>2) Country Selection and Sequencing</h2>
+      <p class="muted">
+        Scoring dimensions (weighting): digital demand (30%), buying capacity (20%), partner density (20%), regulatory clarity (15%), expansion leverage (15%).
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Priority</th>
+            <th>Why It Matters</th>
+            <th>Entry Motion</th>
+            <th>Target Month</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rwanda</td>
+            <td><span class="good">Tier 1</span></td>
+            <td>Policy-forward digital state, strong public-private innovation posture, practical AI adoption momentum.</td>
+            <td>Kigali-first lighthouse deployments with education and utility agencies plus implementation partners.</td>
+            <td>M1</td>
+          </tr>
+          <tr>
+            <td>Nigeria</td>
+            <td><span class="good">Tier 1</span></td>
+            <td>Large federal and state-level public institutions with significant service demand and modernization pressure.</td>
+            <td>Direct institutional sales + public-sector SI partnerships.</td>
+            <td>M2</td>
+          </tr>
+          <tr>
+            <td>Kenya</td>
+            <td><span class="good">Tier 1</span></td>
+            <td>Strong digital public service momentum and education system modernization opportunity.</td>
+            <td>Design partner program with TVET institutions + channel co-sell.</td>
+            <td>M2</td>
+          </tr>
+          <tr>
+            <td>South Africa</td>
+            <td><span class="warn">Tier 2</span></td>
+            <td>Enterprise procurement maturity and stronger contract values; best as ACV expansion lane after core repeatability.</td>
+            <td>Enterprise-led outbound + SI alliance.</td>
+            <td>M6</td>
+          </tr>
+          <tr>
+            <td>Ghana</td>
+            <td><span class="warn">Tier 2</span></td>
+            <td>Regulatory clarity and gateway to Francophone adjacency via partners.</td>
+            <td>Partner-led expansion.</td>
+            <td>M10</td>
+          </tr>
+          <tr>
+            <td>Zambia</td>
+            <td><span class="warn">Tier 2</span></td>
+            <td>Practical digital policy environment with growing enterprise digitization and manageable entry complexity.</td>
+            <td>Rwanda-to-Zambia corridor expansion via public-sector and utility implementation partners.</td>
+            <td>M10</td>
+          </tr>
+          <tr>
+            <td>Uganda / Tanzania</td>
+            <td><span class="warn">Tier 2</span></td>
+            <td>Mobile-led business workflows and serviceable via Kenya hub.</td>
+            <td>Kenya-centered expansion pods.</td>
+            <td>M11</td>
+          </tr>
+          <tr>
+            <td>Cote d'Ivoire</td>
+            <td><span class="warn">Tier 2</span></td>
+            <td>Francophone growth option via distributor and SI channels.</td>
+            <td>Distributor model first.</td>
+            <td>M13</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="roadmap">
+      <h2>3) 18-Month Rollout Roadmap</h2>
+      <div class="grid-3">
+        <article class="card phase">
+          <h3>Phase 1: Beachhead Build (M1-M3)</h3>
+          <ul>
+            <li>Secure 8-12 paid pilots anchored in Rwanda, plus Kenya/Nigeria follow-on pilots.</li>
+            <li>Ship localized onboarding templates for ministries/departments, TVET colleges, and public utility workflow teams.</li>
+            <li>Stand up compliance and data-handling baseline per pilot.</li>
+            <li>Build reference case studies with quantified outcomes.</li>
+          </ul>
+        </article>
+        <article class="card phase">
+          <h3>Phase 2: Conversion and Expansion (M4-M9)</h3>
+          <ul>
+            <li>Convert at least 70% of pilots into annual contracts.</li>
+            <li>Enter South Africa with 5 anchor enterprise accounts after Rwanda playbook repeatability is proven.</li>
+            <li>Formalize partner program with 6 active channel partners.</li>
+            <li>Launch tiered pricing and industry-specific success playbooks.</li>
+          </ul>
+        </article>
+        <article class="card phase">
+          <h3>Phase 3: Regional Scale (M10-M18)</h3>
+          <ul>
+            <li>Expand into Zambia and Ghana plus one East African adjacency market.</li>
+            <li>Release repeatable onboarding kits for district-level institutions and utility regional offices.</li>
+            <li>Achieve partner-sourced pipeline share above 35%.</li>
+            <li>Launch enterprise governance module to raise ACV.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="gtm">
+      <h2>4) GTM, Packaging, and Pricing</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Ideal Customer Profiles</h3>
+          <ul>
+            <li><strong>ICP-A:</strong> National or provincial education departments with high-volume learner, teacher, and parent service workflows.</li>
+            <li><strong>ICP-B:</strong> TVET colleges and tertiary public institutions with admissions, student support, and retention bottlenecks.</li>
+            <li><strong>ICP-C:</strong> Public utilities handling service requests, outage communication, billing support, and field dispatch coordination.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Offer Structure</h3>
+          <ul>
+            <li><strong>Pilot Pack (8-12 weeks):</strong> fixed fee + institutional KPI guarantee.</li>
+            <li><strong>Operational Plan:</strong> annual platform subscription + channel and workflow usage blocks.</li>
+            <li><strong>National Program Plan:</strong> multi-agency deployment, governance controls, and partner-integrated delivery.</li>
+          </ul>
+        </article>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>Target Segment</th>
+            <th>Commercial Model</th>
+            <th>Core Promise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pilot Pack</td>
+            <td>Single ministry, college cluster, or utility division</td>
+            <td>One-time implementation + reduced monthly platform fee</td>
+            <td>Time-to-value in under 30 days</td>
+          </tr>
+          <tr>
+            <td>Operational Plan</td>
+            <td>Multi-site institutional rollout</td>
+            <td>Base SaaS + volume usage tiers</td>
+            <td>Automation rate and cost per service interaction reduction</td>
+          </tr>
+          <tr>
+            <td>National Program Plan</td>
+            <td>National departments and utility headquarters</td>
+            <td>Annual contract + onboarding and governance add-ons</td>
+            <td>Compliance-grade orchestration with regional rollout support</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="partner-model">
+      <h2>5) Partner-Led Distribution Model</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Partner Type 1: Public-Sector System Integrators</h3>
+          <p>Role: implementation, change management, and enterprise integration.</p>
+          <p><strong>Target:</strong> 3 active SIs in first 6 months.</p>
+        </article>
+        <article class="card">
+          <h3>Partner Type 2: Education Delivery Partners</h3>
+          <p>Role: implementation support for ministries, TVET networks, and training institutions.</p>
+          <p><strong>Target:</strong> 4 co-delivery partners by month 9.</p>
+        </article>
+        <article class="card">
+          <h3>Partner Type 3: Utility Technology and Field Ops Vendors</h3>
+          <p>Role: bundled go-to-market with CRM, service desk, and field-management providers.</p>
+          <p><strong>Target:</strong> 5 integration-based referrals by month 12.</p>
+        </article>
+      </div>
+      <div class="card" style="margin-top: 12px;">
+        <strong>Partner economics guardrail:</strong> keep gross margin above 62% on partner-delivered deals by separating
+        implementation services (partner-owned) from platform licensing (Myelin-owned recurring).
+      </div>
+      <div class="card" style="margin-top: 12px;">
+        <strong>Rwanda launch note:</strong> use Kigali as the rapid-iteration hub for proof points, then export validated playbooks into larger but slower procurement markets.
+      </div>
+      <div class="card" style="margin-top: 12px;">
+        <strong>Zambia addition:</strong> run Lusaka as a controlled scale node using Rwanda-proven onboarding and partner-delivery templates.
+      </div>
+    </section>
+
+    <section id="ai-agent-os">
+      <h2>6) AI Agent Operating System (Claw-like)</h2>
+      <p class="muted">
+        Design principle: every repeating go-to-market action is assigned to an agent with clear triggers, permissions, outputs, and escalation rules.
+        This section is designed for a single founder running the business through agent-led execution and decision checkpoints.
+      </p>
+      <div class="checklist">
+        <strong>Single-founder architecture principle</strong>
+        <ul>
+          <li>Agents do all repetitive analysis, drafting, monitoring, and follow-up generation.</li>
+          <li>You only handle approval, negotiation, stakeholder relationships, and exception decisions.</li>
+          <li>No workflow reaches external stakeholders without passing a risk and approval gate.</li>
+          <li>Every agent action produces an artifact you can audit in under 3 minutes.</li>
+        </ul>
+      </div>
+
+      <h3>Founder Control Tower (Daily)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Time Block</th>
+            <th>What the Agent System Delivers</th>
+            <th>Founder Decision</th>
+            <th>SLA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>06:30-07:00</td>
+            <td>Morning brief: opportunities, risk alerts, blocked deals, pilot health.</td>
+            <td>Approve top priorities and outreach queue.</td>
+            <td>30 min</td>
+          </tr>
+          <tr>
+            <td>12:30-12:50</td>
+            <td>Midday delta report: new signals, response rates, pilot exceptions.</td>
+            <td>Resolve red flags and legal/compliance escalations.</td>
+            <td>20 min</td>
+          </tr>
+          <tr>
+            <td>17:30-18:00</td>
+            <td>End-of-day execution report and next-day proposal.</td>
+            <td>Confirm tomorrow run plan and approval limits.</td>
+            <td>30 min</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mono">Control Loop (single founder)
+Signal ingest -> opportunity scoring -> account mapping -> outreach draft -> founder approval ->
+engagement tracking -> pilot orchestration -> compliance checks -> expansion recommendations ->
+daily founder decisions -> updated agent instructions</div>
+
+      <div class="agent-stack">
+        <article class="agent">
+          <h3>1. Market Scout Agent</h3>
+          <p><strong>Input:</strong> procurement feeds, ministry notices, utility tenders, partner intelligence, sector reports.</p>
+          <p><strong>Trigger:</strong> scheduled scan every 6 hours and event-driven scan on new tenders.</p>
+          <p><strong>Action:</strong> classifies opportunity type, scores urgency/fit, predicts win probability, tags decision cycle complexity.</p>
+          <p><strong>Output:</strong> `daily_opportunity_heatmap`, `priority_watchlist`, and `48h action queue`.</p>
+          <small>KPI: % pipeline created from detected signals; precision of scored priority accounts.</small>
+        </article>
+        <article class="agent">
+          <h3>2. Account Mapper Agent</h3>
+          <p><strong>Input:</strong> CRM, public organization charts, event attendee lists, prior communications, partner referrals.</p>
+          <p><strong>Trigger:</strong> fires when an account enters Tier A/B watchlist.</p>
+          <p><strong>Action:</strong> maps procurement, technical, sponsor, and political stakeholders; generates influence graph and outreach order.</p>
+          <p><strong>Output:</strong> `account_brief_v1`, `stakeholder_map`, and `contact sequence plan`.</p>
+          <small>KPI: meeting conversion rate by account tier; time to complete actionable stakeholder map.</small>
+        </article>
+        <article class="agent">
+          <h3>3. Outreach Composer Agent</h3>
+          <p><strong>Input:</strong> account brief, institutional pain themes, country policy context, language preference.</p>
+          <p><strong>Trigger:</strong> runs after stakeholder map passes confidence threshold.</p>
+          <p><strong>Action:</strong> drafts role-specific outreach, follow-ups, objection responses, and meeting agenda suggestions.</p>
+          <p><strong>Output:</strong> `message_pack` with email + WhatsApp + briefing-note variants and reply playbooks.</p>
+          <small>KPI: reply rate, discovery call bookings, and response quality score.</small>
+        </article>
+        <article class="agent">
+          <h3>4. Pilot Orchestrator Agent</h3>
+          <p><strong>Input:</strong> signed SOW, KPI baseline, milestone plan, integration logs, incident stream.</p>
+          <p><strong>Trigger:</strong> activates at pilot kickoff and runs hourly monitor jobs.</p>
+          <p><strong>Action:</strong> tracks milestone drift, predicts misses, drafts intervention plan, updates sponsor-ready summaries.</p>
+          <p><strong>Output:</strong> `pilot_control_board`, `risk register`, `daily status digest`, `weekly value report draft`.</p>
+          <small>KPI: on-time milestone completion, incident containment speed, pilot-to-annual conversion.</small>
+        </article>
+        <article class="agent">
+          <h3>5. Compliance Sentinel Agent</h3>
+          <p><strong>Input:</strong> data-flow diagram, contract clauses, country checklist, consent mechanisms, data retention settings.</p>
+          <p><strong>Trigger:</strong> runs pre-sales (proposal check), pre-go-live (hard gate), and weekly post-go-live review.</p>
+          <p><strong>Action:</strong> validates lawful basis, transfer rules, access controls, and retention policy fit.</p>
+          <p><strong>Output:</strong> `compliance memo` (pass/conditional/fail), remediation actions, evidence log.</p>
+          <small>KPI: zero critical compliance incidents; remediation completion before deadlines.</small>
+        </article>
+        <article class="agent">
+          <h3>6. Expansion Analyst Agent</h3>
+          <p><strong>Input:</strong> usage telemetry, SLA performance, support patterns, billing status, stakeholder engagement signals.</p>
+          <p><strong>Trigger:</strong> weekly health scan and immediate scan on usage drop or incident spikes.</p>
+          <p><strong>Action:</strong> predicts churn/expansion probabilities and generates account-specific intervention scripts.</p>
+          <p><strong>Output:</strong> `account health score`, `expansion hypothesis`, `retention action plan`.</p>
+          <small>KPI: NRR, expansion ARR, churn reduction, and renewal forecast accuracy.</small>
+        </article>
+      </div>
+
+      <h3>Agent Run Contract Matrix</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Cadence</th>
+            <th>Hard Stop Rule</th>
+            <th>Escalation Trigger</th>
+            <th>Artifact Required</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Market Scout</td>
+            <td>Every 6 hours</td>
+            <td>No external messaging permissions</td>
+            <td>Tender deadline under 10 days</td>
+            <td>Opportunity brief + confidence score</td>
+          </tr>
+          <tr>
+            <td>Account Mapper</td>
+            <td>On account creation/update</td>
+            <td>No contact enrichment from restricted sources</td>
+            <td>Decision-maker unknown after 48 hours</td>
+            <td>Stakeholder map with role confidence</td>
+          </tr>
+          <tr>
+            <td>Outreach Composer</td>
+            <td>Per sequence launch</td>
+            <td>No outbound send without approval token</td>
+            <td>Low confidence or policy-sensitive claims</td>
+            <td>Approved message pack version</td>
+          </tr>
+          <tr>
+            <td>Pilot Orchestrator</td>
+            <td>Hourly monitor + daily summary</td>
+            <td>No scope changes without founder sign-off</td>
+            <td>Milestone delay above 20%</td>
+            <td>Pilot status + risk ledger</td>
+          </tr>
+          <tr>
+            <td>Compliance Sentinel</td>
+            <td>Pre-go-live + weekly</td>
+            <td>Blocks production if status is fail</td>
+            <td>Cross-border transfer or high-risk data class</td>
+            <td>Compliance decision memo</td>
+          </tr>
+          <tr>
+            <td>Expansion Analyst</td>
+            <td>Weekly + anomaly-triggered</td>
+            <td>No commercial terms generation autonomously</td>
+            <td>Health score drop above 15 points</td>
+            <td>Expansion/retention playbook</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-2" style="margin-top: 12px;">
+        <article class="card">
+          <h3>Agent Governance Rules</h3>
+          <ul>
+            <li>Every outbound action above defined risk threshold requires explicit founder approval token.</li>
+            <li>All generated content and tool actions are logged by account, country, and timestamp.</li>
+            <li>Data access is role-scoped by geography, contract, and data classification label.</li>
+            <li>Compliance fail states block workflow progression automatically until resolved.</li>
+            <li>Agents may propose commercial or legal edits but cannot dispatch final versions.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Agent Tech Stack Blueprint</h3>
+          <ul>
+            <li>Orchestrator: queue-based planner with per-agent retry policy and dead-letter queue.</li>
+            <li>Memory: account-level context store with freshness score, source provenance, and expiry rules.</li>
+            <li>Integrations: CRM, email, WhatsApp, calendar, ticketing, document store, billing, and BI.</li>
+            <li>Observability: prompt logs, tool traces, output diffs, latency/error dashboards, alert hooks.</li>
+            <li>Security: secret vault, token rotation, least-privilege service accounts, immutable audit log.</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3>Permission and Approval Matrix (Founder-Centric)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Allowed Mode</th>
+            <th>Approval Needed</th>
+            <th>Audit Record</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Research and account scoring</td>
+            <td>Autonomous</td>
+            <td>No</td>
+            <td>Input sources + scoring rationale</td>
+          </tr>
+          <tr>
+            <td>Draft outreach and follow-ups</td>
+            <td>Autonomous draft only</td>
+            <td>Yes (before send)</td>
+            <td>Versioned message pack + approver</td>
+          </tr>
+          <tr>
+            <td>Send external communication</td>
+            <td>Human-approved execution</td>
+            <td>Yes</td>
+            <td>Recipient, content hash, send timestamp</td>
+          </tr>
+          <tr>
+            <td>Pilot status updates to stakeholders</td>
+            <td>Autonomous for low-risk updates</td>
+            <td>Yes for red-risk updates</td>
+            <td>Status snapshot + risk level</td>
+          </tr>
+          <tr>
+            <td>Compliance disposition</td>
+            <td>Recommendation only</td>
+            <td>Yes</td>
+            <td>Checklist result + evidence links</td>
+          </tr>
+          <tr>
+            <td>Pricing and contract changes</td>
+            <td>Recommendation only</td>
+            <td>Yes</td>
+            <td>Proposed delta + reason code</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Solo Founder Operating Rhythm with Agents</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Frequency</th>
+            <th>Agent Bundle</th>
+            <th>Founder Task</th>
+            <th>Expected Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Daily</td>
+            <td>Scout + Mapper + Outreach</td>
+            <td>Approve top outreach queue and meeting priorities.</td>
+            <td>45-60 min</td>
+          </tr>
+          <tr>
+            <td>Daily</td>
+            <td>Pilot Orchestrator + Compliance Sentinel</td>
+            <td>Resolve critical pilot risks and compliance holds.</td>
+            <td>20-30 min</td>
+          </tr>
+          <tr>
+            <td>Weekly</td>
+            <td>Expansion Analyst + Pilot Orchestrator</td>
+            <td>Approve renewal/expansion plan and intervention list.</td>
+            <td>60 min</td>
+          </tr>
+          <tr>
+            <td>Weekly</td>
+            <td>All agents</td>
+            <td>Tune thresholds, prompts, and run policies.</td>
+            <td>60-90 min</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <strong>Failure-safe defaults for solo execution</strong>
+        <ul>
+          <li>If approval queue backlog exceeds 24 hours, auto-pause outbound sends and prioritize approvals.</li>
+          <li>If any compliance gate is unresolved, freeze deployment changes for that account.</li>
+          <li>If model confidence drops below threshold, downgrade agent to draft-only mode.</li>
+          <li>If two high-severity incidents occur in 7 days, trigger full incident review before resuming autonomy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="pilot-blueprint">
+      <h2>7) 12-Week Pilot Blueprint</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Focus</th>
+            <th>Deliverables</th>
+            <th>Exit Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1-2</td>
+            <td>Discovery and Data Mapping</td>
+            <td>Process map, baseline KPI capture, stakeholder alignment.</td>
+            <td>Signed pilot scorecard and data access granted.</td>
+          </tr>
+          <tr>
+            <td>3-4</td>
+            <td>Integration and Workflow Setup</td>
+            <td>Connected channels, configured agent flows, fallback routing.</td>
+            <td>End-to-end dry run with no blocking defects.</td>
+          </tr>
+          <tr>
+            <td>5-8</td>
+            <td>Controlled Production Run</td>
+            <td>Live operation in selected queue/use case and daily reporting.</td>
+            <td>At least 2 target KPIs hit for two consecutive weeks.</td>
+          </tr>
+          <tr>
+            <td>9-10</td>
+            <td>Optimization Sprint</td>
+            <td>Model tuning, script localization, escalation policy tuning.</td>
+            <td>Measured lift over baseline exceeds threshold.</td>
+          </tr>
+          <tr>
+            <td>11-12</td>
+            <td>Conversion to Annual</td>
+            <td>Final value report, commercial proposal, rollout plan.</td>
+            <td>Contract signed or decision date locked with procurement.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="compliance">
+      <h2>8) Compliance and Data Localization Blueprint</h2>
+      <p class="muted">
+        Practical rule: keep citizen, learner, and account-identifiable data in-country or in approved regions when required; use redaction and tokenization for cross-border analytics.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Primary Requirement</th>
+            <th>Operational Control</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rwanda</td>
+            <td>Operate under Law No 058/2021 with NCSA/DPO supervisory requirements.</td>
+            <td>DPO assignment, privacy impact checks, and explicit consent and purpose controls.</td>
+            <td>Compliance Sentinel + Country Legal Counsel</td>
+          </tr>
+          <tr>
+            <td>Nigeria</td>
+            <td>Operate under NDP Act obligations and NDPC guidance.</td>
+            <td>DPIA before launch, consent flow checks, incident protocol.</td>
+            <td>Compliance Sentinel + Legal Lead</td>
+          </tr>
+          <tr>
+            <td>Kenya</td>
+            <td>Data handling aligned with Data Protection Act and ODPC expectations.</td>
+            <td>Purpose limitation controls and cross-border transfer review.</td>
+            <td>Country Compliance Owner</td>
+          </tr>
+          <tr>
+            <td>Zambia</td>
+            <td>Operate under the Data Protection Act, 2021 (Act No. 3 of 2021) and Data Protection Commissioner oversight.</td>
+            <td>Data controller/processor registration checks, consent logging, and transfer control review.</td>
+            <td>Compliance Sentinel + Country Legal Counsel</td>
+          </tr>
+          <tr>
+            <td>South Africa</td>
+            <td>POPIA-aligned data processing and operator agreements.</td>
+            <td>Contract annex templates and minimal data retention defaults.</td>
+            <td>Legal + Security Lead</td>
+          </tr>
+          <tr>
+            <td>All markets</td>
+            <td>Auditability, security logging, and incident response readiness.</td>
+            <td>Quarterly compliance reviews and penetration testing cycle.</td>
+            <td>Security Program Manager</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="kpis">
+      <h2>9) KPI Framework and Operating Dashboards</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Commercial Dashboard (Weekly)</h3>
+          <ul>
+            <li>Pipeline by stage, country, and source (direct vs partner).</li>
+            <li>Pilot win rate and pilot-to-annual conversion.</li>
+            <li>Sales cycle days and average contract value by segment.</li>
+            <li>Partner contribution and channel payback period.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Institutional Service Value Dashboard (Weekly)</h3>
+          <ul>
+            <li>Automation rate, response time, first-contact resolution.</li>
+            <li>Cost per resolved case and uplift vs baseline.</li>
+            <li>Escalation quality scores and SLA adherence.</li>
+            <li>Account health, expansion trigger score, churn risk score.</li>
+          </ul>
+        </article>
+      </div>
+      <div class="card" style="margin-top: 12px;">
+        <strong>Executive monthly review thresholds:</strong>
+        <span class="good">Green:</span> pilot conversion above 65%,
+        <span class="warn">Amber:</span> 45%-65%,
+        <span class="bad">Red:</span> below 45%.
+        Trigger immediate GTM redesign if two consecutive months remain red.
+      </div>
+    </section>
+
+    <section id="org">
+      <h2>10) Org Design and Hiring Sequence</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Timing</th>
+            <th>Role</th>
+            <th>Mission</th>
+            <th>Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>M1-M3</td>
+            <td>Country Lead (Rwanda), Founding AE, Solutions Lead</td>
+            <td>Acquire and deliver first 8-12 pilots and produce lighthouse case studies.</td>
+            <td>Rwanda-first, Kenya/Nigeria support</td>
+          </tr>
+          <tr>
+            <td>M4-M6</td>
+            <td>Country GM (Nigeria/Kenya), Partner Manager, Compliance Program Manager, CSM Lead</td>
+            <td>Build repeatable partner and renewal motions and scale multi-country sales execution.</td>
+            <td>Rwanda, Kenya, Nigeria</td>
+          </tr>
+          <tr>
+            <td>M7-M12</td>
+            <td>Enterprise AE (South Africa), RevOps Analyst, Support Ops Manager</td>
+            <td>Lift ACV and improve sales and service throughput.</td>
+            <td>South Africa + regional</td>
+          </tr>
+          <tr>
+            <td>M13-M18</td>
+            <td>Regional Expansion Lead, Localization Manager</td>
+            <td>Open two additional markets with partner-first model.</td>
+            <td>West/East/Southern adjacency (including Zambia)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="risks">
+      <h2>11) Risk Register with Mitigations</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Risk: Slow Enterprise Procurement</h3>
+          <p>Impact: delayed revenue realization and pipeline aging.</p>
+          <p><strong>Mitigation:</strong> pilot-first contracting, procurement-ready legal packs, partner introductions at C-level.</p>
+        </article>
+        <article class="card">
+          <h3>Risk: Compliance Variability by Country</h3>
+          <p>Impact: deployment delays and legal exposure.</p>
+          <p><strong>Mitigation:</strong> compliance sentinel agent and pre-approved country playbooks.</p>
+        </article>
+        <article class="card">
+          <h3>Risk: Weak Pilot Outcomes</h3>
+          <p>Impact: low conversion and poor referenceability.</p>
+          <p><strong>Mitigation:</strong> strict entry criteria, bounded scope, daily intervention cadence.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="next-90">
+      <h2>12) Immediate 90-Day Execution Plan</h2>
+      <ol>
+        <li>Finalize tier-1 account list (120 accounts) anchored in Rwanda and expanded to Kenya/Nigeria, plus a Zambia discovery pod (20 accounts) with agent-driven scoring.</li>
+        <li>Launch Kigali outbound sprint: 3-touch sequence per account with English and Kinyarwanda-aware messaging variants where relevant.</li>
+        <li>Sign 8-12 paid pilots using one standardized pilot contract and KPI scorecard template, with at least 4 Rwanda lighthouse accounts.</li>
+        <li>Deploy pilot orchestrator and compliance sentinel agents before first production launch.</li>
+        <li>Stand up weekly leadership review: pipeline, pilot KPIs, compliance exceptions, and partner status.</li>
+        <li>Publish first 3 institutional value snapshots from Rwanda to accelerate expansion into Kenya, Nigeria, Zambia, and then South Africa.</li>
+      </ol>
+    </section>
+
+    <section id="cadence-manual">
+      <h2>13) Operating Cadence Manual</h2>
+      <p class="muted">
+        This is the required operating rhythm. If a cadence is skipped, performance drift usually appears within 2-3 weeks.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Cadence</th>
+            <th>Participants</th>
+            <th>Agenda (Fixed)</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Daily: Country Pod Standup (20 min)</td>
+            <td>Country lead, AE, solutions lead, CSM</td>
+            <td>Top 3 deals, top 3 delivery risks, top 1 blocker requiring escalation.</td>
+            <td>Action list with owner and due date.</td>
+          </tr>
+          <tr>
+            <td>Daily: Agent Ops Check (15 min)</td>
+            <td>RevOps, compliance owner, support ops</td>
+            <td>Agent exceptions, approval queue, failed automations, false positives.</td>
+            <td>Agent tuning tickets and severity log.</td>
+          </tr>
+          <tr>
+            <td>Weekly: Revenue Review (60 min)</td>
+            <td>CEO, country leads, RevOps, finance</td>
+            <td>Pipeline coverage, stage aging, win/loss, discount approvals.</td>
+            <td>Forecast commit and red account list.</td>
+          </tr>
+          <tr>
+            <td>Weekly: Delivery Review (60 min)</td>
+            <td>Solutions, CSM, product, support</td>
+            <td>Pilot milestone burn-down, SLA misses, integration blockers.</td>
+            <td>Escalation register and recovery plan.</td>
+          </tr>
+          <tr>
+            <td>Weekly: Compliance Desk (45 min)</td>
+            <td>Compliance lead, legal, security owner</td>
+            <td>New deployments, data transfer checks, incident drill status.</td>
+            <td>Signed compliance clearance or hold notice.</td>
+          </tr>
+          <tr>
+            <td>Monthly: Country Business Review (90 min)</td>
+            <td>Leadership + country pod</td>
+            <td>ARR growth, CAC payback, partner performance, hiring status.</td>
+            <td>Country scorecard and next-month plan.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="checklist">
+        <strong>Non-negotiable operating rules</strong>
+        <ul>
+          <li>No pilot starts without signed KPI scorecard and owner mapping.</li>
+          <li>No discount above threshold without finance and country lead approval.</li>
+          <li>No cross-border data transfer without documented legal basis.</li>
+          <li>Every red metric must have a dated recovery owner within 24 hours.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sales-manual">
+      <h2>14) Sales Execution Manual</h2>
+      <p class="muted">
+        This funnel model is mandatory across all countries to keep conversion data comparable and coachable.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Entry Criteria</th>
+            <th>Exit Criteria</th>
+            <th>Max Time in Stage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S0: Signal Identified</td>
+            <td>Account appears in Market Scout priority feed.</td>
+            <td>Owner assigned and first outreach launched.</td>
+            <td>3 days</td>
+          </tr>
+          <tr>
+            <td>S1: Qualified</td>
+            <td>Role-fit buyer identified and pain hypothesis validated.</td>
+            <td>Discovery meeting booked with decision participant.</td>
+            <td>10 days</td>
+          </tr>
+          <tr>
+            <td>S2: Discovery Complete</td>
+            <td>Current process, baseline KPI, and urgency captured.</td>
+            <td>Mutual action plan and pilot scope draft accepted.</td>
+            <td>14 days</td>
+          </tr>
+          <tr>
+            <td>S3: Solution Mapped</td>
+            <td>Technical fit, data sources, and integration path validated.</td>
+            <td>Commercial and pilot proposal submitted.</td>
+            <td>14 days</td>
+          </tr>
+          <tr>
+            <td>S4: Pilot Proposal</td>
+            <td>Commercial terms + legal draft sent.</td>
+            <td>Pilot contract signed and kickoff date locked.</td>
+            <td>21 days</td>
+          </tr>
+          <tr>
+            <td>S5: Pilot Live</td>
+            <td>Pilot in production with weekly KPI reporting.</td>
+            <td>Annual contract negotiation opened with value proof.</td>
+            <td>12 weeks</td>
+          </tr>
+          <tr>
+            <td>S6: Annual Close</td>
+            <td>Value report signed off by buyer sponsor.</td>
+            <td>Annual MSA closed and expansion plan approved.</td>
+            <td>30 days</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Discovery Call Script (45 min)</h3>
+          <ol>
+            <li>Context (5 min): confirm team, process scope, and current systems.</li>
+            <li>Pain and economics (15 min): current volume, SLA misses, and cost base.</li>
+            <li>Desired outcomes (10 min): target KPI changes and timeline urgency.</li>
+            <li>Risk and compliance (10 min): data constraints and governance requirements.</li>
+            <li>Close (5 min): agree next step, owners, and pilot decision date.</li>
+          </ol>
+          <div class="checklist small">Mandatory artifact: one-page discovery summary in CRM within 24 hours.</div>
+        </article>
+        <article class="step-card">
+          <h3>Outbound Sequence SOP (10 business days)</h3>
+          <p class="small">The Outreach Composer Agent drafts; founder approves before send.</p>
+          <div class="mono">Day 1: Email 1 (pain-led + benchmark)
+Day 2: LinkedIn touch (value snippet)
+Day 4: Email 2 (country case study + CTA)
+Day 6: WhatsApp/business channel nudge (if approved)
+Day 8: Email 3 (pilot offer with KPI guarantee)
+Day 10: Breakup email + referral ask</div>
+          <div class="checklist small">Trigger escalation if zero engagement after 2 sequences and account tier is A.</div>
+        </article>
+      </div>
+
+      <div class="checklist">
+        <strong>Deal quality gates</strong>
+        <ul>
+          <li>Do not enter S3 without baseline metric and value hypothesis in numbers.</li>
+          <li>Do not discount to close pilot unless sponsor and procurement map are complete.</li>
+          <li>Do not mark commit unless legal redlines are understood and owned.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="delivery-manual">
+      <h2>15) Pilot Delivery Manual (12-Week SOP)</h2>
+      <p class="muted">
+        Every pilot follows five stage gates. Skipping a gate creates conversion risk later.
+      </p>
+      <div class="timeline">
+        <article class="lane">
+          <h3>Gate 1: Readiness</h3>
+          <ul>
+            <li>KPI scorecard signed.</li>
+            <li>Stakeholders mapped with escalation chain.</li>
+            <li>Data access granted and validated.</li>
+          </ul>
+        </article>
+        <article class="lane">
+          <h3>Gate 2: Integration</h3>
+          <ul>
+            <li>Core systems connected.</li>
+            <li>Fallback and human handoff tested.</li>
+            <li>Audit logging enabled.</li>
+          </ul>
+        </article>
+        <article class="lane">
+          <h3>Gate 3: Controlled Live</h3>
+          <ul>
+            <li>Limited workflow slice in production.</li>
+            <li>Daily KPI and quality checks.</li>
+            <li>Issue response in under 24 hours.</li>
+          </ul>
+        </article>
+        <article class="lane">
+          <h3>Gate 4: Value Proof</h3>
+          <ul>
+            <li>At least 2 target KPIs achieved.</li>
+            <li>Cost and SLA improvements quantified.</li>
+            <li>Sponsor validation complete.</li>
+          </ul>
+        </article>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Severity</th>
+            <th>Definition</th>
+            <th>Response SLA</th>
+            <th>Escalation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>P1</td>
+            <td>Production outage, compliance exposure, or critical workflow failure.</td>
+            <td>15 minutes acknowledge / 4 hours workaround</td>
+            <td>Solutions lead + compliance lead + executive sponsor</td>
+          </tr>
+          <tr>
+            <td>P2</td>
+            <td>Material degradation with business impact.</td>
+            <td>30 minutes acknowledge / 1 business day fix plan</td>
+            <td>Solutions lead + CSM</td>
+          </tr>
+          <tr>
+            <td>P3</td>
+            <td>Minor defects without immediate commercial risk.</td>
+            <td>4 business hours acknowledge / next sprint</td>
+            <td>Product owner</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mono">Weekly Pilot Report Template
+1) KPI Snapshot: baseline vs current vs target
+2) Delivery Status: milestones complete / at-risk / blocked
+3) Incident Log: new issues, severity, owner, ETA
+4) Decisions Needed: commercial, legal, technical
+5) Next Week Plan: priorities, owners, and dates</div>
+    </section>
+
+    <section id="agent-manual">
+      <h2>16) AI Agent Manual (Claw-like Operations)</h2>
+      <p class="muted">
+        This is the production operating manual for a solo founder. It defines how you safely shift execution from human-heavy to agent-heavy without losing control.
+      </p>
+      <h3>Autonomy Maturity Levels</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Description</th>
+            <th>Allowed Scope</th>
+            <th>Founder Involvement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>L0: Manual</td>
+            <td>Agents only summarize and suggest.</td>
+            <td>No external writes or sends.</td>
+            <td>100% decision and execution</td>
+          </tr>
+          <tr>
+            <td>L1: Draft Assist</td>
+            <td>Agents create first drafts and task plans.</td>
+            <td>Internal artifacts only.</td>
+            <td>100% approval before external action</td>
+          </tr>
+          <tr>
+            <td>L2: Controlled Execution</td>
+            <td>Agents execute low-risk workflows automatically.</td>
+            <td>Research, monitoring, internal updates, low-risk notifications.</td>
+            <td>Approval for medium/high-risk actions</td>
+          </tr>
+          <tr>
+            <td>L3: Bounded Autonomy</td>
+            <td>Agents run end-to-end within defined policy corridors.</td>
+            <td>Pre-approved outreach, pilot status updates, routine account actions.</td>
+            <td>Exception handling and final approvals only</td>
+          </tr>
+          <tr>
+            <td>L4: Scale Mode</td>
+            <td>Multi-agent system self-coordinates with strict guardrails.</td>
+            <td>Most recurring GTM operations except legal/commercial decisions.</td>
+            <td>Strategic oversight and red-flag decisions</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>90-Day Deployment Plan (Single Founder)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Window</th>
+            <th>Objective</th>
+            <th>What to Build</th>
+            <th>Exit Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Days 1-30</td>
+            <td>Stability and observability</td>
+            <td>Event queue, logging, alerting, L0/L1 workflows for all 6 agents.</td>
+            <td>Every action traceable; no blind execution paths.</td>
+          </tr>
+          <tr>
+            <td>Days 31-60</td>
+            <td>Controlled throughput</td>
+            <td>L2 workflows for scout/mapper/outreach/pilot monitoring, approval queue UI.</td>
+            <td>At least 60% repetitive tasks automated with no critical incidents.</td>
+          </tr>
+          <tr>
+            <td>Days 61-90</td>
+            <td>Bounded autonomy</td>
+            <td>L3 for low-risk outbound and pilot updates, automated escalation pipelines.</td>
+            <td>Founder time on routine ops reduced below 2 hours/day.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Action Type</th>
+            <th>Examples</th>
+            <th>Default Mode</th>
+            <th>Approver</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Low Risk</td>
+            <td>Account enrichment, meeting note summaries, KPI drafting.</td>
+            <td>Autonomous</td>
+            <td>None (audit log only)</td>
+          </tr>
+          <tr>
+            <td>Medium Risk</td>
+            <td>Outbound messaging drafts, proposal drafts, pilot intervention recommendations.</td>
+            <td>Human-in-loop</td>
+            <td>Founder</td>
+          </tr>
+          <tr>
+            <td>High Risk</td>
+            <td>Pricing changes, legal responses, compliance disposition, data export.</td>
+            <td>Manual approval only</td>
+            <td>Founder + legal/compliance advisor</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Agent Prompt Card Standard</h3>
+          <div class="mono">Role:
+Objective:
+Inputs:
+Input freshness rules:
+Constraints:
+Escalation triggers:
+Tools allowed:
+Tools blocked:
+Output quality checks:
+Required output JSON schema:
+Confidence score:
+Sources used:</div>
+          <p class="small">Use this card for every production agent to keep behavior predictable and auditable.</p>
+        </article>
+        <article class="step-card">
+          <h3>Agent QA Scorecard</h3>
+          <ul>
+            <li>Accuracy of recommendation (0-5)</li>
+            <li>Policy compliance (0-5)</li>
+            <li>Actionability of output (0-5)</li>
+            <li>Hallucination or unsupported claims (0-5 inverse)</li>
+            <li>Latency and operational reliability (0-5)</li>
+          </ul>
+          <div class="checklist small">Minimum production threshold: average score 4.0 with no policy-critical failures.</div>
+        </article>
+      </div>
+
+      <h3>Agent-by-Agent Runbook (Operational Detail)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Daily Tasks</th>
+            <th>Weekly Tasks</th>
+            <th>Escalate If</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Market Scout</td>
+            <td>Ingest feeds, re-score opportunity list, issue morning and midday briefs.</td>
+            <td>Recalibrate scoring weights by win/loss outcomes.</td>
+            <td>Top-score opportunity has low confidence or missing source evidence.</td>
+          </tr>
+          <tr>
+            <td>Account Mapper</td>
+            <td>Refresh stakeholder maps and decision pathways for active targets.</td>
+            <td>Audit map quality vs meeting outcomes.</td>
+            <td>Key decision-maker unknown for more than 3 business days.</td>
+          </tr>
+          <tr>
+            <td>Outreach Composer</td>
+            <td>Create sequence variants for queued accounts.</td>
+            <td>Analyze reply patterns and update message playbooks.</td>
+            <td>Reply rate drops below threshold for 2 consecutive weeks.</td>
+          </tr>
+          <tr>
+            <td>Pilot Orchestrator</td>
+            <td>Monitor milestone progress, incident feeds, and SLA drift.</td>
+            <td>Generate sponsor-ready value report draft.</td>
+            <td>Any P1 incident or milestone slip above 20% of plan.</td>
+          </tr>
+          <tr>
+            <td>Compliance Sentinel</td>
+            <td>Validate new data flows and permission changes.</td>
+            <td>Run account-level compliance evidence audit.</td>
+            <td>Cross-border transfer without legal basis or missing consent control.</td>
+          </tr>
+          <tr>
+            <td>Expansion Analyst</td>
+            <td>Track health score and renewal risk deltas.</td>
+            <td>Publish expansion and retention action pack.</td>
+            <td>Health score drop above 15 points or billing friction appears.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Founder Approval Queue Rubric</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Queue Type</th>
+            <th>What You Review</th>
+            <th>Decision Options</th>
+            <th>Target Review SLA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Outbound Queue</td>
+            <td>Recipient fit, message claims, CTA quality, tone risk.</td>
+            <td>Approve / Edit / Reject / Hold</td>
+            <td>12 hours</td>
+          </tr>
+          <tr>
+            <td>Pilot Risk Queue</td>
+            <td>Severity, timeline impact, stakeholder impact, mitigation options.</td>
+            <td>Escalate / Apply workaround / Re-scope</td>
+            <td>4 hours for red items</td>
+          </tr>
+          <tr>
+            <td>Compliance Queue</td>
+            <td>Legal basis, data class, transfer path, control evidence.</td>
+            <td>Pass / Conditional Pass / Fail</td>
+            <td>24 hours pre-go-live</td>
+          </tr>
+          <tr>
+            <td>Commercial Queue</td>
+            <td>Pricing delta, contract variance, margin impact.</td>
+            <td>Approve / Counter / Escalate counsel</td>
+            <td>24 hours</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Observability and SLOs</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Target</th>
+            <th>Alert Threshold</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Agent task success rate</td>
+            <td>99%+</td>
+            <td>Below 97% in 24h window</td>
+            <td>Orchestrator + founder</td>
+          </tr>
+          <tr>
+            <td>Approval queue aging</td>
+            <td>Under 12h median</td>
+            <td>Above 24h median</td>
+            <td>Founder</td>
+          </tr>
+          <tr>
+            <td>Policy violation rate</td>
+            <td>0 critical</td>
+            <td>Any critical event</td>
+            <td>Compliance Sentinel + founder</td>
+          </tr>
+          <tr>
+            <td>False-positive escalation rate</td>
+            <td>Below 15%</td>
+            <td>Above 25%</td>
+            <td>Prompt tuning owner</td>
+          </tr>
+          <tr>
+            <td>Time saved vs manual baseline</td>
+            <td>More than 60%</td>
+            <td>Below 40%</td>
+            <td>Founder + RevOps</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <strong>Agent incident response playbook</strong>
+        <ol>
+          <li>Immediately pause autonomous actions for affected agent.</li>
+          <li>Switch workflow to human fallback queue.</li>
+          <li>Capture root-cause trace (prompt, context, tool calls, output).</li>
+          <li>Apply prompt and policy patch; run regression test suite.</li>
+          <li>Resume with heightened monitoring for 7 days.</li>
+        </ol>
+      </div>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Solo Founder Fallback Mode</h3>
+          <ul>
+            <li>Set all agents to draft-only mode.</li>
+            <li>Freeze external sends except urgent stakeholder updates.</li>
+            <li>Prioritize active pilots and red-risk accounts.</li>
+            <li>Run manual approval batches every 4 hours.</li>
+            <li>Return to autonomous mode only after two clean monitoring cycles.</li>
+          </ul>
+        </article>
+        <article class="step-card">
+          <h3>Weekly Agent Tuning Checklist</h3>
+          <ul>
+            <li>Review top 20 agent decisions and compare to founder final decisions.</li>
+            <li>Adjust scoring thresholds for opportunity and risk detection.</li>
+            <li>Update prompt cards with newly observed objection patterns.</li>
+            <li>Remove stale context and refresh source whitelists.</li>
+            <li>Re-run test suite on all high-risk workflows.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="country-manual">
+      <h2>17) Country Execution Packs</h2>
+      <p class="muted">
+        Country packs translate the core operating model into local execution choices.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>First 3 Vertical Focuses</th>
+            <th>Preferred Entry Motion</th>
+            <th>Localization Priorities</th>
+            <th>First 60-Day Success Metric</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rwanda</td>
+            <td>Education ministry workflows, TVET administration, public utility service desks</td>
+            <td>Lighthouse pilots in Kigali with ministry and utility references first</td>
+            <td>English/Kinyarwanda service scripts, escalation protocol localization</td>
+            <td>4 lighthouse pilots signed with 2 live by day 60</td>
+          </tr>
+          <tr>
+            <td>Zambia</td>
+            <td>TVET operations, utility contact centers, public-service digital helpdesks</td>
+            <td>Partner-led launch via Lusaka with Rwanda-proven public-sector assets</td>
+            <td>Consent language localization, citizen communication tone tuning</td>
+            <td>20-account qualified pipeline and 2 paid pilots by day 60</td>
+          </tr>
+          <tr>
+            <td>Kenya</td>
+            <td>Education agencies, TVET networks, utility modernization programs</td>
+            <td>Design partner cohort + channel co-sell</td>
+            <td>Channel-specific outreach and escalation rules</td>
+            <td>3 pilots and 1 annual conversion by day 60</td>
+          </tr>
+          <tr>
+            <td>Nigeria</td>
+            <td>Federal/state education departments, TVET systems, utility consumer operations</td>
+            <td>Direct institutional sales plus public-sector SI alliances</td>
+            <td>Procurement mapping and legal cycle acceleration</td>
+            <td>5 enterprise opportunities in S3+ by day 60</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Rwanda to Zambia Expansion SOP</h3>
+          <ol>
+            <li>Export two proven use-case templates from Rwanda (learner support + service request triage).</li>
+            <li>Run legal and compliance pre-check for Zambia before first proposal.</li>
+            <li>Recruit one implementation partner and one channel referral partner.</li>
+            <li>Launch Lusaka discovery pod with weekly leadership oversight.</li>
+            <li>Close two pilots before hiring dedicated country lead.</li>
+          </ol>
+        </article>
+        <article class="step-card">
+          <h3>Country Launch Readiness Checklist</h3>
+          <ul>
+            <li>Country legal review complete.</li>
+            <li>Local partner shortlist validated.</li>
+            <li>Localized scripts approved.</li>
+            <li>Price corridor approved by finance.</li>
+            <li>Escalation tree and incident contacts mapped.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="partner-manual">
+      <h2>18) Partner Program Manual</h2>
+      <p class="muted">
+        Partner channel is used for scale, not as a fallback. Partner quality controls are strict.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Lifecycle Stage</th>
+            <th>Required Actions</th>
+            <th>SLA</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Recruit</td>
+            <td>Screen for vertical fit, delivery capability, and existing enterprise relationships.</td>
+            <td>10 business days</td>
+            <td>Partner manager</td>
+          </tr>
+          <tr>
+            <td>Enable</td>
+            <td>Commercial training, solution certification, and compliance briefing.</td>
+            <td>15 business days</td>
+            <td>Partner manager + solutions lead</td>
+          </tr>
+          <tr>
+            <td>Co-sell</td>
+            <td>Joint account plan, deal registration, and opportunity reviews.</td>
+            <td>Weekly cadence</td>
+            <td>AE + partner manager</td>
+          </tr>
+          <tr>
+            <td>Co-deliver</td>
+            <td>Partner-owned implementation, Myelin-owned platform governance.</td>
+            <td>Pilot timeline bound</td>
+            <td>Solutions lead + CSM</td>
+          </tr>
+          <tr>
+            <td>Scale or Exit</td>
+            <td>Quarterly scorecard to retain, improve, or offboard partner.</td>
+            <td>Quarterly</td>
+            <td>Country lead</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <strong>Deal registration rules</strong>
+        <ul>
+          <li>Registration expires after 90 days unless activity milestones are met.</li>
+          <li>Conflict resolution follows first qualified opportunity evidence.</li>
+          <li>Partner discount protection is tied to certified delivery participation.</li>
+          <li>No unmanaged white-labeling without signed quality and compliance annexes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="commercial-manual">
+      <h2>19) Commercial Controls and Approval Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Commercial Lever</th>
+            <th>Default Guardrail</th>
+            <th>Approval Needed</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pilot discount</td>
+            <td>Up to 10%</td>
+            <td>AE + country lead</td>
+            <td>Requires written conversion hypothesis.</td>
+          </tr>
+          <tr>
+            <td>Pilot discount above 10%</td>
+            <td>Maximum 20%</td>
+            <td>Country lead + finance</td>
+            <td>Only for strategic lighthouse accounts.</td>
+          </tr>
+          <tr>
+            <td>Annual contract discount</td>
+            <td>Up to 15%</td>
+            <td>Country lead</td>
+            <td>Must preserve target gross margin.</td>
+          </tr>
+          <tr>
+            <td>Special payment terms</td>
+            <td>Net-30 standard</td>
+            <td>Finance + legal</td>
+            <td>Any deviation requires documented reason.</td>
+          </tr>
+          <tr>
+            <td>Custom legal clauses</td>
+            <td>Template first</td>
+            <td>Legal owner</td>
+            <td>Track clause changes in redline log.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Procurement Acceleration Pack</h3>
+          <ul>
+            <li>Security overview and architecture one-pager.</li>
+            <li>Data processing annex and compliance controls summary.</li>
+            <li>Pilot KPI commitment sheet and reference case studies.</li>
+            <li>Implementation plan with named owners and SLAs.</li>
+          </ul>
+        </article>
+        <article class="step-card">
+          <h3>Renewal and Expansion Timing</h3>
+          <ul>
+            <li>Renewal prep starts 120 days before term end.</li>
+            <li>Expansion proposal starts once two KPIs exceed target for 6 weeks.</li>
+            <li>Executive business review at least once per quarter.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="finance-manual">
+      <h2>20) Finance and Unit Economics Manual</h2>
+      <p class="muted">
+        Use this as the default budgeting logic for country rollout and hiring decisions.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Line Item</th>
+            <th>Q1-Q2 Focus</th>
+            <th>Q3-Q4 Focus</th>
+            <th>Control Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Headcount</td>
+            <td>Core pod staffing in Rwanda + shared regional roles.</td>
+            <td>Add country roles only after pilot conversion threshold.</td>
+            <td>Hire only when 3-month forward coverage is above target.</td>
+          </tr>
+          <tr>
+            <td>Cloud and AI inference</td>
+            <td>Pilot workloads with strict usage caps.</td>
+            <td>Reserved capacity for stable annual accounts.</td>
+            <td>Monthly cost-to-revenue ratio reviewed by finance.</td>
+          </tr>
+          <tr>
+            <td>Sales and travel</td>
+            <td>Founder-led and country-lead strategic travel only.</td>
+            <td>Partner and enterprise expansion travel.</td>
+            <td>All travel mapped to account plan or partner outcome.</td>
+          </tr>
+          <tr>
+            <td>Legal and compliance</td>
+            <td>Country setup and template creation.</td>
+            <td>Scale controls and periodic audits.</td>
+            <td>No market launch without compliance budget allocation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Core Unit Economics Formulas</h3>
+          <div class="mono">CAC Payback (months) = CAC / Monthly Gross Margin per New Customer
+Gross Margin % = (Revenue - Direct Delivery Cost - Inference Cost) / Revenue
+NRR % = (Starting ARR + Expansion - Contraction - Churn) / Starting ARR
+LTV/CAC = (ARR * Gross Margin %) / Churn Rate / CAC</div>
+        </article>
+        <article class="step-card">
+          <h3>Decision Triggers</h3>
+          <ul>
+            <li>Pause aggressive hiring if CAC payback rises above 18 months.</li>
+            <li>Rework packaging if gross margin drops below 60% for 2 months.</li>
+            <li>Shift to partner-heavy motion if direct sales cycle exceeds 120 days.</li>
+            <li>Increase expansion focus when NRR exceeds 120% in two consecutive quarters.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="talent-manual">
+      <h2>21) Talent Enablement and QA Manual</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>30-Day Onboarding Outcome</th>
+            <th>60-Day Outcome</th>
+            <th>90-Day Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Account Executive</td>
+            <td>Own discovery and manage S0-S2 pipeline.</td>
+            <td>Advance 6 qualified deals to S3+.</td>
+            <td>Close first pilot and own forecast accuracy.</td>
+          </tr>
+          <tr>
+            <td>Solutions Lead</td>
+            <td>Run integration discovery and architecture mapping.</td>
+            <td>Launch 2 pilots with zero critical setup gaps.</td>
+            <td>Publish repeatable delivery playbook updates.</td>
+          </tr>
+          <tr>
+            <td>Customer Success Manager</td>
+            <td>Own health score and executive reporting cadence.</td>
+            <td>Drive adoption lift in pilot accounts.</td>
+            <td>Lead first renewal or expansion cycle.</td>
+          </tr>
+          <tr>
+            <td>Partner Manager</td>
+            <td>Build and rank partner shortlist.</td>
+            <td>Certify first 2 partners.</td>
+            <td>Deliver partner-sourced pipeline contribution.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <strong>Quality assurance checklist (weekly)</strong>
+        <ul>
+          <li>Review five random sales calls for discovery quality and qualification rigor.</li>
+          <li>Audit two pilots for milestone discipline and reporting integrity.</li>
+          <li>Audit one compliance workflow for evidence completeness.</li>
+          <li>Review AI agent outputs for policy and quality threshold adherence.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="appendix-templates">
+      <h2>22) Templates and Scripts (Ready to Use)</h2>
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Template A: First Outreach Email</h3>
+          <div class="mono">Subject: Improving service delivery and response times in [Institution]
+
+Hi [Name],
+
+Institutions like yours in [Country/Segment] are seeing 20-40% faster service response by automating repetitive admissions, learner support, citizen service, and utility request workflows while keeping human escalation where needed.
+
+We built Myelin to do exactly that with strict compliance controls and measurable pilot KPIs in 8-12 weeks.
+
+If relevant, I can share a 1-page pilot plan mapped to your current workflow.
+
+Regards,
+[Sender]</div>
+        </article>
+        <article class="step-card">
+          <h3>Template B: Pilot KPI Scorecard</h3>
+          <div class="mono">Use Case:
+Baseline KPI 1:
+Target KPI 1:
+Baseline KPI 2:
+Target KPI 2:
+Pilot Start Date:
+Pilot End Date:
+Executive Sponsor:
+Delivery Owner:
+Weekly Report Day:</div>
+        </article>
+      </div>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Template C: Executive Weekly Summary</h3>
+          <div class="mono">1) ARR and pipeline movement by country
+2) Pilot status: on-track / at-risk / blocked
+3) Compliance exceptions and remediation
+4) Partner contributions and next actions
+5) Decisions required from leadership this week</div>
+        </article>
+        <article class="step-card">
+          <h3>Template D: Deal Review (Mandatory Fields)</h3>
+          <div class="mono">Account:
+Stage:
+Decision maker:
+Problem statement (quantified):
+Value hypothesis:
+Pilot scope:
+Procurement risks:
+Next committed action:
+Owner and date:</div>
+        </article>
+      </div>
+
+      <div class="checklist">
+        <strong>How to use this manual day-to-day</strong>
+        <ol>
+          <li>Start each week with Section 13 cadence and Section 9 KPI dashboard review.</li>
+          <li>Run all pipeline activity against Section 14 stage gates and quality rules.</li>
+          <li>Deliver every pilot using Section 15 gates and reporting templates.</li>
+          <li>Operate all AI agents under Section 16 approval and incident protocols.</li>
+          <li>Use Sections 17-20 when launching new country, partner, or budget decisions.</li>
+          <li>Use Section 22 templates to keep communication and governance consistent.</li>
+          <li>Run all brand and messaging choices through Section 23 controls.</li>
+          <li>Run all demand generation and campaign execution through Section 24.</li>
+          <li>Generate pricing, quote corridors, and proposal drafts through Section 25.</li>
+          <li>Use Section 26 to set up and operate your legal, domain, and workspace foundation.</li>
+          <li>Use Section 27 when positioning technical-skills defensibility with utilities and government buyers.</li>
+          <li>Use Section 28 to operationalize simulation-first technical skills delivery and assessment evidence.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="branding-manual">
+      <h2>23) Branding System and Messaging Manual</h2>
+      <p class="muted">
+        This section standardizes Myelin brand identity so every country team tells the same story with local relevance.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Brand Layer</th>
+            <th>Definition</th>
+            <th>Required Expression</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purpose</td>
+            <td>Why Myelin exists.</td>
+            <td>"Help African teams operate at world-class speed through trusted AI agents."</td>
+            <td>CEO + Marketing Lead</td>
+          </tr>
+          <tr>
+            <td>Category Position</td>
+            <td>What market position Myelin claims.</td>
+            <td>"AI agent operating layer for service delivery and operations in SSA public institutions."</td>
+            <td>Product Marketing</td>
+          </tr>
+          <tr>
+            <td>Brand Promise</td>
+            <td>What institutions should reliably experience.</td>
+            <td>Fast deployment, measurable ROI, and compliance-aware automation.</td>
+            <td>Marketing + Solutions</td>
+          </tr>
+          <tr>
+            <td>Proof Standard</td>
+            <td>Evidence required for marketing claims.</td>
+            <td>Quantified institutional outcomes with date, baseline, and measurement method.</td>
+            <td>RevOps + Legal</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Brand Voice Rules</h3>
+          <ul>
+            <li>Voice: clear, practical, accountable, and technical without jargon overload.</li>
+            <li>Tone by context: consultative in sales, decisive in incident comms, evidence-first in marketing.</li>
+            <li>Avoid unproven superlatives like "best", "revolutionary", or "guaranteed" without data.</li>
+            <li>Use region-aware language that respects local market maturity differences.</li>
+          </ul>
+          <div class="checklist small">All external copy must pass brand voice check before publication.</div>
+        </article>
+        <article class="step-card">
+          <h3>Messaging House (Default)</h3>
+          <div class="mono">Pillar 1: Speed to Value
+Message: Deploy in weeks, not quarters.
+Proof: Pilot SOP + KPI tracking framework.
+
+Pillar 2: Public Service Outcomes
+Message: Improve learner, citizen, and utility-service outcomes while reducing backlog.
+Proof: Baseline vs post-launch scorecard.
+
+Pillar 3: Controlled AI
+Message: Human-in-loop and policy-safe automation.
+Proof: Agent risk tiers + compliance logs.
+
+Pillar 4: Regional Fit
+Message: Built for SSA operating realities.
+Proof: Country packs, language variants, partner delivery model.</div>
+        </article>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Audience</th>
+            <th>Primary Pain</th>
+            <th>Primary Message</th>
+            <th>Primary CTA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Permanent Secretary / Director General</td>
+            <td>Service quality pressure across constrained budgets and legacy workflows.</td>
+            <td>Myelin improves institutional service outcomes without linear staffing growth.</td>
+            <td>Book executive transformation briefing.</td>
+          </tr>
+          <tr>
+            <td>TVET Principal / Registrar</td>
+            <td>Admissions and learner support bottlenecks.</td>
+            <td>Automate repetitive academic support and administrative workflows with escalation controls.</td>
+            <td>Request student-services pilot.</td>
+          </tr>
+          <tr>
+            <td>Utility COO / Customer Services Head</td>
+            <td>High service-request volume, outages, and response inconsistency.</td>
+            <td>Improve request triage, outage communication, and first-contact resolution with AI + human orchestration.</td>
+            <td>Start utility service pilot.</td>
+          </tr>
+          <tr>
+            <td>Procurement / ICT Governance / Legal</td>
+            <td>Risk from uncontrolled AI, procurement non-compliance, and data handling.</td>
+            <td>Deploy with approval tiers, traceability, and country-specific controls aligned to public procurement rules.</td>
+            <td>Review procurement and compliance brief.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Brand Governance Workflow</h3>
+          <ol>
+            <li>Draft created by marketing owner or AI content agent.</li>
+            <li>Brand Guardian Agent checks tone, claims, and terminology.</li>
+            <li>Product marketing validates technical accuracy.</li>
+            <li>Legal/compliance review for high-risk claims.</li>
+            <li>Country lead approves localization and publishes.</li>
+          </ol>
+          <div class="checklist small">SLA: standard assets 48 hours, launch assets 5 business days.</div>
+        </article>
+        <article class="step-card">
+          <h3>Brand Asset Kit (Required)</h3>
+          <ul>
+            <li>One-page company narrative (problem, solution, proof, why now).</li>
+            <li>Pitch deck with localized proof slides (Rwanda, Kenya, Nigeria, Zambia).</li>
+            <li>Case study template and approval checklist.</li>
+            <li>Logo usage guidelines, color usage, and typography hierarchy.</li>
+            <li>Press boilerplate and spokesperson Q and A sheet.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="checklist">
+        <strong>Brand quality checklist before any campaign launch</strong>
+        <ul>
+          <li>Core message aligns with one of four messaging pillars.</li>
+          <li>Every claim has named evidence source and date.</li>
+          <li>Audience-specific CTA is explicit and measurable.</li>
+          <li>Localization is reviewed by country owner.</li>
+          <li>Compliance-sensitive claims are legally approved.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="marketing-manual">
+      <h2>24) Marketing Engine and Demand Generation Manual</h2>
+      <p class="muted">
+        This section defines the full-funnel marketing system from awareness to qualified pipeline and revenue contribution.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Funnel Layer</th>
+            <th>Objective</th>
+            <th>Core Plays</th>
+            <th>Primary Metric</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Awareness</td>
+            <td>Create category clarity and trust.</td>
+            <td>Thought leadership, founder voice, PR moments, event speaking.</td>
+            <td>Share of voice and branded traffic growth.</td>
+          </tr>
+          <tr>
+            <td>Demand Capture</td>
+            <td>Convert interest into named opportunities.</td>
+            <td>Landing pages, webinars, lead magnets, outbound-integrated campaigns.</td>
+            <td>MQL to SQL conversion rate.</td>
+          </tr>
+          <tr>
+            <td>Pipeline Acceleration</td>
+            <td>Shorten sales cycle and increase pilot starts.</td>
+            <td>Case studies, ROI calculators, procurement packs, exec briefings.</td>
+            <td>Days from S2 to S4.</td>
+          </tr>
+          <tr>
+            <td>Expansion</td>
+            <td>Drive upsell and referral pipeline.</td>
+            <td>Institutional case studies, QBR narratives, partner co-marketing.</td>
+            <td>Expansion pipeline and referral-sourced ARR.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Country Channel Mix (Default)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Country</th>
+                <th>Primary Channels</th>
+                <th>Secondary Channels</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rwanda</td>
+                <td>Education and utility roundtables, ministry briefings, ecosystem partnerships</td>
+                <td>LinkedIn thought leadership, targeted institutional email programs</td>
+              </tr>
+              <tr>
+                <td>Zambia</td>
+                <td>Partner co-marketing, public utility and TVET webinars, field visits</td>
+                <td>LinkedIn ABM, case-study drip campaigns</td>
+              </tr>
+              <tr>
+                <td>Kenya</td>
+                <td>Digital campaigns, education and public-service communities, webinars</td>
+                <td>Partner newsletters and event sponsorships</td>
+              </tr>
+              <tr>
+                <td>Nigeria</td>
+                <td>ABM outbound + policy content, executive briefings</td>
+                <td>PR, regional conference visibility</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="step-card">
+          <h3>Budget Allocation Guide</h3>
+          <div class="mono">40%: Demand generation (ABM, digital, lead capture)
+20%: Content and brand assets (case studies, videos, proof collateral)
+15%: Events and field marketing
+15%: Partner co-marketing and enablement
+10%: Experimentation and new channel tests</div>
+          <div class="checklist small">Rebalance quarterly based on cost per qualified opportunity and close rate.</div>
+        </article>
+      </div>
+
+      <h3>12-Week Campaign Operating Cycle</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Weeks</th>
+            <th>Workstream</th>
+            <th>Deliverables</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1-2</td>
+            <td>Campaign strategy</td>
+            <td>Audience list, campaign thesis, KPI targets, budget sign-off.</td>
+            <td>Marketing lead + RevOps</td>
+          </tr>
+          <tr>
+            <td>3-4</td>
+            <td>Asset production</td>
+            <td>Landing page, ad copy, outreach variants, case-study insert.</td>
+            <td>Content lead + Brand Guardian Agent</td>
+          </tr>
+          <tr>
+            <td>5-8</td>
+            <td>Launch and optimize</td>
+            <td>Channel deployment, A/B tests, weekly optimization report.</td>
+            <td>Growth manager + Campaign Optimizer Agent</td>
+          </tr>
+          <tr>
+            <td>9-10</td>
+            <td>Pipeline acceleration</td>
+            <td>Sales enablement assets, executive briefings, objection playbook.</td>
+            <td>Product marketing + sales</td>
+          </tr>
+          <tr>
+            <td>11-12</td>
+            <td>Retrospective and scale</td>
+            <td>Performance review, lessons learned, next campaign decision.</td>
+            <td>Marketing lead + leadership</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>AI Agent Roles for Marketing</h3>
+          <ul>
+            <li><strong>Brand Guardian Agent:</strong> enforces voice, positioning, and claim discipline.</li>
+            <li><strong>Content Strategist Agent:</strong> generates content briefs by funnel stage and country.</li>
+            <li><strong>Campaign Optimizer Agent:</strong> monitors CAC, CPL, and conversion shifts; recommends reallocation.</li>
+            <li><strong>Social Listening Agent:</strong> tracks sentiment, competitor narratives, and event opportunities.</li>
+            <li><strong>Attribution Analyst Agent:</strong> stitches campaign, outbound, and partner influence into pipeline attribution.</li>
+          </ul>
+          <div class="checklist small">High-risk outputs (pricing, legal claims, institutional logos) require human approval.</div>
+        </article>
+        <article class="step-card">
+          <h3>Weekly Marketing Review SOP</h3>
+          <ol>
+            <li>Review funnel metrics by country and channel.</li>
+            <li>Inspect message performance and creative fatigue indicators.</li>
+            <li>Compare campaign-sourced pipeline quality vs outbound-only pipeline.</li>
+            <li>Approve budget shifts and content priorities for next 7 days.</li>
+            <li>Publish one-page report to sales and leadership.</li>
+          </ol>
+        </article>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Green</th>
+            <th>Amber</th>
+            <th>Red</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MQL to SQL conversion</td>
+            <td>&gt; 30%</td>
+            <td>20-30%</td>
+            <td>&lt; 20%</td>
+            <td>Refine audience and offer; tighten lead qualification.</td>
+          </tr>
+          <tr>
+            <td>Cost per qualified opportunity</td>
+            <td>Within target corridor</td>
+            <td>Up to 20% above target</td>
+            <td>&gt; 20% above target</td>
+            <td>Shift spend to proven channels and partner-led demand.</td>
+          </tr>
+          <tr>
+            <td>Campaign-influenced win rate</td>
+            <td>&gt; 25%</td>
+            <td>15-25%</td>
+            <td>&lt; 15%</td>
+            <td>Improve sales enablement and middle-funnel content.</td>
+          </tr>
+          <tr>
+            <td>Brand search trend</td>
+            <td>Consistent growth</td>
+            <td>Flat</td>
+            <td>Declining</td>
+            <td>Increase thought leadership and PR cadence.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Template E: Campaign Brief</h3>
+          <div class="mono">Campaign name:
+Country:
+Audience segment:
+Problem statement:
+Offer:
+Channels:
+Budget:
+KPI targets:
+Sales follow-up owner:
+Start/end dates:</div>
+        </article>
+        <article class="step-card">
+          <h3>Template F: Case Study Skeleton</h3>
+          <div class="mono">Institution profile:
+Initial challenge:
+Implementation scope:
+Time to go-live:
+KPI outcomes (baseline vs result):
+Quote from sponsor:
+Expansion opportunity:</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="quote-calculator">
+      <h2>25) Quote Calculator and Proposal Pack</h2>
+      <p class="muted">
+        Use this section to generate institution-ready pricing and proposal drafts in under 10 minutes. All values are in USD and should be adapted to procurement currency at contracting stage.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Institution Type</th>
+            <th>Pilot (8-12 weeks)</th>
+            <th>Annual Platform</th>
+            <th>Implementation (Year 1)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TVET College (single campus)</td>
+            <td>$12,000-$25,000</td>
+            <td>$24,000-$72,000</td>
+            <td>$10,000-$35,000</td>
+          </tr>
+          <tr>
+            <td>TVET Network / Provincial Education Unit</td>
+            <td>$25,000-$60,000</td>
+            <td>$90,000-$250,000</td>
+            <td>$35,000-$120,000</td>
+          </tr>
+          <tr>
+            <td>Public Utility (regional)</td>
+            <td>$20,000-$50,000</td>
+            <td>$120,000-$320,000</td>
+            <td>$40,000-$140,000</td>
+          </tr>
+          <tr>
+            <td>National Education Dept / National Utility HQ</td>
+            <td>$35,000-$90,000</td>
+            <td>$300,000-$1,200,000</td>
+            <td>$120,000-$400,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Product Package (What They Buy)</h3>
+          <ul>
+            <li><strong>Institutional Core:</strong> multi-channel AI service desk, workflow automation, dashboards, role-based controls.</li>
+            <li><strong>Governance and Compliance:</strong> policy checks, audit logs, evidence trails, country-specific controls.</li>
+            <li><strong>Agent OS:</strong> scout, mapping, outreach, pilot control, compliance, expansion intelligence.</li>
+            <li><strong>Operations Layer:</strong> approval workflows, escalation rules, observability, and health monitoring.</li>
+          </ul>
+        </article>
+        <article class="step-card">
+          <h3>Service Package (How It Is Delivered)</h3>
+          <ul>
+            <li><strong>Implementation Sprint:</strong> discovery, integrations, pilot configuration, go-live support.</li>
+            <li><strong>Adoption and Enablement:</strong> admin training, SOP setup, stakeholder reporting templates.</li>
+            <li><strong>Managed AgentOps (optional):</strong> weekly tuning, monitoring, incident response, optimization reviews.</li>
+            <li><strong>Change Requests:</strong> scoped enhancements billed as fixed days or project blocks.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="calc-shell">
+        <h3>Interactive Quote Calculator</h3>
+        <div class="calc-grid">
+          <div class="calc-form">
+            <div class="field-row">
+              <div class="field">
+                <label for="qcClient">Institution Name</label>
+                <input id="qcClient" type="text" value="Sample Institution">
+              </div>
+              <div class="field">
+                <label for="qcCountry">Country</label>
+                <input id="qcCountry" type="text" value="Rwanda">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="qcUseCase">Primary Use Case</label>
+                <input id="qcUseCase" type="text" value="Admissions and learner support automation">
+              </div>
+              <div class="field">
+                <label for="qcInstitutionType">Institution Type</label>
+                <select id="qcInstitutionType">
+                  <option value="tvet_single">TVET College (single campus)</option>
+                  <option value="tvet_network">TVET Network / Provincial Education Unit</option>
+                  <option value="utility_regional">Public Utility (regional)</option>
+                  <option value="national_hq">National Education Dept / National Utility HQ</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qcScope">Deployment Scope</label>
+                <select id="qcScope">
+                  <option value="single">Single site/division</option>
+                  <option value="multi">Multi-site</option>
+                  <option value="national">National rollout</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="qcCompliance">Compliance Complexity</label>
+                <select id="qcCompliance">
+                  <option value="standard">Standard</option>
+                  <option value="elevated">Elevated</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qcWorkflows">Workflow Count</label>
+                <input id="qcWorkflows" type="number" min="1" max="30" value="4">
+              </div>
+              <div class="field">
+                <label for="qcIntegrations">Integration Count</label>
+                <input id="qcIntegrations" type="number" min="0" max="20" value="3">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qcChannels">Channel Count</label>
+                <select id="qcChannels">
+                  <option value="1">1 channel</option>
+                  <option value="2">2 channels</option>
+                  <option value="3" selected>3 channels</option>
+                  <option value="4">4+ channels</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="qcTerm">Contract Term (years)</label>
+                <select id="qcTerm">
+                  <option value="1">1 year</option>
+                  <option value="2">2 years</option>
+                  <option value="3" selected>3 years</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qcDiscount">Multi-year Discount %</label>
+                <input id="qcDiscount" type="number" min="0" max="20" value="10">
+              </div>
+              <div class="field">
+                <label for="qcManagedPct">Managed AgentOps % of annual platform</label>
+                <input id="qcManagedPct" type="number" min="0" max="35" value="20">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qcTextInteractions">Estimated Annual Text Interactions</label>
+                <input id="qcTextInteractions" type="number" min="0" step="1000" value="150000">
+              </div>
+              <div class="field">
+                <label for="qcVoiceMinutes">Estimated Annual Voice Minutes</label>
+                <input id="qcVoiceMinutes" type="number" min="0" step="1000" value="25000">
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qcPilotEnabled">Include Pilot Phase?</label>
+                <select id="qcPilotEnabled">
+                  <option value="yes" selected>Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="qcPilotCredit">Pilot Credit % Applied to Year-1</label>
+                <input id="qcPilotCredit" type="number" min="0" max="50" value="40">
+              </div>
+            </div>
+
+            <div class="calc-actions">
+              <button id="qcRecalcBtn" class="action-btn" type="button">Recalculate Quote</button>
+              <button id="qcCopyProposalBtn" class="action-btn secondary" type="button">Copy Proposal</button>
+            </div>
+          </div>
+
+          <div class="calc-summary">
+            <h3>Quote Summary</h3>
+            <table class="results-table">
+              <tbody>
+                <tr><td><strong>Pilot Fee</strong></td><td id="qcPilotFee">$0</td></tr>
+                <tr><td><strong>Annual Platform Fee</strong></td><td id="qcAnnualPlatform">$0</td></tr>
+                <tr><td><strong>Implementation (Year 1)</strong></td><td id="qcImplementation">$0</td></tr>
+                <tr><td><strong>Managed AgentOps (Annual)</strong></td><td id="qcManagedOps">$0</td></tr>
+                <tr><td><strong>Variable Usage (Annual)</strong></td><td id="qcUsage">$0</td></tr>
+                <tr><td><strong>Year-1 Gross Value</strong></td><td id="qcYear1Gross">$0</td></tr>
+                <tr><td><strong>Pilot Credit</strong></td><td id="qcPilotCreditAmt">$0</td></tr>
+                <tr><td><strong>Year-1 Net Contract Value</strong></td><td class="quote-num" id="qcYear1Net">$0</td></tr>
+                <tr><td><strong>Total Contract Value (Net)</strong></td><td class="quote-num" id="qcTcvNet">$0</td></tr>
+              </tbody>
+            </table>
+            <div class="checklist">
+              <strong>Recommended Price Corridor</strong>
+              <ul>
+                <li>Annual Platform Corridor: <span id="qcAnnualCorridor">$0 - $0</span></li>
+                <li>Implementation Corridor: <span id="qcImplCorridor">$0 - $0</span></li>
+                <li>Pilot Corridor: <span id="qcPilotCorridor">$0 - $0</span></li>
+              </ul>
+            </div>
+            <div class="checklist">
+              <strong>Applied Factors</strong>
+              <ul>
+                <li>Complexity Multiplier: <span id="qcComplexity">1.00x</span></li>
+                <li>Term Discount Applied: <span id="qcAppliedDiscount">0%</span></li>
+                <li>Proposal Mode: <span id="qcTemplateMode">Pilot-to-Annual</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="mono">Formula Set
+Complexity = ScopeFactor * WorkflowFactor * IntegrationFactor * ChannelFactor * ComplianceFactor
+Annual Platform = Midpoint(Base Annual Range) * Complexity
+Implementation = Midpoint(Base Implementation Range) * (1 + (Complexity - 1) * 0.75)
+Pilot = Midpoint(Base Pilot Range) * (0.8 + (Complexity - 1) * 0.6)
+Managed AgentOps = Annual Platform * ManagedPct
+Variable Usage = (TextInteractions * 0.009) + (VoiceMinutes * 0.07)
+Year1 Gross = Pilot + Annual Platform + Implementation + Managed AgentOps + Variable Usage
+Year1 Net = Year1 Gross - PilotCredit
+TCV Net = Year1 Net + ((Annual Platform + Managed AgentOps + Variable Usage) * (Term - 1)) - MultiYearDiscount</div>
+
+        <h3>Ready Proposal Templates</h3>
+        <div class="pill-row">
+          <button class="pill-btn" type="button" data-template="pilot">Pilot-to-Annual Template</button>
+          <button class="pill-btn" type="button" data-template="annual">Direct Annual Template</button>
+          <button class="pill-btn" type="button" data-template="national">National Program Template</button>
+        </div>
+        <div class="field" style="margin-top: 8px;">
+          <label for="qcProposalOutput">Proposal Draft (Editable)</label>
+          <textarea id="qcProposalOutput"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section id="business-setup">
+      <h2>26) Business Setup and Infrastructure (Teludens Lab + Myelin)</h2>
+      <p class="muted">
+        This section defines how to structure the company, domains, and Google Workspace so you can run Myelin as a product of Teludens Lab with strong operational control from day one.
+      </p>
+
+      <div class="checklist">
+        <strong>Operating assumption</strong>
+        <ul>
+          <li>Teludens Lab is the parent entity.</li>
+          <li>Myelin is a product/brand under Teludens Lab.</li>
+          <li>You own `teludens.com`, `teludens.org`, and `teludens.net` and want a clean trust + sales + product architecture.</li>
+        </ul>
+      </div>
+
+      <h3>Entity and Brand Architecture</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Recommended Structure</th>
+            <th>Purpose</th>
+            <th>Key Documents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Parent Entity</td>
+            <td>Teludens Lab (registered legal entity)</td>
+            <td>Owns IP, contracts, banking, tax, and liability framework.</td>
+            <td>Certificate of formation, tax registration, operating agreement/bylaws.</td>
+          </tr>
+          <tr>
+            <td>Product Brand</td>
+            <td>Myelin (product of Teludens Lab)</td>
+            <td>Go-to-market identity for institutional customers.</td>
+            <td>Brand usage policy, product terms, privacy notice.</td>
+          </tr>
+          <tr>
+            <td>Commercial Contracting</td>
+            <td>"Teludens Lab (trading as Myelin)"</td>
+            <td>Ensures legal clarity while preserving product brand.</td>
+            <td>MSA, order form, DPA, service schedule.</td>
+          </tr>
+          <tr>
+            <td>IP Ownership</td>
+            <td>Held by Teludens Lab</td>
+            <td>Protects product ownership and investor/legal diligence.</td>
+            <td>IP assignment agreements, contractor IP clauses, trademark records.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Business Registration Checklist</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Action</th>
+            <th>Owner</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Confirm legal entity form and jurisdiction with counsel/accountant.</td>
+            <td>Founder</td>
+            <td>Entity choice memo + registration plan</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Register business name and complete tax registrations.</td>
+            <td>Founder + legal/accounting support</td>
+            <td>Registration certificate + tax IDs</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Open business bank account and set finance controls.</td>
+            <td>Founder</td>
+            <td>Business account + approval policy</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Issue core legal docs: MSA, DPA, order form, privacy policy, terms.</td>
+            <td>Founder + legal</td>
+            <td>Legal baseline package v1</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Register any key marks and domain-related IP where relevant.</td>
+            <td>Founder + IP counsel</td>
+            <td>Trademark/IP filing tracker</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Domain Architecture (Teludens + Myelin)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Recommended Role</th>
+            <th>Examples</th>
+            <th>Security Baseline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>teludens.com</td>
+            <td>Corporate and legal trust domain (primary business identity)</td>
+            <td>Corporate site, legal pages, investor/about, corporate email</td>
+            <td>MFA on registrar, DNS lock, SPF + DKIM + DMARC</td>
+          </tr>
+          <tr>
+            <td>teludens.net</td>
+            <td>Product and operations domain for Myelin</td>
+            <td>myelin.teludens.net, app.teludens.net, docs.teludens.net</td>
+            <td>HSTS, WAF, cert auto-renew, subdomain inventory</td>
+          </tr>
+          <tr>
+            <td>teludens.org</td>
+            <td>Partnership, public-interest, research, and impact communications</td>
+            <td>impact site, policy briefs, ecosystem initiatives</td>
+            <td>SPF + DKIM + DMARC, restricted admin access</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mono">Suggested DNS and Email Security Rollout
+1) Set MX to Google Workspace
+2) Publish SPF (include:_spf.google.com)
+3) Enable DKIM (2048-bit) for each sending domain
+4) Publish DMARC in monitor mode (p=none), then move to quarantine/reject after 2-4 weeks
+5) Monitor spoofing and delivery reports weekly</div>
+
+      <h3>Google Workspace Architecture Blueprint</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Recommended Setup</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary Workspace Domain</td>
+            <td>`teludens.com`</td>
+            <td>Corporate trust and clean legal identity.</td>
+          </tr>
+          <tr>
+            <td>Secondary Domains/Aliases</td>
+            <td>`teludens.net`, `teludens.org`</td>
+            <td>Lets one Workspace manage product + impact + corporate communications.</td>
+          </tr>
+          <tr>
+            <td>Admin Accounts</td>
+            <td>Separate super-admin account from daily user account.</td>
+            <td>Reduces blast radius if daily account is compromised.</td>
+          </tr>
+          <tr>
+            <td>Identity Security</td>
+            <td>Mandatory 2-step verification, security keys/passkeys, session controls.</td>
+            <td>Baseline protection for high-trust institutional contracting.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Recommended Organizational Units (OUs)</h3>
+          <ul>
+            <li>`/Founders-Leadership`</li>
+            <li>`/Operations-Finance-Legal`</li>
+            <li>`/Product-Engineering-Myelin`</li>
+            <li>`/GoToMarket-Sales-Marketing`</li>
+            <li>`/Agent-Service-Accounts`</li>
+            <li>`/Contractors-Restricted`</li>
+          </ul>
+        </article>
+        <article class="step-card">
+          <h3>Recommended Group and Alias Map</h3>
+          <ul>
+            <li>`hello@teludens.com` (general inbound)</li>
+            <li>`myelin@teludens.net` (product identity)</li>
+            <li>`sales@teludens.com` and `partnerships@teludens.org`</li>
+            <li>`legal@teludens.com`, `privacy@teludens.com`, `security@teludens.com`</li>
+            <li>`procurement@teludens.com` for institution-facing commercial workflows</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3>Google Drive and Knowledge Architecture</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Shared Drive</th>
+            <th>Contents</th>
+            <th>Access Model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01_Corporate_Governance</td>
+            <td>Company registration docs, board records, entity and tax records.</td>
+            <td>Founder + legal only</td>
+          </tr>
+          <tr>
+            <td>02_Legal_Commercial</td>
+            <td>MSA/DPA templates, signed contracts, procurement packs.</td>
+            <td>Founder + legal + sales leadership</td>
+          </tr>
+          <tr>
+            <td>03_Myelin_Product</td>
+            <td>Roadmaps, architecture, release docs, agent runbooks.</td>
+            <td>Product/engineering + founder</td>
+          </tr>
+          <tr>
+            <td>04_GTM_Institutions</td>
+            <td>Account plans, proposals, pricing outputs, campaign assets.</td>
+            <td>GTM + founder</td>
+          </tr>
+          <tr>
+            <td>05_Compliance_and_Security</td>
+            <td>DPIAs, compliance checklists, audits, incident reports.</td>
+            <td>Founder + compliance/security advisors</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>AI Agent Accounts and Workspace Integration</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Agent Function</th>
+            <th>Workspace Access</th>
+            <th>Permission Rule</th>
+            <th>Audit Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Market and Account Intelligence</td>
+            <td>Read-only access to approved GTM docs and CRM exports.</td>
+            <td>No send permissions.</td>
+            <td>Query logs retained and reviewable.</td>
+          </tr>
+          <tr>
+            <td>Outreach Drafting</td>
+            <td>Draft-only access to Gmail templates and docs.</td>
+            <td>Founder approval required before send.</td>
+            <td>Version history + approval log.</td>
+          </tr>
+          <tr>
+            <td>Pilot and Compliance Agents</td>
+            <td>Read access to delivery trackers and compliance folders.</td>
+            <td>No legal/commercial edits without approval.</td>
+            <td>Decision memo attached to each recommendation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>30-Day Setup Sprint</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Focus</th>
+            <th>Deliverable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Week 1</td>
+            <td>Legal + domain governance</td>
+            <td>Entity checklist complete, domain role map, registrar security locked.</td>
+          </tr>
+          <tr>
+            <td>Week 2</td>
+            <td>Workspace baseline</td>
+            <td>Primary/secondary domains live, OUs/groups created, security policies active.</td>
+          </tr>
+          <tr>
+            <td>Week 3</td>
+            <td>Knowledge and commercial ops</td>
+            <td>Shared drives structured, legal pack v1, proposal templates live.</td>
+          </tr>
+          <tr>
+            <td>Week 4</td>
+            <td>Agent integration and auditability</td>
+            <td>Service accounts configured, logs centralized, approval workflow tested.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="checklist">
+        <strong>Founder non-negotiables for setup quality</strong>
+        <ul>
+          <li>Never share super-admin credentials or use super-admin for daily work.</li>
+          <li>All procurement/legal emails route through tracked group addresses.</li>
+          <li>All customer-facing domains have SPF, DKIM, and DMARC configured and monitored.</li>
+          <li>All agent actions touching external communications must be approval-gated.</li>
+          <li>All critical docs must live in shared drives, not personal drives.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="utility-moat">
+      <h2>27) Utility Technical Skills Moat (with Eskom and Rand Water examples)</h2>
+      <p class="muted">
+        Technical-skills depth in utilities is a strategic moat because these competencies are high-stakes, compliance-heavy, and context-specific. Generic learning tools struggle to deliver measurable readiness in these domains.
+      </p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Why This Matters for Africa</h3>
+          <ul>
+            <li>Utilities are mission-critical national infrastructure with zero tolerance for training failure.</li>
+            <li>Skill pathways are tied to safety, operational uptime, regulatory compliance, and public trust.</li>
+            <li>Workforce capability gaps directly affect service continuity, not just internal productivity metrics.</li>
+            <li>Governments and SOEs can justify budget when training outcomes are linked to operational risk reduction.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Why It Creates Defensibility</h3>
+          <ul>
+            <li>Domain-specific competency maps and assessment logic are difficult and expensive to replicate.</li>
+            <li>Institutional switching cost rises once training, certification evidence, and interventions are embedded.</li>
+            <li>Outcome data improves learning-path accuracy over time, creating a defensible flywheel.</li>
+            <li>Cross-linking education/TVET pipelines with utility-ready competencies expands long-term platform relevance.</li>
+          </ul>
+        </article>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Utility Example</th>
+            <th>Representative Technical Skills</th>
+            <th>Why Generic Platforms Underperform</th>
+            <th>Myelin Advantage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eskom (South Africa) type context</td>
+            <td>High-voltage safety, substation procedures, relay protection, SCADA/DCS operations, outage restoration, predictive maintenance.</td>
+            <td>Needs role-specific progression, scenario-based decision support, and strict safety evidence trails.</td>
+            <td>Adaptive pathways + instructor copilot + readiness tracking with audit-grade evidence.</td>
+          </tr>
+          <tr>
+            <td>Rand Water (South Africa) type context</td>
+            <td>Water treatment process control, pump/valve maintenance, instrumentation, lab quality controls, leakage management, network operations.</td>
+            <td>Requires operational-context learning and continuous competency validation, not static module completion.</td>
+            <td>Cohort risk detection + intervention workflows + competency and recertification monitoring.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Go-to-Market Application</h3>
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>For Education Ministries and TVET Directorates</h3>
+          <ul>
+            <li>Position Myelin as the bridge between curriculum delivery and workforce-readiness outcomes.</li>
+            <li>Prioritize pathways aligned to national critical sectors (energy, water, and technical trades).</li>
+            <li>Use utility-aligned competency evidence to strengthen ministry procurement cases.</li>
+          </ul>
+        </article>
+        <article class="step-card">
+          <h3>For Utility Buyers and Partners</h3>
+          <ul>
+            <li>Start with one safety- or reliability-critical role family for pilot validation.</li>
+            <li>Track time-to-competency, incident reduction, and certification readiness metrics.</li>
+            <li>Expand from pilot pathways into enterprise learning operations with governance controls.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="checklist">
+        <strong>Use this moat narrative in proposals</strong>
+        <ol>
+          <li>Show why technical skill pathways are operational risk controls, not optional training tools.</li>
+          <li>Reference the specific competency families relevant to the buyer context.</li>
+          <li>Tie learning outcomes to institutional KPIs (completion, competency, readiness, compliance).</li>
+          <li>Demonstrate how Myelin evidence logs support procurement and audit requirements.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="simulation-learning">
+      <h2>28) Simulation Learning Engine (Technical Skills at Mastery Level)</h2>
+      <p class="muted">
+        Simulation is a core Myelin differentiator for technical pathways because it converts theory into repeatable procedural competency with measurable evidence. This is especially critical for high-risk operational domains where practical readiness matters more than content completion.
+      </p>
+
+      <div class="grid-2">
+        <article class="card">
+          <h3>Why simulation is non-optional</h3>
+          <ul>
+            <li>Technical roles require decision and motor-sequence training, not just knowledge recall.</li>
+            <li>Institutions need safe environments to practice high-risk procedures before field deployment.</li>
+            <li>Simulation creates objective assessment evidence for procurement and accreditation stakeholders.</li>
+            <li>It shortens time-to-competency for learner cohorts and workforce onboarding pipelines.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Where it fits in Myelin</h3>
+          <ul>
+            <li>Adaptive learning pathways route learners into simulation modules at the right competency stage.</li>
+            <li>Instructor copilots receive simulation performance traces to target remediation.</li>
+            <li>Institution dashboards track competency mastery, error patterns, and recertification readiness.</li>
+            <li>Governance layer records pass/fail events and tolerance evidence for auditability.</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3>Simulation Capability Stack</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Capability</th>
+            <th>Operational Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Scenario Runtime</td>
+            <td>Browser-based 3D simulation scenes with realistic interaction logic.</td>
+            <td>Scales access without native installs and supports institutional device constraints.</td>
+          </tr>
+          <tr>
+            <td>Physics and Procedure Engine</td>
+            <td>Torque, pressure, constraints, and step-gated interaction validation.</td>
+            <td>Measures procedural correctness, not just completion clicks.</td>
+          </tr>
+          <tr>
+            <td>Assessment Integrity</td>
+            <td>Tolerance windows, pass/fail thresholds, and reproducible scoring rules.</td>
+            <td>Defensible competency evidence for certification pathways.</td>
+          </tr>
+          <tr>
+            <td>Telemetry and Replay</td>
+            <td>Step-level logs, attempt traces, and QA replay artifacts.</td>
+            <td>Enables targeted remediation and institution-level quality review.</td>
+          </tr>
+          <tr>
+            <td>Adaptive Intervention</td>
+            <td>Cohort-risk and instructor agents trigger remediation after simulation outcomes.</td>
+            <td>Closes the loop between practice, assessment, and learner progression.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Priority Simulation Pathways (Examples)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Pathway</th>
+            <th>Simulation Focus</th>
+            <th>Assessment Evidence</th>
+            <th>Institutional Buyer Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Electrical and grid operations</td>
+            <td>Isolation/LOTO procedures, control logic, restoration sequences.</td>
+            <td>Step pass/fail, tolerance deviations, attempt progression.</td>
+            <td>Safer workforce readiness and lower field-error risk.</td>
+          </tr>
+          <tr>
+            <td>Water and process operations</td>
+            <td>Treatment control, instrumentation handling, maintenance sequencing.</td>
+            <td>Procedure integrity logs, threshold compliance, response timing.</td>
+            <td>Operational reliability and certification confidence.</td>
+          </tr>
+          <tr>
+            <td>TVET technical labs</td>
+            <td>Equipment setup, diagnostics, repair/rework workflows.</td>
+            <td>Competency mastery score, intervention history, readiness status.</td>
+            <td>Improved completion and employability outcomes.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Technical Baseline Targets (from Myelin simulation spec)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Baseline Target</th>
+            <th>Why It Matters for Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Platform support</td>
+            <td>WebGL 2 baseline in modern browsers; WebGPU optional with fallback.</td>
+            <td>Procurement-friendly deployment with no native install requirement.</td>
+          </tr>
+          <tr>
+            <td>Performance</td>
+            <td>60 fps desktop target; 30-60 fps mobile/tablet with adaptive quality.</td>
+            <td>Usable learning experience across mixed hardware environments.</td>
+          </tr>
+          <tr>
+            <td>Interaction latency</td>
+            <td>Input-to-visual latency target <=54 ms.</td>
+            <td>Supports practical skill rehearsal fidelity and user trust.</td>
+          </tr>
+          <tr>
+            <td>Assessment correctness</td>
+            <td>Step-level thresholds and tolerance checks for pass/fail.</td>
+            <td>Creates credible competency evidence beyond attendance metrics.</td>
+          </tr>
+          <tr>
+            <td>Telemetry</td>
+            <td>Timestamped step logs, attempt traces, and performance metrics.</td>
+            <td>Supports audits, QA sign-off, and intervention intelligence.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="manual-grid">
+        <article class="step-card">
+          <h3>Simulation Rollout Phases</h3>
+          <ol>
+            <li>Phase 1: scenario baseline build (visual + interaction + assessment rules).</li>
+            <li>Phase 2: pilot cohort launch with instructor observation and telemetry capture.</li>
+            <li>Phase 3: remediation logic integration into adaptive pathways.</li>
+            <li>Phase 4: scale to additional pathways with institution governance evidence.</li>
+          </ol>
+        </article>
+        <article class="step-card">
+          <h3>Commercial Packaging Guidance</h3>
+          <ul>
+            <li>Add `Simulation Pathway Pack` as a priced module in proposals.</li>
+            <li>Scope by number of pathways, complexity level, and assessment rigor.</li>
+            <li>Include annual simulation content maintenance and versioning support.</li>
+            <li>Use simulation outcome KPIs in pilot-to-annual conversion criteria.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="checklist">
+        <strong>Procurement narrative for simulation-led bids</strong>
+        <ol>
+          <li>Lead with competency readiness and safety/compliance risk reduction.</li>
+          <li>Show how simulation produces auditable evidence, not only course completion rates.</li>
+          <li>Map scenario outcomes directly to ministry/TVET/utility workforce KPIs.</li>
+          <li>Demonstrate how Myelin combines simulation + instructor intervention + governance controls.</li>
+        </ol>
+      </div>
+    </section>
+
+    <p class="footer">
+      This document is an operating playbook, not legal advice. Country-specific compliance controls should be validated by licensed counsel before production deployments.
+    </p>
+  </div>
+  <script>
+    (function () {
+      const PRICING_BANDS = {
+        tvet_single: { pilot: [12000, 25000], annual: [24000, 72000], impl: [10000, 35000], label: "TVET College (single campus)" },
+        tvet_network: { pilot: [25000, 60000], annual: [90000, 250000], impl: [35000, 120000], label: "TVET Network / Provincial Education Unit" },
+        utility_regional: { pilot: [20000, 50000], annual: [120000, 320000], impl: [40000, 140000], label: "Public Utility (regional)" },
+        national_hq: { pilot: [35000, 90000], annual: [300000, 1200000], impl: [120000, 400000], label: "National Education Dept / National Utility HQ" }
+      };
+
+      const DEFAULT_TERM_DISCOUNT = { 1: 0, 2: 5, 3: 10 };
+      const current = { template: "pilot", quote: null };
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function num(id) {
+        return Number(byId(id).value) || 0;
+      }
+
+      function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function round(v) {
+        return Math.round(v);
+      }
+
+      function mid(range) {
+        return (range[0] + range[1]) / 2;
+      }
+
+      function usd(v) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0
+        }).format(v);
+      }
+
+      function complexityFactor() {
+        const scope = byId("qcScope").value;
+        const compliance = byId("qcCompliance").value;
+        const channels = byId("qcChannels").value;
+        const workflows = clamp(num("qcWorkflows"), 1, 30);
+        const integrations = clamp(num("qcIntegrations"), 0, 20);
+
+        const scopeFactorMap = { single: 1.0, multi: 1.2, national: 1.45 };
+        const complianceFactorMap = { standard: 1.0, elevated: 1.12, high: 1.25 };
+        const channelFactorMap = { "1": 0.92, "2": 1.0, "3": 1.12, "4": 1.2 };
+
+        const scopeFactor = scopeFactorMap[scope] || 1.0;
+        const complianceFactor = complianceFactorMap[compliance] || 1.0;
+        const channelFactor = channelFactorMap[channels] || 1.0;
+        const workflowFactor = 1 + Math.max(0, workflows - 4) * 0.04;
+        const integrationFactor = 1 + Math.max(0, integrations - 3) * 0.03;
+
+        return scopeFactor * complianceFactor * channelFactor * workflowFactor * integrationFactor;
+      }
+
+      function computeQuote() {
+        const type = byId("qcInstitutionType").value;
+        const bands = PRICING_BANDS[type];
+        if (!bands) return null;
+
+        const complexity = complexityFactor();
+        const annualPlatform = round(mid(bands.annual) * complexity);
+        const implementation = round(mid(bands.impl) * (1 + (complexity - 1) * 0.75));
+        const pilotBase = round(mid(bands.pilot) * (0.8 + (complexity - 1) * 0.6));
+
+        const includePilot = byId("qcPilotEnabled").value === "yes";
+        const pilotFee = includePilot ? pilotBase : 0;
+        const pilotCreditPct = clamp(num("qcPilotCredit"), 0, 50) / 100;
+        const managedPct = clamp(num("qcManagedPct"), 0, 35) / 100;
+
+        const managedOps = round(annualPlatform * managedPct);
+        const textInteractions = Math.max(0, num("qcTextInteractions"));
+        const voiceMinutes = Math.max(0, num("qcVoiceMinutes"));
+        const usage = round(textInteractions * 0.009 + voiceMinutes * 0.07);
+
+        const year1Gross = pilotFee + annualPlatform + implementation + managedOps + usage;
+        const pilotCreditAmt = round(includePilot ? pilotFee * pilotCreditPct : 0);
+        const year1Net = year1Gross - pilotCreditAmt;
+
+        const term = clamp(Math.round(num("qcTerm")), 1, 3);
+        const discountPct = clamp(num("qcDiscount"), 0, 20) / 100;
+        const recurring = annualPlatform + managedOps + usage;
+        const multiYearBase = round(recurring * Math.max(0, term - 1));
+        const multiYearDiscount = round(multiYearBase * discountPct);
+        const tcvNet = year1Net + multiYearBase - multiYearDiscount;
+
+        const implFactor = (1 + (complexity - 1) * 0.75);
+        const pilotFactor = (0.8 + (complexity - 1) * 0.6);
+
+        const annualCorridor = [
+          round(bands.annual[0] * complexity * 0.9),
+          round(bands.annual[1] * complexity * 1.1)
+        ];
+        const implCorridor = [
+          round(bands.impl[0] * implFactor * 0.9),
+          round(bands.impl[1] * implFactor * 1.1)
+        ];
+        const pilotCorridor = includePilot
+          ? [round(bands.pilot[0] * pilotFactor * 0.9), round(bands.pilot[1] * pilotFactor * 1.1)]
+          : [0, 0];
+
+        return {
+          typeLabel: bands.label,
+          complexity,
+          includePilot,
+          annualPlatform,
+          implementation,
+          pilotFee,
+          managedOps,
+          usage,
+          year1Gross,
+          pilotCreditAmt,
+          year1Net,
+          term,
+          discountPct,
+          tcvNet,
+          annualCorridor,
+          implCorridor,
+          pilotCorridor
+        };
+      }
+
+      function renderSummary(q) {
+        if (!q) return;
+        byId("qcPilotFee").textContent = usd(q.pilotFee);
+        byId("qcAnnualPlatform").textContent = usd(q.annualPlatform);
+        byId("qcImplementation").textContent = usd(q.implementation);
+        byId("qcManagedOps").textContent = usd(q.managedOps);
+        byId("qcUsage").textContent = usd(q.usage);
+        byId("qcYear1Gross").textContent = usd(q.year1Gross);
+        byId("qcPilotCreditAmt").textContent = usd(q.pilotCreditAmt);
+        byId("qcYear1Net").textContent = usd(q.year1Net);
+        byId("qcTcvNet").textContent = usd(q.tcvNet);
+        byId("qcAnnualCorridor").textContent = usd(q.annualCorridor[0]) + " - " + usd(q.annualCorridor[1]);
+        byId("qcImplCorridor").textContent = usd(q.implCorridor[0]) + " - " + usd(q.implCorridor[1]);
+        byId("qcPilotCorridor").textContent = q.includePilot
+          ? usd(q.pilotCorridor[0]) + " - " + usd(q.pilotCorridor[1])
+          : "Not included";
+        byId("qcComplexity").textContent = q.complexity.toFixed(2) + "x";
+        byId("qcAppliedDiscount").textContent = Math.round(q.discountPct * 100) + "%";
+      }
+
+      function commonTemplateHeader(q) {
+        const client = byId("qcClient").value || "Institution";
+        const country = byId("qcCountry").value || "Country";
+        const useCase = byId("qcUseCase").value || "Institutional workflow automation";
+        return {
+          client,
+          country,
+          useCase,
+          header:
+`Institution: ${client}
+Country: ${country}
+Institution Type: ${q.typeLabel}
+Primary Use Case: ${useCase}
+`
+        };
+      }
+
+      function proposalText(mode, q) {
+        const t = commonTemplateHeader(q);
+        if (mode === "annual") {
+          return `DIRECT ANNUAL PROPOSAL
+${t.header}
+Commercial Structure
+- Annual Platform License: ${usd(q.annualPlatform)}
+- Year-1 Implementation: ${usd(q.implementation)}
+- Managed AgentOps (annual): ${usd(q.managedOps)}
+- Estimated Variable Usage (annual): ${usd(q.usage)}
+- Term: ${q.term} year(s)
+- Term Discount: ${Math.round(q.discountPct * 100)}%
+- Net Total Contract Value: ${usd(q.tcvNet)}
+
+Included Product Scope
+- Myelin Institutional Core
+- Governance and Compliance controls
+- AI Agent Operating System
+- Founder approval and observability controls
+
+Included Service Scope
+- Implementation sprint and go-live support
+- Admin enablement and SOP setup
+- Weekly optimization cadence
+
+Commercial Notes
+- Pricing corridor for annual platform: ${usd(q.annualCorridor[0])} to ${usd(q.annualCorridor[1])}
+- Pricing valid for 30 days from issue date
+- Subject to procurement, legal, and data compliance review`;
+        }
+
+        if (mode === "national") {
+          return `NATIONAL PROGRAM PROPOSAL (PHASED)
+${t.header}
+Program Structure
+- Phase 1: Pilot and validation (8-12 weeks)
+- Phase 2: Core national rollout (priority departments/divisions)
+- Phase 3: Full institutional scale and optimization
+
+Commercial Structure
+- Pilot Fee: ${usd(q.pilotFee)}
+- Pilot Credit Applied: ${usd(q.pilotCreditAmt)}
+- Annual Platform License: ${usd(q.annualPlatform)}
+- Year-1 Implementation: ${usd(q.implementation)}
+- Managed AgentOps (annual): ${usd(q.managedOps)}
+- Estimated Variable Usage (annual): ${usd(q.usage)}
+- Year-1 Net Value: ${usd(q.year1Net)}
+- ${q.term}-Year Net Total Contract Value: ${usd(q.tcvNet)}
+
+Program Governance
+- Joint steering committee (weekly during pilot, monthly post-rollout)
+- Compliance gate before each phase transition
+- KPI scorecard measured against baseline and target outcomes
+
+Commercial Notes
+- Recommended annual corridor: ${usd(q.annualCorridor[0])} to ${usd(q.annualCorridor[1])}
+- Recommended implementation corridor: ${usd(q.implCorridor[0])} to ${usd(q.implCorridor[1])}
+- Payment milestones tied to phase completion and acceptance`;
+        }
+
+        return `PILOT-TO-ANNUAL PROPOSAL
+${t.header}
+Pilot Phase (8-12 weeks)
+- Pilot Fee: ${usd(q.pilotFee)}
+- Pilot Credit (applied to Year-1 contract): ${usd(q.pilotCreditAmt)}
+- Pilot Goal: prove KPI improvement and readiness for annual rollout
+
+Annual Contract (post-pilot conversion)
+- Annual Platform License: ${usd(q.annualPlatform)}
+- Year-1 Implementation: ${usd(q.implementation)}
+- Managed AgentOps (annual): ${usd(q.managedOps)}
+- Estimated Variable Usage (annual): ${usd(q.usage)}
+
+Commercial Summary
+- Year-1 Gross Value: ${usd(q.year1Gross)}
+- Year-1 Net Value after Pilot Credit: ${usd(q.year1Net)}
+- ${q.term}-Year Net Total Contract Value: ${usd(q.tcvNet)}
+- Term Discount Applied: ${Math.round(q.discountPct * 100)}%
+
+Recommended Next Step
+- Approve pilot scope, KPI scorecard, and implementation kickoff date`;
+      }
+
+      function setTemplateMode(mode) {
+        current.template = mode;
+        const labels = {
+          pilot: "Pilot-to-Annual",
+          annual: "Direct Annual",
+          national: "National Program"
+        };
+        byId("qcTemplateMode").textContent = labels[mode] || labels.pilot;
+        if (current.quote) {
+          byId("qcProposalOutput").value = proposalText(mode, current.quote);
+        }
+      }
+
+      function recalc() {
+        current.quote = computeQuote();
+        renderSummary(current.quote);
+        setTemplateMode(current.template);
+      }
+
+      function wireEvents() {
+        const inputs = document.querySelectorAll("#quote-calculator input, #quote-calculator select");
+        inputs.forEach((el) => {
+          el.addEventListener("input", recalc);
+          el.addEventListener("change", recalc);
+        });
+
+        byId("qcTerm").addEventListener("change", function () {
+          const term = clamp(Math.round(num("qcTerm")), 1, 3);
+          byId("qcDiscount").value = DEFAULT_TERM_DISCOUNT[term] || 0;
+          recalc();
+        });
+
+        byId("qcRecalcBtn").addEventListener("click", recalc);
+
+        document.querySelectorAll("#quote-calculator [data-template]").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            setTemplateMode(this.getAttribute("data-template"));
+          });
+        });
+
+        byId("qcCopyProposalBtn").addEventListener("click", function () {
+          const text = byId("qcProposalOutput").value || "";
+          if (!text) return;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+              const old = this.textContent;
+              this.textContent = "Copied";
+              setTimeout(() => { this.textContent = old; }, 1200);
+            });
+          } else {
+            byId("qcProposalOutput").select();
+            document.execCommand("copy");
+          }
+        });
+      }
+
+      wireEvents();
+      recalc();
+    })();
+  </script>
+</body>
+</html>

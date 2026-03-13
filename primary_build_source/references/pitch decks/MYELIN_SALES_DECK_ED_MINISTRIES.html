@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Myelin Sales Deck</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=IBM+Plex+Serif:wght@500;600;700&display=swap");
+
+    :root {
+      --ink-900: #0d1f2d;
+      --ink-700: #18384f;
+      --ink-500: #44627a;
+      --sea-700: #005f73;
+      --sea-500: #0a9396;
+      --sun-500: #ee9b00;
+      --sun-700: #ca6702;
+      --mint-100: #eefcf8;
+      --sky-100: #eff8fd;
+      --bg-100: #f4f9fc;
+      --white: #ffffff;
+      --card-border: #cfe0ea;
+      --shadow: 0 18px 44px rgba(13, 31, 45, 0.16);
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: radial-gradient(circle at 10% 10%, #e9f9f8 0%, transparent 40%),
+                  radial-gradient(circle at 88% 14%, #fff1dd 0%, transparent 36%),
+                  linear-gradient(160deg, #edf6fb 0%, #f5fbff 60%, #fffaf0 100%);
+      color: var(--ink-900);
+      font-family: "Sora", "Trebuchet MS", sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(10, 147, 150, 0.06), rgba(238, 155, 0, 0.06));
+      z-index: -2;
+    }
+
+    .deck {
+      width: min(1200px, 96vw);
+      margin: 16px auto 20px;
+      border: 1px solid #d1e2eb;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #d9e6ee;
+      background: linear-gradient(95deg, rgba(255, 255, 255, 0.86), rgba(239, 248, 253, 0.86));
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.93rem;
+      color: var(--ink-700);
+      font-weight: 600;
+    }
+
+    .mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(140deg, var(--sea-700), var(--sea-500));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mark::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      right: -4px;
+      bottom: -4px;
+      background: rgba(238, 155, 0, 0.9);
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--ink-500);
+    }
+
+    .counter {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #c5dae6;
+      background: #f8fdff;
+      color: var(--ink-700);
+      font-weight: 600;
+      min-width: 52px;
+      text-align: center;
+    }
+
+    .viewport {
+      position: relative;
+      width: 100%;
+      height: min(74vh, 780px);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(248, 252, 255, 0.78));
+    }
+
+    .track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 360ms ease;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      padding: 30px 34px 24px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+      animation: fadeIn 420ms ease both;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0.25;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .kicker {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid #b9d8e5;
+      border-radius: 999px;
+      color: var(--ink-700);
+      background: #f5fcff;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      font-weight: 600;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "IBM Plex Serif", "Georgia", serif;
+      line-height: 1.15;
+      color: var(--ink-900);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      margin-top: 8px;
+    }
+
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-top: 8px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--ink-700);
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--ink-500);
+      line-height: 1.5;
+    }
+
+    .subtitle {
+      max-width: 880px;
+      font-size: 1.05rem;
+      margin-top: 8px;
+      color: var(--ink-700);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid #bdd8e5;
+      background: #f8fdff;
+      padding: 6px 10px;
+      font-size: 0.83rem;
+      color: var(--ink-700);
+      font-weight: 600;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      align-content: start;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-content: start;
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      padding: 12px;
+      box-shadow: 0 7px 20px rgba(24, 56, 79, 0.08);
+    }
+
+    .card strong {
+      color: var(--ink-700);
+    }
+
+    .metric {
+      border: 1px solid #cbe0ea;
+      border-radius: var(--radius-md);
+      background: linear-gradient(170deg, #fbfeff 0%, #f2fbff 100%);
+      padding: 13px;
+    }
+
+    .metric .val {
+      margin-top: 6px;
+      color: var(--sea-700);
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .bar-wrap {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #e5f0f6;
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--sea-500), var(--sun-500));
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--ink-700);
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.92rem;
+      background: #fff;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      border: 1px solid #d3e3ec;
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e9f3f8;
+      color: var(--ink-700);
+    }
+
+    .cta-box {
+      border: 1px solid #bad8e6;
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      background: linear-gradient(145deg, #ffffff 0%, #eef9ff 48%, #fff4e4 100%);
+    }
+
+    .cta-title {
+      color: var(--sea-700);
+      font-size: 1.45rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--ink-500);
+      border-top: 1px solid #d7e6ef;
+      padding-top: 10px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px 14px;
+      border-top: 1px solid #d9e7ef;
+      background: linear-gradient(92deg, #ffffff 0%, #f3faff 100%);
+    }
+
+    .progress {
+      flex: 1;
+      max-width: 520px;
+      height: 8px;
+      border-radius: 999px;
+      background: #deebf3;
+      overflow: hidden;
+    }
+
+    .progress > span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--sea-700), var(--sea-500), var(--sun-500));
+      transition: width 260ms ease;
+    }
+
+    .btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      border: 1px solid #9ec3d5;
+      border-radius: 9px;
+      background: #f8fcff;
+      color: var(--ink-700);
+      padding: 7px 11px;
+      font-size: 0.88rem;
+      font-family: "Sora", "Trebuchet MS", sans-serif;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e8f6fd;
+    }
+
+    .keyhint {
+      font-size: 0.8rem;
+      color: var(--ink-500);
+    }
+
+    .slide-1 {
+      background: linear-gradient(130deg, rgba(0, 95, 115, 0.08), rgba(255, 255, 255, 0) 60%),
+                  linear-gradient(176deg, #ffffff 0%, #f2fbff 65%, #fff7ea 100%);
+    }
+
+    .slide-12 {
+      background: linear-gradient(132deg, rgba(238, 155, 0, 0.12), rgba(255, 255, 255, 0) 52%),
+                  linear-gradient(176deg, #ffffff 0%, #eef8fc 70%, #ffffff 100%);
+    }
+
+    @media (max-width: 980px) {
+      .viewport {
+        height: 82vh;
+      }
+
+      .slide {
+        padding: 18px 16px 14px;
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .subtitle {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="topbar">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <span><strong>Myelin</strong> by Teludens Lab</span>
+      </div>
+      <div class="meta">
+        <span>Education Ministry Sales Deck</span>
+        <span class="counter" id="counter">1 / 14</span>
+      </div>
+    </div>
+
+    <main class="viewport">
+      <div class="track" id="track">
+        <section class="slide slide-1">
+          <div>
+            <span class="kicker">Slide 1 | Opening</span>
+            <h1>Myelin</h1>
+            <p class="subtitle">AI Learning Platform for national education ministries, TVET systems, and public school networks.</p>
+            <div class="chips">
+              <span class="chip">Built by Teludens Lab</span>
+              <span class="chip">Human-in-loop by design</span>
+              <span class="chip">Pilot in 8-12 weeks</span>
+            </div>
+          </div>
+          <div class="grid-3">
+            <article class="metric">
+              <h3>Learner Success Pressure</h3>
+              <div class="val">High</div>
+              <p>Institutions must improve completion and competency outcomes at scale.</p>
+            </article>
+            <article class="metric">
+              <h3>Teaching Capacity Gap</h3>
+              <div class="val">Urgent</div>
+              <p>Instructors and administrators are overloaded by repetitive support work.</p>
+            </article>
+            <article class="metric">
+              <h3>Myelin Promise</h3>
+              <div class="val">Measurable</div>
+              <p>Better learning outcomes with AI tutoring, teacher copilots, and governance controls.</p>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Confidential proposal deck</span>
+            <span>teludens.com | teludens.net</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 2 | Learning Problem</span>
+            <h2>Learning outcomes are now a national performance KPI</h2>
+            <p class="subtitle">Education leaders are measured on completion, competency, progression, and employability. Most learning systems are fragmented and reactive.</p>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Education Departments and TVET Networks</h3>
+              <ul>
+                <li>Learners need personalized support but curriculum delivery is mostly one-size-fits-all.</li>
+                <li>Instructor time is consumed by repetitive tutoring and administrative follow-ups.</li>
+                <li>Weak visibility into learner risk, progression, and intervention effectiveness.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Provincial and District Education Systems</h3>
+              <ul>
+                <li>School-level learner support quality varies across districts.</li>
+                <li>Intervention programs are hard to coordinate and monitor at scale.</li>
+                <li>Data arrives late, reducing early-response effectiveness.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Problem statement</span>
+            <span>Current platforms cannot scale personalization, quality, and governance together</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 3 | Why Current Tools Fail</span>
+            <h2>Most LMS tools deliver content, not mastery</h2>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <h3>Content Without Coaching</h3>
+              <p>Learners get static modules but limited adaptive guidance when they struggle.</p>
+            </article>
+            <article class="card">
+              <h3>No Teaching Copilot Layer</h3>
+              <p>Instructors still perform repetitive Q and A, remediation, and tracking manually.</p>
+            </article>
+            <article class="card">
+              <h3>Weak Learning Intelligence</h3>
+              <p>Administrators cannot identify risk cohorts early or trigger interventions consistently.</p>
+            </article>
+          </div>
+          <div class="card">
+            <h3>Result</h3>
+            <p>Institutions license software but still rely on manual work for remediation, learner support, and outcome reporting.</p>
+          </div>
+          <div class="foot">
+            <span>Market gap</span>
+            <span>Need: AI learning platform with tutor, instructor, and governance intelligence</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 4 | Solution</span>
+            <h2>Myelin is an AI Learning Platform built for institutional scale</h2>
+            <p class="subtitle">Myelin orchestrates learning workflows end-to-end: onboarding, adaptive learning paths, AI tutoring, instructor copilot support, assessment readiness, and cohort analytics.</p>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Product Stack</h3>
+              <ul>
+                <li><strong>Learner Experience Layer:</strong> AI tutor, adaptive practice, and personalized learning pathways.</li>
+                <li><strong>Instructor Copilot:</strong> lesson support, content adaptation, remediation and feedback assistance.</li>
+                <li><strong>Institution Console:</strong> cohort risk, completion, competency, and intervention tracking.</li>
+                <li><strong>Governance and Compliance:</strong> role controls, audit logs, and policy-safe automation.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>What changes after Myelin</h3>
+              <div class="bar-wrap">
+                <p>Learner completion confidence</p>
+                <div class="bar"><span style="width: 84%"></span></div>
+                <p>Instructor productivity</p>
+                <div class="bar"><span style="width: 78%"></span></div>
+                <p>Time-to-competency</p>
+                <div class="bar"><span style="width: 81%"></span></div>
+              </div>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Core value</span>
+            <span>Better learning outcomes + teaching leverage + controlled AI</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 5 | Sector Use Cases</span>
+            <h2>High-impact learning workflows Myelin accelerates first</h2>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <h3>National Education Departments</h3>
+              <ul>
+                <li>Curriculum support and adaptive remediation</li>
+                <li>Exam readiness pathways and performance monitoring</li>
+                <li>District-level intervention tracking and reporting</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>TVET Colleges</h3>
+              <ul>
+                <li>Student onboarding and competency pathway guidance</li>
+                <li>AI tutor support for technical modules</li>
+                <li>Instructor copilot for assignment feedback and remediation plans</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Public School Networks</h3>
+              <ul>
+                <li>Foundational literacy and numeracy reinforcement pathways</li>
+                <li>Teacher classroom support and differentiated instruction guidance</li>
+                <li>Attendance-risk and learning-gap intervention tracking</li>
+              </ul>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Deployment strategy</span>
+            <span>Start with one learning pathway, then scale across cohorts and campuses</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 6 | Utility Technical Skills Moat</span>
+            <h2>Utility-grade technical skills make Myelin harder to copy</h2>
+            <p class="subtitle">Technical-skills delivery for critical infrastructure raises entry barriers and strengthens Myelin’s defensibility for education and workforce buyers.</p>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Eskom-type Skill Families</h3>
+              <ul>
+                <li>High-voltage safety and substation procedures</li>
+                <li>SCADA/DCS operations and relay protection</li>
+                <li>Outage restoration and predictive maintenance readiness</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Rand Water-type Skill Families</h3>
+              <ul>
+                <li>Water treatment process control and instrumentation</li>
+                <li>Pump/valve maintenance and lab quality controls</li>
+                <li>Leakage management and distribution operations</li>
+              </ul>
+            </article>
+          </div>
+          <div class="card">
+            <h3>Why this is a national education advantage</h3>
+            <ul>
+              <li>TVET and ministry pathways aligned to real critical-sector competencies are more employability-relevant.</li>
+              <li>Competency and recertification evidence becomes a durable institutional data moat.</li>
+              <li>Generic LMS vendors rarely provide this depth with governance and readiness tracking.</li>
+            </ul>
+          </div>
+          <div class="foot">
+            <span>Moat logic</span>
+            <span>Utility-grade skill pathways create defensibility and policy relevance</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 7 | Simulation Learning Engine</span>
+            <h2>Simulation turns theory into measurable technical competency</h2>
+            <p class="subtitle">Myelin combines adaptive learning with browser-based technical simulation so ministries can verify procedural readiness, not just module completion.</p>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Learner and Instructor Experience</h3>
+              <ul>
+                <li>Scenario-based practice for high-risk technical procedures in a safe environment.</li>
+                <li>Step-by-step feedback, correction prompts, and repeated attempts to mastery.</li>
+                <li>Instructor visibility into where learners fail and where intervention is needed.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Institution and Ministry Evidence</h3>
+              <ul>
+                <li>Step-level pass/fail and tolerance-based assessment traces.</li>
+                <li>Cohort-level time-to-competency analytics across campuses and pathways.</li>
+                <li>Audit-ready competency records for accreditation and procurement reporting.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="card">
+            <strong>Simulation moat:</strong> scenario realism, assessment thresholds, and telemetry-linked remediation create durable differentiation that generic LMS products rarely match.
+          </div>
+          <div class="foot">
+            <span>Simulation value</span>
+            <span>Competency verification at scale with governance-ready evidence</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 8 | Learning Agent Advantage</span>
+            <h2>AI agents that improve learning outcomes, not just admin efficiency</h2>
+            <p class="subtitle">Myelin embeds specialized learning agents for learners, instructors, and administrators while keeping high-stakes actions approval-controlled.</p>
+          </div>
+          <div class="grid-3">
+            <article class="card"><h3>Learner Coach</h3><p>Personalized guidance, practice, and remediation paths.</p></article>
+            <article class="card"><h3>Instructor Copilot</h3><p>Lesson adaptation, assignment support, and feedback drafts.</p></article>
+            <article class="card"><h3>Assessment Builder</h3><p>Question generation and competency-aligned evaluation support.</p></article>
+            <article class="card"><h3>Cohort Risk Agent</h3><p>Early alerts for dropout risk and performance decline.</p></article>
+            <article class="card"><h3>Certification Sentinel</h3><p>Tracks compliance, deadlines, and certification readiness.</p></article>
+            <article class="card"><h3>Content Localizer</h3><p>Adapts instructional material by level, language, and context.</p></article>
+          </div>
+          <div class="card">
+            <strong>Control principle:</strong> AI supports teaching and learning workflows while educators and administrators retain decision authority.
+          </div>
+          <div class="foot">
+            <span>Learning model</span>
+            <span>Personalization + instructor leverage + governance</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 9 | Pilot Plan</span>
+            <h2>8-12 week learning pilot to prove outcomes before full rollout</h2>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Weeks</th>
+                <th>What happens</th>
+                <th>Acceptance gate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Discovery</td>
+                <td>1-2</td>
+                <td>Learning pathway mapping, baseline outcomes capture, cohort selection.</td>
+                <td>Signed learning KPI scorecard</td>
+              </tr>
+              <tr>
+                <td>Build and Integration</td>
+                <td>3-4</td>
+                <td>LMS/SIS integration, content setup, instructor and admin onboarding.</td>
+                <td>End-to-end learning flow pass</td>
+              </tr>
+              <tr>
+                <td>Controlled Cohort Live</td>
+                <td>5-8</td>
+                <td>Pilot cohort deployment with weekly outcome and intervention reviews.</td>
+                <td>Completion and competency trend positive</td>
+              </tr>
+              <tr>
+                <td>Optimization and Conversion</td>
+                <td>9-12</td>
+                <td>Tuning, faculty enablement, governance hardening, rollout plan.</td>
+                <td>Pilot-to-annual platform decision</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="foot">
+            <span>Delivery model</span>
+            <span>Low-risk learning pilot with measurable outcome gates</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 10 | Trust and Academic Governance</span>
+            <h2>Institution-grade controls for learner data and assessment integrity</h2>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Data and Identity Controls</h3>
+              <ul>
+                <li>Role-scoped access for learner, instructor, admin, and ministry users.</li>
+                <li>Policy-aware handling of learner and assessment data.</li>
+                <li>Immutable logs for high-impact actions and changes.</li>
+                <li>Institution-defined approval gates for sensitive workflows.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Academic and Operational Assurance</h3>
+              <ul>
+                <li>Audit-ready evidence for interventions, feedback, and assessment actions.</li>
+                <li>Incident playbook with severity-based SLA.</li>
+                <li>Weekly governance review for quality and compliance.</li>
+                <li>Security baseline: MFA, least privilege, and domain email protection controls.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Trust pillar</span>
+            <span>Controlled AI learning with academic and institutional governance</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 11 | Commercial Model</span>
+            <h2>Learning platform package designed for institutional scale</h2>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Product Package</h3>
+              <ul>
+                <li>Learning Core (learner app + pathway engine)</li>
+                <li>Instructor Copilot suite</li>
+                <li>Cohort analytics and intervention console</li>
+                <li>Governance and compliance controls</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Service Package</h3>
+              <ul>
+                <li>Implementation Sprint (mandatory)</li>
+                <li>Faculty and administrator enablement</li>
+                <li>Managed AgentOps and learning optimization (optional)</li>
+                <li>Curriculum/content adaptation blocks</li>
+              </ul>
+            </article>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Package</th>
+                <th>Typical Buyer</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pilot Pack</td>
+                <td>Single institution/division</td>
+                <td>Fast proof of completion and competency gains</td>
+              </tr>
+              <tr>
+                <td>Operational Plan</td>
+                <td>Multi-site institution</td>
+                <td>Year-round learning delivery, intervention, and reporting</td>
+              </tr>
+              <tr>
+                <td>National Program Plan</td>
+                <td>National ministry or ministry-level agency</td>
+                <td>Phased national learning rollout with governance controls</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="foot">
+            <span>Pricing delivery</span>
+            <span>Use built-in quote calculator in the Myelin playbook</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 12 | Value Case</span>
+            <h2>Clear learning and institutional performance upside</h2>
+          </div>
+          <div class="grid-3">
+            <article class="metric">
+              <h3>Learner Completion</h3>
+              <div class="val">Higher</div>
+              <p>Earlier risk detection and remediation improve progression.</p>
+            </article>
+            <article class="metric">
+              <h3>Instructor Capacity</h3>
+              <div class="val">Expanded</div>
+              <p>AI copilot reduces repetitive workload and frees teaching time.</p>
+            </article>
+            <article class="metric">
+              <h3>Time-to-Competency</h3>
+              <div class="val">Reduced</div>
+              <p>Adaptive pathways accelerate readiness and certification progress.</p>
+            </article>
+          </div>
+          <div class="card">
+            <h3>Sample ROI logic (pilot stage)</h3>
+            <p>If one cohort with high dropout or low pass rates receives targeted AI-supported interventions, measurable outcome gains can justify pilot investment through improved completion, progression, and instructional efficiency.</p>
+          </div>
+          <div class="foot">
+            <span>Value framing</span>
+            <span>Outcome-based learning procurement, not feature-based LMS buying</span>
+          </div>
+        </section>
+
+        <section class="slide">
+          <div>
+            <span class="kicker">Slide 13 | Why Teludens + Myelin</span>
+            <h2>Execution speed of a focused founder, rigor of a learning operating system</h2>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Teludens Lab foundation</h3>
+              <ul>
+                <li>Myelin positioned as institutional learning platform line.</li>
+                <li>Domain stack for trust, product, and partnership channels.</li>
+                <li>Structured operating manual, quote engine, and rollout playbooks.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Learning delivery certainty</h3>
+              <ul>
+                <li>Defined 12-week learning pilot blueprint.</li>
+                <li>Founder control tower with AI agent execution and educator oversight.</li>
+                <li>Escalation and governance gates to prevent quality drift.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Positioning</span>
+            <span>Partner for measurable institutional learning modernization</span>
+          </div>
+        </section>
+
+        <section class="slide slide-12">
+          <div>
+            <span class="kicker">Slide 14 | Close</span>
+            <h2>Proposed next step: launch an 8-12 week learning pilot</h2>
+            <p class="subtitle">Select one priority cohort and pathway. Baseline outcomes, deploy Myelin, and make a scale decision on measurable learning impact.</p>
+          </div>
+          <div class="cta-box">
+            <div class="cta-title">Pilot Decision Pack</div>
+            <ul>
+              <li>Scope one learning pathway and one accountable institutional owner.</li>
+              <li>Agree target completion, competency, and intervention KPIs.</li>
+              <li>Approve pilot cohort, implementation start date, and governance checklist.</li>
+              <li>Run pilot-to-annual commercial path with pre-agreed scale gates.</li>
+            </ul>
+          </div>
+          <div class="grid-2">
+            <article class="card">
+              <h3>Contact</h3>
+              <p>Teludens Lab / Myelin</p>
+              <p>procurement@teludens.com</p>
+              <p>myelin@teludens.net</p>
+            </article>
+            <article class="card">
+              <h3>Action</h3>
+              <p>Book the learning pilot design workshop and procurement briefing.</p>
+            </article>
+          </div>
+          <div class="foot">
+            <span>Thank you</span>
+            <span>Use arrow keys or buttons to review slides</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="controls">
+      <div class="progress"><span id="progressFill"></span></div>
+      <div class="keyhint">Keys: Left/Right, Space, Home, End</div>
+      <div class="btns">
+        <button id="prevBtn" type="button">Previous</button>
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const track = document.getElementById("track");
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const counter = document.getElementById("counter");
+      const progressFill = document.getElementById("progressFill");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      let index = 0;
+
+      function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function render() {
+        index = clamp(index, 0, slides.length - 1);
+        track.style.transform = "translateX(-" + (index * 100) + "%)";
+        counter.textContent = (index + 1) + " / " + slides.length;
+        progressFill.style.width = ((index + 1) / slides.length) * 100 + "%";
+      }
+
+      function next() {
+        index = clamp(index + 1, 0, slides.length - 1);
+        render();
+      }
+
+      function prev() {
+        index = clamp(index - 1, 0, slides.length - 1);
+        render();
+      }
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          next();
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "Home") {
+          index = 0;
+          render();
+        } else if (e.key === "End") {
+          index = slides.length - 1;
+          render();
+        }
+      });
+
+      let startX = null;
+      track.addEventListener("touchstart", function (e) {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+      track.addEventListener("touchend", function (e) {
+        if (startX === null) return;
+        const endX = e.changedTouches[0].clientX;
+        const delta = endX - startX;
+        if (delta > 45) prev();
+        if (delta < -45) next();
+        startX = null;
+      }, { passive: true });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

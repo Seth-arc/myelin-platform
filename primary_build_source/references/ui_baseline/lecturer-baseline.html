@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myelin TMS - Lecturer UI Baseline</title>
+    <link rel="stylesheet" href="../../assets/styles/myelin-tokens.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--myelin-font-sans);
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-base);
+            color: var(--text-body);
+            display: flex;
+            letter-spacing: var(--myelin-letter-tight);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand {
+            padding: 24px 28px;
+            color: var(--text-heading);
+            font-size: 1.06rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand i {
+            color: var(--brand-accent);
+            font-size: 1.3rem;
+        }
+
+        .role-pill {
+            margin: 0 20px 12px;
+            border: 1px solid var(--border-color);
+            background: var(--brand-light);
+            color: var(--brand-accent);
+            border-radius: var(--myelin-radius-pill);
+            padding: 8px 12px;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 10px;
+        }
+
+        .nav-item {
+            background: transparent;
+            border: 0;
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            text-align: left;
+            cursor: pointer;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background var(--myelin-motion-fast), color var(--myelin-motion-fast);
+        }
+
+        .nav-item:hover {
+            color: var(--text-heading);
+            background: var(--brand-light);
+        }
+
+        .nav-item.active {
+            color: var(--brand-accent);
+            background: var(--brand-light);
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding: 18px 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .app {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .topbar {
+            height: 70px;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .topbar-left {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+
+        .crumbs {
+            color: var(--text-muted);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .crumbs strong {
+            color: var(--text-heading);
+        }
+
+        .context-select,
+        .search-input {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-surface);
+            color: var(--text-heading);
+            height: 38px;
+            font-size: 13px;
+        }
+
+        .context-select {
+            padding: 0 10px;
+            min-width: 170px;
+        }
+
+        .search-wrap {
+            min-width: 240px;
+            max-width: 360px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0 12px 0 34px;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .btn {
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-heading);
+            border-radius: var(--radius-md);
+            padding: 9px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn.primary {
+            border-color: var(--brand-accent);
+            background: var(--brand-accent);
+            color: #fff;
+        }
+
+        body.dark .btn.primary {
+            color: #000;
+        }
+
+        .workspace {
+            padding: 20px 24px 24px;
+            overflow: auto;
+            display: grid;
+            gap: 14px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .kpi {
+            padding: 14px;
+        }
+
+        .kpi-label {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            color: var(--text-heading);
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .kpi-meta {
+            margin-top: 8px;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .panel {
+            padding: 16px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .panel-header h2 {
+            color: var(--text-heading);
+            font-size: 17px;
+            line-height: 1.2;
+        }
+
+        .panel-sub {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .split {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .triple {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: 1.2fr 1fr 1fr;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .table th,
+        .table td {
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 8px;
+            vertical-align: top;
+        }
+
+        .table th {
+            color: var(--text-muted);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-block;
+            border-radius: var(--myelin-radius-pill);
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .status.ok {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .status.warn {
+            background: rgba(245, 158, 11, 0.14);
+            color: var(--warning);
+        }
+
+        .status.alert {
+            background: rgba(239, 68, 68, 0.14);
+            color: var(--danger);
+        }
+
+        .status.info {
+            background: rgba(37, 99, 235, 0.14);
+            color: var(--myelin-info);
+        }
+
+        .queue-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .queue-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 10px 11px;
+        }
+
+        .queue-title {
+            color: var(--text-heading);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .queue-meta {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .meter {
+            margin-bottom: 10px;
+        }
+
+        .meter:last-child {
+            margin-bottom: 0;
+        }
+
+        .meter-head {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .meter-track {
+            height: 8px;
+            border-radius: 99px;
+            background: var(--brand-light);
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: var(--brand-accent);
+        }
+
+        .pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            border: 1px solid var(--border-color);
+            border-radius: var(--myelin-radius-pill);
+            padding: 6px 9px;
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg-surface);
+        }
+
+        .chip.active {
+            color: var(--brand-accent);
+            background: var(--brand-light);
+        }
+
+        .mini-note {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 1520px) {
+            .kpi-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .triple {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .split {
+                grid-template-columns: 1fr;
+            }
+
+            .search-wrap {
+                display: none;
+            }
+
+            .context-select {
+                min-width: 140px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand"><i class="ph-bold ph-chalkboard-teacher"></i> Myelin TMS</div>
+        <div class="role-pill">Lecturer Baseline</div>
+        <div class="nav-menu">
+            <button class="nav-item active"><i class="ph ph-gauge"></i> Cohort Dashboard</button>
+            <button class="nav-item"><i class="ph ph-map-trifold"></i> Pathway Progress</button>
+            <button class="nav-item"><i class="ph ph-cube"></i> Simulator Reviews</button>
+            <button class="nav-item"><i class="ph ph-folder-open"></i> e-Portfolio Queue</button>
+            <button class="nav-item"><i class="ph ph-users-three"></i> Peer Moderation</button>
+            <button class="nav-item"><i class="ph ph-book-open-text"></i> Workplace Sign-offs</button>
+            <button class="nav-item"><i class="ph ph-chat-circle-text"></i> Learner Interventions</button>
+        </div>
+        <div class="sidebar-footer">
+            <div>Cohort: Eng Trades L4 - 2026A</div>
+            <div>Mode: Baseline Reference</div>
+        </div>
+    </aside>
+
+    <main class="app">
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="crumbs">Lecturer Console <i class="ph ph-caret-right"></i> <strong>Cohort Dashboard</strong></div>
+                <select class="context-select" aria-label="Cohort">
+                    <option>Engineering Trades L4 - 2026A</option>
+                    <option>Engineering Trades L4 - 2026B</option>
+                </select>
+                <select class="context-select" aria-label="Module focus">
+                    <option>All Modules</option>
+                    <option>Module 2</option>
+                    <option>Module 3</option>
+                </select>
+                <div class="search-wrap">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input class="search-input" type="search" placeholder="Search learners, submissions, reviews">
+                </div>
+            </div>
+            <div class="topbar-actions">
+                <button class="btn">Assign Reviews</button>
+                <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="ph ph-moon"></i></button>
+                <button class="icon-btn" title="Notifications"><i class="ph ph-bell"></i></button>
+            </div>
+        </header>
+
+        <section class="workspace">
+            <div class="pills">
+                <span class="chip active">Current Week</span>
+                <span class="chip">Assessment Window</span>
+                <span class="chip">Sign-off Follow-up</span>
+                <span class="chip">High-Risk Learners</span>
+            </div>
+
+            <div class="kpi-grid">
+                <article class="card kpi">
+                    <div class="kpi-label">Cohort Size</div>
+                    <div class="kpi-value">124</div>
+                    <div class="kpi-meta">118 active this week</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">On-Track Learners</div>
+                    <div class="kpi-value">88</div>
+                    <div class="kpi-meta">71% pace adherence</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Needs Intervention</div>
+                    <div class="kpi-value">21</div>
+                    <div class="kpi-meta">9 severe, 12 moderate</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Pending Reviews</div>
+                    <div class="kpi-value">37</div>
+                    <div class="kpi-meta">Median latency 18h</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">LOTO Pass Rate</div>
+                    <div class="kpi-value">68%</div>
+                    <div class="kpi-meta">+5% month-over-month</div>
+                </article>
+                <article class="card kpi">
+                    <div class="kpi-label">Mentor Sign-off SLA</div>
+                    <div class="kpi-value">82%</div>
+                    <div class="kpi-meta">Goal >= 90%</div>
+                </article>
+            </div>
+
+            <div class="split">
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Learner Intervention Queue</h2>
+                        <button class="btn">Open Case Manager</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Learner</th>
+                                <th>Current Module</th>
+                                <th>Risk Signals</th>
+                                <th>Next Action</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Thabo Lekota</td>
+                                <td>Module 3</td>
+                                <td>Step 6 repeats, low confidence</td>
+                                <td>Assign guided retry + coach follow-up</td>
+                                <td><span class="status warn">Watch</span></td>
+                            </tr>
+                            <tr>
+                                <td>Naledi Mokoena</td>
+                                <td>Module 2</td>
+                                <td>No activity in 4 days</td>
+                                <td>Escalate to advisor + send SMS</td>
+                                <td><span class="status alert">Critical</span></td>
+                            </tr>
+                            <tr>
+                                <td>Kamogelo Dube</td>
+                                <td>Module 3</td>
+                                <td>Passed simulator, pending portfolio</td>
+                                <td>Review submission within 24h</td>
+                                <td><span class="status info">Pending Review</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ayanda Khumalo</td>
+                                <td>Module 1</td>
+                                <td>Quiz failures across hazard checks</td>
+                                <td>Assign remediation worksheet</td>
+                                <td><span class="status warn">At Risk</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Today&apos;s Teaching Agenda</h2>
+                        <button class="btn primary">Start Session</button>
+                    </div>
+                    <ul class="queue-list">
+                        <li class="queue-item">
+                            <div class="queue-title">08:30 - 09:15 | Module 3 debrief</div>
+                            <div class="queue-meta">Topic: residual pressure and step 6 errors</div>
+                            <span class="status ok">Ready</span>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">10:00 - 11:00 | Review clinic</div>
+                            <div class="queue-meta">12 pending LOTO portfolio submissions</div>
+                            <span class="status warn">Backlog</span>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">14:00 - 14:30 | Mentor sync</div>
+                            <div class="queue-meta">9 workplace entries awaiting sign-off</div>
+                            <span class="status info">Scheduled</span>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="split">
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Assessment and Review Pipeline</h2>
+                        <button class="btn">Configure Rules</button>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>Simulator attempts reviewed</span><span>76%</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:76%"></div></div>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>Portfolio grading completion</span><span>64%</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:64%"></div></div>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>Peer moderation complete</span><span>83%</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:83%"></div></div>
+                    </div>
+                    <div class="meter">
+                        <div class="meter-head"><span>Workplace sign-off completion</span><span>58%</span></div>
+                        <div class="meter-track"><div class="meter-fill" style="width:58%"></div></div>
+                    </div>
+                    <div class="mini-note">Pipeline percentages are cohort scoped and reset per assessment window.</div>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Module Performance</h2>
+                        <button class="btn">Open Analytics</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Module</th>
+                                <th>Completion</th>
+                                <th>Average Score</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Foundation</td>
+                                <td>92%</td>
+                                <td>81%</td>
+                                <td><span class="status ok">Up</span></td>
+                            </tr>
+                            <tr>
+                                <td>Module 2</td>
+                                <td>78%</td>
+                                <td>74%</td>
+                                <td><span class="status warn">Flat</span></td>
+                            </tr>
+                            <tr>
+                                <td>Module 3</td>
+                                <td>61%</td>
+                                <td>69%</td>
+                                <td><span class="status info">Improving</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+
+            <div class="triple">
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>At-Risk Learner Profiles</h2>
+                        <button class="btn">View All</button>
+                    </div>
+                    <ul class="queue-list">
+                        <li class="queue-item">
+                            <div class="queue-title">Naledi Mokoena</div>
+                            <div class="queue-meta">Attendance dip + quiz retry loop</div>
+                            <span class="status alert">Critical Case</span>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">Ayanda Khumalo</div>
+                            <div class="queue-meta">Hazard identification gaps</div>
+                            <span class="status warn">Intervention Needed</span>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">Sipho Mthembu</div>
+                            <div class="queue-meta">Delayed portfolio upload</div>
+                            <span class="status info">Monitor</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Peer Moderation Queue</h2>
+                        <button class="btn primary">Moderate Now</button>
+                    </div>
+                    <ul class="queue-list">
+                        <li class="queue-item">
+                            <div class="queue-title">5 reviews flagged for scoring drift</div>
+                            <div class="queue-meta">Variance exceeds threshold by 1.8 points</div>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">2 reviews missing rubric comments</div>
+                            <div class="queue-meta">Require completion before release</div>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">Reviewer calibration due this week</div>
+                            <div class="queue-meta">12 reviewers pending calibration</div>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="card panel">
+                    <div class="panel-header">
+                        <h2>Communication Templates</h2>
+                        <button class="btn">Edit Templates</button>
+                    </div>
+                    <ul class="queue-list">
+                        <li class="queue-item">
+                            <div class="queue-title">Missed Activity Reminder</div>
+                            <div class="queue-meta">SMS + Email, 24h inactivity trigger</div>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">LOTO Retry Coaching Prompt</div>
+                            <div class="queue-meta">Sent after 3 failed step attempts</div>
+                        </li>
+                        <li class="queue-item">
+                            <div class="queue-title">Mentor Sign-off Follow-up</div>
+                            <div class="queue-meta">Escalates after 72h pending state</div>
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        (function initTheme() {
+            const body = document.body;
+            const btn = document.getElementById("themeToggle");
+            const icon = btn.querySelector("i");
+            const stored = localStorage.getItem("myelin-theme");
+            if (stored === "dark") {
+                body.classList.add("dark");
+                icon.className = "ph ph-sun";
+            }
+            btn.addEventListener("click", function () {
+                body.classList.toggle("dark");
+                const dark = body.classList.contains("dark");
+                localStorage.setItem("myelin-theme", dark ? "dark" : "light");
+                icon.className = dark ? "ph ph-sun" : "ph ph-moon";
+            });
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+/*
+ * Myelin shared design tokens.
+ *
+ * Import before page/component styles:
+ * <link rel="stylesheet" href="assets/styles/myelin-tokens.css">
+ *
+ * Theme toggle support:
+ * - body.dark
+ * - [data-theme="dark"] on the root element
+ */
+
+:root {
+    color-scheme: light;
+
+    /* Typography */
+    --myelin-font-sans: "Inter", sans-serif;
+    --myelin-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    --myelin-font-size-xs: 12px;
+    --myelin-font-size-sm: 14px;
+    --myelin-font-size-md: 16px;
+    --myelin-font-size-lg: 20px;
+    --myelin-font-size-xl: 32px;
+    --myelin-letter-tight: -0.01em;
+    --myelin-letter-wide: 0.1em;
+
+    /* Core colors - light */
+    --myelin-bg-base: #f8fafc;
+    --myelin-bg-surface: #ffffff;
+    --myelin-border-color: rgba(15, 23, 42, 0.08);
+
+    --myelin-text-heading: #0f172a;
+    --myelin-text-body: #475569;
+    --myelin-text-muted: #8492a6;
+
+    --myelin-brand-main: #0a1c30;
+    --myelin-brand-accent: #0a1c30;
+    --myelin-brand-accent-hover: #1e293b;
+    --myelin-brand-light: #f1f5f9;
+
+    --myelin-success: #10b981;
+    --myelin-success-bg: #ecfdf5;
+    --myelin-warning: #f59e0b;
+    --myelin-danger: #ef4444;
+    --myelin-info: #2563eb;
+
+    /* Decorative surfaces */
+    --myelin-bg-radial-dark: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
+    --myelin-glass-dark: rgba(5, 5, 5, 0.8);
+    --myelin-hero-gradient: linear-gradient(180deg, #ffffff 0%, #a3a3a3 100%);
+    --myelin-simulator-gradient: linear-gradient(135deg, #111827, #0f172a, #1e293b);
+
+    /* Radius */
+    --myelin-radius-sm: 8px;
+    --myelin-radius-md: 10px;
+    --myelin-radius-lg: 16px;
+    --myelin-radius-xl: 20px;
+    --myelin-radius-pill: 999px;
+
+    /* Elevation */
+    --myelin-shadow-subtle: 0 4px 20px rgba(15, 23, 42, 0.04);
+    --myelin-shadow-float: 0 20px 40px rgba(15, 23, 42, 0.08);
+    --myelin-shadow-hero: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    /* Spacing */
+    --myelin-space-1: 4px;
+    --myelin-space-2: 8px;
+    --myelin-space-3: 12px;
+    --myelin-space-4: 16px;
+    --myelin-space-5: 24px;
+    --myelin-space-6: 32px;
+    --myelin-space-7: 40px;
+    --myelin-space-8: 48px;
+    --myelin-space-9: 64px;
+
+    /* Motion */
+    --myelin-motion-fast: 160ms;
+    --myelin-motion-normal: 260ms;
+    --myelin-motion-slow: 420ms;
+    --myelin-ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+    --myelin-ease-emphasis: cubic-bezier(0.19, 1, 0.22, 1);
+
+    /* Focus */
+    --myelin-focus-ring-color: rgba(37, 99, 235, 0.45);
+    --myelin-focus-ring-size: 3px;
+
+    /* Z-index scale */
+    --myelin-z-base: 1;
+    --myelin-z-nav: 50;
+    --myelin-z-overlay: 100;
+    --myelin-z-toast: 200;
+
+    /*
+     * Compatibility aliases for current codebase.
+     * These map existing variable names used in HTML prototypes to shared tokens.
+     */
+    --bg-base: var(--myelin-bg-base);
+    --bg-surface: var(--myelin-bg-surface);
+    --border-color: var(--myelin-border-color);
+
+    --text-heading: var(--myelin-text-heading);
+    --text-body: var(--myelin-text-body);
+    --text-muted: var(--myelin-text-muted);
+
+    --brand-main: var(--myelin-brand-main);
+    --brand-accent: var(--myelin-brand-accent);
+    --brand-accent-hover: var(--myelin-brand-accent-hover);
+    --brand-light: var(--myelin-brand-light);
+
+    --success: var(--myelin-success);
+    --success-bg: var(--myelin-success-bg);
+    --warning: var(--myelin-warning);
+    --danger: var(--myelin-danger);
+
+    --radius-md: var(--myelin-radius-md);
+    --radius-lg: var(--myelin-radius-lg);
+    --radius-xl: var(--myelin-radius-xl);
+
+    --shadow-subtle: var(--myelin-shadow-subtle);
+    --shadow-float: var(--myelin-shadow-float);
+}
+
+body.dark,
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --myelin-bg-base: #050505;
+    --myelin-bg-surface: rgba(5, 5, 5, 0.8);
+    --myelin-border-color: rgba(255, 255, 255, 0.05);
+
+    --myelin-text-heading: #ffffff;
+    --myelin-text-body: #e5e5e5;
+    --myelin-text-muted: #a3a3a3;
+
+    --myelin-brand-main: #ffffff;
+    --myelin-brand-accent: #ffffff;
+    --myelin-brand-accent-hover: #e5e5e5;
+    --myelin-brand-light: rgba(255, 255, 255, 0.05);
+
+    --myelin-success-bg: rgba(16, 185, 129, 0.1);
+
+    --myelin-shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --myelin-shadow-float: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --myelin-motion-fast: 0ms;
+        --myelin-motion-normal: 0ms;
+        --myelin-motion-slow: 0ms;
+    }
+}
