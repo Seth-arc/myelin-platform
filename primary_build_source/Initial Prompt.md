@@ -1,357 +1,476 @@
-You are GPT‑5.4 Codex Extra High, acting as a senior staff engineer and project coach for a vibe‑coded development process. Your job is to read and understand my project files and then generate a single, comprehensive markdown guide that I can follow step‑by‑step with minimal prior coding knowledge.
-I will paste or attach the project files and documentation. Work only from those files plus the instructions below.
-Overall goal
-Create a detailed markdown “Development Guide” that:
-Starts from absolute zero (fresh machine, no tools installed) and walks through:
-Setting up the workspace and tools
-Cloning / creating the project
-Installing required packages
-Configuring environment variables and scripts
-Running and testing the app locally
-Breaks the work into phases, tasks, and checklists that I can follow in order.
-Is optimized for vibe‑coding with GPT‑style copilots (Cursor, VS Code, etc.), assuming I will mostly press “continue”, review, and run tests.
-Write the guide as a single markdown file.
+You are GPT-5.4 Codex Extra High, acting as a senior staff engineer, systems architect, and implementation coach for the Myelin professional rebuild.
 
-1. Read and understand the project
-Carefully read all provided project files and documentation in the primary_build_source folder:
-Note tech stack (frameworks, languages, package managers, build tools).
-Note folder structure and key entry points.
-Note any explicit requirements, constraints, or conventions (naming, linting, architecture).
-Infer the expected local dev setup from:
-package.json, lockfiles, requirements.txt, pyproject.toml, Dockerfile, docker-compose.yml, Makefile, .env.example, etc.
-If anything is ambiguous:
-Make reasonable, explicit assumptions and document them in an “Assumptions” section in the guide.
-Do not start writing the guide until you have a coherent mental model of the project structure and stack.
-2. Output format and structure
-Produce only a markdown document with the following high‑level sections:
+Your job is to analyze the files in `primary_build_source` and generate one single, self-contained markdown document that a careful non-technical operator can use to bootstrap the Myelin rebuild safely and correctly.
 
-# Project Development Guide
+Work only from the files provided plus these instructions.
 
-## Overview
+## Critical Reality Of This Source Package
 
-Very brief description of the project (1–3 sentences).
-Tech stack summary (frontend, backend, database, tooling).
+This source package is not a runnable production application.
 
-## Prerequisites and Workspace Setup
+- It is a consolidated source package of specifications, prototype HTML references, design tokens, planning documents, and implementation contracts.
+- There is no runnable monorepo in `primary_build_source`.
+- There is no `package.json`, lockfile, `.env.example`, Dockerfile, `docker-compose.yml`, or confirmed local script surface in this folder.
+- Therefore you must not write as if the current folder can already be installed and run.
+- You are writing a guide for bootstrapping a new Myelin rebuild workspace from these specifications, not for running `primary_build_source` as-is.
 
-## Phase 1 – Environment and Tools
+Every instruction in your guide must be clearly categorized as one of:
 
-## Phase 2 – Project Bootstrap
+1. Confirmed repo fact
+2. Explicit bootstrap assumption / proposed default for the future rebuild workspace
 
-## Phase 3 – Core Development Loop
+Do not blur those categories.
 
-## Phase 4 – Testing and Quality
+## Source-Of-Truth Order
 
-## Phase 5 – Packaging, Build and Deployment
+Use this precedence order when interpreting the project:
 
-## Appendix – Prompts for Vibe Coding
+1. `docs/MYELIN_ENGINEERING_STANDARDS_AND_QUALITY_BAR.md`
+2. `docs/v1_decisions.md`
+3. `docs/MYELIN_PROFESSIONAL_REBUILD_PRD.md`
+4. `docs/MYELIN_SIMULATION_BUILD_SINGLE_SOURCE_SPEC.md`
+5. `docs/MYELIN_V1_RECOMMENDED_TECH_STACK.md`
+6. `docs/MYELIN_AI_AGENT_V1_BUILD_BLUEPRINT.md`
+7. `docs/MYELIN_AI_AGENT_IMPLEMENTATION_PLAN.md`
+8. `docs/MYELIN_PROFESSIONAL_FEATURES.md`
+9. `docs/MYELIN_UI_UX_STYLING_GUIDE.md` and `assets/styles/myelin-tokens.css`
+10. Relevant implementation-contract files under `docs/skills/*/mnt/user-data/outputs/`
+11. `references/*` as supporting reference material only when not contradicted by higher-priority documents
 
-You may add subsections, but keep this top‑level structure.
-Within each section:
-Use numbered steps where order matters.
-Use short, explicit checklists for actions a non‑developer can follow.
-Include example terminal commands, file paths, and what success looks like for each step.
+## Conflict Handling Rules
 
-3. Detailed content requirements
-3.1 Prerequisites and workspace setup
-Explain from scratch, assuming a fresh machine:
-OS assumptions (e.g., Windows 11, macOS, or Linux). Specify differences if needed.
-Installations:
-Git
-The project’s main runtime(s) (e.g., Node.js version, Python version, Java, etc.)
-Package managers (npm/yarn/pnpm, pip/uv/poetry, etc.)
-Database tools or runtimes (e.g., Postgres, MySQL, SQLite, MongoDB) if required.
-The primary editor (Cursor or VS Code) and how to enable the AI coding assistant.
-Include:
-Exact download links or search phrases (e.g., “Search: Node.js LTS download”).
-Example commands to confirm installation (e.g., node -v, python --version, git --version).
-Provide a short Workspace Checklist:
-“You should be able to run: git --version, node -v, … and see versions, etc.”
-3.2 Phase 1 – Environment and tools
-Define how to set up the project workspace:
-Creating or choosing a project folder.
-Cloning or copying the repo (include git clone or unzip instructions).
-Opening the folder in Cursor/VS Code.
-Trusting the workspace / enabling recommended extensions.
-Creating and activating virtual environments if relevant (Python, Node version managers, etc.).
-Adding any config files the project expects (.env, .env.local, .vscode/settings.json, etc.).
-Include:
-A step‑by‑step numbered list.
-A “Phase 1 Checklist” with bullet points the user can tick off.
-3.3 Phase 2 – Project bootstrap
-Explain how to get the project running locally for the first time:
-Installing dependencies:
-Exact commands (e.g., npm install, pnpm install, pip install -r requirements.txt, poetry install).
-How to handle common issues (lockfile conflicts, missing runtimes).
-Creating and filling .env files:
-List all environment variables inferred from the project files.
-Specify which are:
-Required to run locally.
-Optional or only for production.
-Provide safe placeholder values and where to store secrets (never hard‑code credentials).
-Database/bootstrap steps:
-Creating local DB or containers.
-Running migrations or seed scripts.
-Starting dev servers:
-Commands for frontend, backend, and any separate services.
-How to access them (e.g., http://localhost:3000).
-What a successful startup looks like (logs, messages, UI state).
-Include a “First Run Checklist” that a non‑technical user can follow.
-3.4 Phase 3 – Core development loop (vibe coding)
-Describe a repeatable workflow for vibe‑coding:
-How to:
-Decide what to build/change (feature stories, bug fixes).
-Locate relevant files/folders in the project.
-Ask the AI assistant for:
-File overviews.
-Impact analysis.
-Safe change plans.
-Provide ready‑to‑use AI prompts, for example:
-“You are my coding copilot. I want to implement feature X. Based on this codebase, propose a step‑by‑step plan with file names and concrete edits. Keep steps small and sequential.”
-“Given this error log, identify the root cause and propose minimal code changes to fix it, including file paths and explanations.”
-Structure this phase as:
-“Plan → Implement → Inspect → Test → Commit” loop.
-Checklists for:
-Before changing code.
-After applying AI‑generated changes.
-Before committing or merging.
-3.5 Phase 4 – Testing and quality
-From the project files, infer and document:
-What testing tools exist (unit tests, integration tests, e2e, linters, formatters).
-How to run them:
-Commands (npm test, pytest, pnpm lint, npm run e2e, etc.).
-How to interpret results:
-What a “green” run looks like.
-Common failure patterns and next steps.
-Create:
-A Testing Matrix section that lists:
-Test type
-Command
-When to run it (e.g., “before committing”, “before pushing to production”).
-A Quality Checklist:
-“All tests passing.”
-“Lint passes.”
-“No TypeScript / type errors (if applicable).”
-3.6 Phase 5 – Packaging, build, and deployment
-Based on the project files, describe:
-How to produce a production build (e.g., npm run build, docker build, npm run export).
-Output artifacts (build folders, Docker images).
-Any environment differences between dev and prod.
-If deployment targets are visible (e.g., Docker, Vercel, Netlify, custom server):
-Document the assumed deployment process at a high level.
-Include commands or configuration files that matter.
-If the deployment target is unknown:
-Provide a generic deployment section:
-“If deploying to X, use the following files and scripts…”
-Make assumptions explicit.
-Include a Pre‑Deployment Checklist.
-3.7 Appendix – Prompts for vibe‑coding
-Provide a small “prompt library” tailored to this specific project, including:
-“Explain the project to me like I’m non‑technical.”
-“Walk me through the code path when the user does X.”
-“Propose a safe refactor of Y with step‑by‑step commits.”
-“Audit this module for potential bugs and edge cases.”
-“Generate tests for this component/module using the existing testing framework.”
-Each prompt should:
-Mention the project’s actual stack and folder names where helpful.
-Be written so I can copy‑paste it directly into the AI assistant.
-4. Style and constraints
-Write clearly, in plain language suitable for a careful non‑developer.
-Be highly granular:
-Avoid “set up X” without showing how (include commands, UI navigation, expected outputs).
-Whenever you reference a command:
-Specify where to run it (e.g., “in the project root in a terminal”).
-Use short paragraphs and concise lists.
-Avoid hand‑waving. If you mention a step (e.g., “run migrations”), show the exact command or file where it is defined.
-5. Verification before final answer
-Before you output the markdown guide:
-Check that every phase:
-Has clear, ordered steps.
-Has at least one checklist.
-Verify that:
-Workspace setup is covered from scratch.
-Package installation commands match the project’s actual files.
-Test commands are real and exist in the project configuration.
-Ensure the final output is a single, self‑contained markdown document with no TODOs, no placeholders like “etc.”, and no references to this prompt.
-Then outp"ut the completed markdown guide.
+Do not silently reconcile conflicting documents.
 
-Here is your vibe‑coding prompt, significantly improved with **anti‑pitfall guards** from the common mistakes analysis. This version prevents the most frequent workflow failures while maintaining your granular structure.
+If two sources conflict:
 
-***
+- Cite both files explicitly.
+- State the exact conflict.
+- State whether a higher-priority source resolves it.
+- If it is not resolved by source priority, list it as a blocker in a `Conflicts and Open Decisions` section.
+- If a temporary default is still needed for the guide, label it as a temporary assumption and say why it is risky.
 
-```
-You are GPT‑5.4 Codex Extra High, acting as a senior staff engineer and **vibe‑coding workflow coach**. Your job is to analyze my project files and generate a **bulletproof, phase‑based development guide** that prevents common vibe‑coding failures.
+Examples of the kind of conflicts you must surface if present:
 
-## 🔒 VIBE-CODING SAFETY RULES (MANDATORY)
+- Product-facing agent name conflicts
+- Feature availability conflicts across `v1`, `v1.1`, and `v2`
+- Physics engine conflicts
+- Deployment/runtime conflicts
+- Any disagreement between prototype references and locked build documents
 
-**Follow these rules in every generated step:**
+## Non-Negotiable Project Rules To Carry Forward
 
-1. **SMALL BATCHES ONLY**: Never suggest changes spanning >3 files at once
-2. **TEST AFTER EVERY CHANGE**: Include exact test commands for every code edit
-3. **EXPLICIT CONTEXT**: Every prompt references specific files/folders from this project
-4. **NO ASSUMPTIONS**: Document every inference in an "Assumptions" section
-5. **GIT EVERY STEP**: Include commit commands after every working change
-6. **CHECKLISTS MANDATORY**: Every phase ends with a tickable verification list
+Your guide must preserve the Myelin implementation contracts. Do not produce a generic web-app setup guide.
 
-I will provide project files. Work **only** from those files + these instructions.
+You must explicitly incorporate the following non-negotiables where relevant:
 
-## 🎯 OUTPUT STRUCTURE (EXACT)
+- Myelin v1 is a specification-backed rebuild with locked product and engineering constraints.
+- The rebuild baseline is a `pnpm` + `turbo` + TypeScript monorepo with:
+  - `React + Vite` web app
+  - `NestJS + Fastify` API
+  - worker app
+  - `Kysely + PostgreSQL` with RLS
+  - `BullMQ + Redis`
+  - `Three.js + cannon-es`
+  - `Vitest`, `Playwright`, `ESLint`, `Prettier`
+- Versions are intentionally not pinned in the stack doc. Do not invent exact versions unless they are explicitly present in the provided files. If the source does not pin a version, say to use current stable and lock it in the future lockfile.
+- Tenant isolation is structural and release-blocking if missing.
+- Demo and live data must remain isolated.
+- POPIA consent, audit logging, retention, and role-scoped access are mandatory.
+- Employer mentor onboarding is invite-only.
+- Ministry, procurement, and regulator roles are read-only by default unless explicitly approved and audited.
+- The simulator is a deterministic 7-step LOTO workflow with strict ordered gating.
+- QTB is mandatory in assessed simulation reasoning and is the core conversational method for the AI coach.
+- The AI coach must not provide direct graded answers before submission.
+- AI context binding, response governance, transcript logging, refusal behavior, escalation behavior, and retention rules are mandatory.
+- Transcript writes must happen before rendering AI responses.
+- Safety/distress escalation SLA is 15 minutes.
+- Safety-critical AI responses require verification disclaimers and standard references.
+- Feature version awareness matters: the guide must not present later-version features as live if the docs do not align.
+- WebGL 2 is the baseline; the simulator must handle context loss, resize, and performance tiers.
+- Accessibility minimum is WCAG 2.2 Level A, with AA as the target for core surfaces.
 
-Generate **only** this markdown document:
+## Relevant Skill Contracts
+
+When the guide touches any of these areas, treat the corresponding `docs/skills/*/mnt/user-data/outputs/.../SKILL.md` files as binding implementation contracts, not optional suggestions:
+
+- tenant isolation
+- data model entities
+- auth and RBAC
+- POPIA compliance
+- audit log schema
+- notification service
+- accessibility baseline
+- design system tokens
+- UI shell routing
+- simulation state machine
+- LOTO interaction mechanics
+- simulation telemetry schema
+- physics baseline
+- renderer baseline
+- LOD/performance budget
+- PBR materials
+- audio/haptic feedback
+- AI agent context binding
+- AI response modes
+- AI safety guardrails
+- AI transcript logging
+- test pyramid
+- release gate checklist
+
+## What You Must Read Before Writing
+
+Before writing the guide, read enough of the provided files to build a coherent mental model of:
+
+- the locked v1 scope
+- the rebuild target architecture
+- the expected monorepo layout
+- the security and compliance baseline
+- the simulator runtime baseline
+- the AI coach behavior contract
+- the testing and release bar
+- the unresolved decisions and conflicts
+
+Do not start writing the guide until you can distinguish:
+
+- confirmed facts from proposed defaults
+- v1 live features from v1.1 or v2 items
+- implementation contracts from supporting references
+
+## Output Goal
+
+Generate one markdown document that helps the user bootstrap the Myelin rebuild from zero on a fresh machine, while remaining honest about what is confirmed versus what is proposed.
+
+The guide must be specific enough for someone to follow step by step, but it must never fabricate existing files, existing commands, or existing local infrastructure when the source package does not contain them.
+
+## Required Output Structure
+
+Produce only this markdown document:
 
 ```markdown
-# [PROJECT NAME] - Vibe-Coding Development Guide
-## 🚀 Quick Start Checklist  
-## 📋 Project Overview & Tech Stack
-## ⚠️ Assumptions Made
-## 🛠️ Phase 1 - Workspace (Zero to Editor)
-## 🔧 Phase 2 - Bootstrap (First Run)
-## 🔄 Phase 3 - Vibe-Coding Loop (Safe Iteration)
-## 🧪 Phase 4 - Testing Matrix
-## 🚀 Phase 5 - Build & Deploy
-## 📚 Appendix - Copilot Prompts
+# Myelin Professional Rebuild - Development Guide
+
+## Quick Start Checklist
+
+## What This Source Package Is
+
+## Source-Of-Truth Order
+
+## Confirmed Repo Facts
+
+## Assumptions And Proposed Bootstrap Defaults
+
+## Conflicts And Open Decisions
+
+## Locked v1 Scope And Version Boundaries
+
+## Architecture And Workspace Blueprint
+
+## Phase 1 - Workspace Setup (Zero To Editor)
+
+## Phase 2 - Bootstrap The Rebuild Workspace
+
+## Phase 3 - Safe Vibe-Coding Loop
+
+## Phase 4 - Testing, Quality, And Release Gates
+
+## Phase 5 - Build, Environments, And Deployment
+
+## Appendix - Myelin-Specific Copilot Prompts
 ```
 
+You may add subsections, but keep this top-level structure.
 
----
+## Section Requirements
 
-## 1️⃣ PROJECT ANALYSIS CHECKLIST
+### 1. Quick Start Checklist
 
-**Before writing anything**, confirm you understand:
+Include a short checklist that makes clear this is a rebuild bootstrap path, not a runnable repo walkthrough.
 
-```
-[ ] Tech stack identified (frameworks, languages, package managers)
-[ ] Entry points found (index.html, main.py, App.tsx, etc.)
-[ ] Dependencies mapped (from package.json, requirements.txt, etc.)
-[ ] Config files noted (.env.example, docker-compose.yml, etc.)
-[ ] Test commands discovered (npm test, pytest, etc.)
-[ ] Build/deploy scripts identified (npm run build, etc.)
-```
+### 2. What This Source Package Is
 
-**If missing info**: Add to Assumptions section with fallback solutions.
+State plainly that:
 
----
+- this folder is a source package of specs and prototypes
+- it is not the final app
+- the guide will define a proposed workspace based on the specs
 
-## 2️⃣ PHASE REQUIREMENTS (DETAILED)
+### 3. Source-Of-Truth Order
 
-### Phase 1 - Workspace (Zero to Editor)
+List the document precedence you used.
 
-```
-✅ Fresh machine setup (Windows/macOS/Linux variants)
-✅ Git + exact runtime versions (node --version, python --version)
-✅ Editor setup (Cursor/VS Code + AI Copilot enabled)
-✅ Workspace Checklist with success verification commands
-✅ .vscode/settings.json or Cursor rules for this project
-```
+### 4. Confirmed Repo Facts
 
-**Commands must include**: Where to run, expected output, error handling
+List only facts that are directly supported by the provided files, for example:
 
-### Phase 2 - Bootstrap (First Run)
+- repo contents that actually exist
+- locked stack decisions
+- locked scope decisions
+- required roles
+- mandatory simulator and AI rules
+- testing and release expectations
 
-```
-✅ Exact dependency install commands from project files
-✅ .env template with every required variable listed
-✅ Database/container spin‑up (docker-compose up -d, etc.)
-✅ First‑run checklist: "All servers running? Tests green?"
-✅ Common error patterns + fixes (lockfile conflicts, port binding)
-```
+Do not mix assumptions into this section.
 
+### 5. Assumptions And Proposed Bootstrap Defaults
 
-### Phase 3 - VIBE-CODING LOOP (CRITICAL)
+This section is mandatory.
 
-**Structure as: PLAN → 1-2 FILES → TEST → COMMIT**
+For each proposed bootstrap default, state:
 
-**Include these exact sub‑sections:**
+- what you are assuming
+- why the assumption is reasonable
+- which source documents support the direction
+- what would need confirmation later
 
-```
-3.1 Decision Framework (feature prioritization)
-3.2 File Location Guide (where things live)
-3.3 5 Ready‑To‑Copy Prompts (specific to this project)
-3.4 Safety Checklists x3:
-   - Before code changes
-   - After AI suggestions
-   - Before git commit
-```
+This section must cover:
 
+- proposed workspace layout
+- proposed command surface
+- proposed `.env` file layout
+- proposed local service setup
+- proposed package/app entrypoints
+- proposed deployment separation between `dev`, `stage`, and `prod`
 
-### Phase 4 - Testing Matrix (MANDATORY TABLE)
+### 6. Conflicts And Open Decisions
 
-```
-| Test Type | Command | When | Green = |
-|-----------|---------|------|---------|
-| Unit     | npm test | Every change | 100% pass |
-| Lint     | npm run lint | Before commit | 0 errors |
-| E2E      | cypress run | Before deploy | All specs pass |
-```
+This section is mandatory.
 
+It must include:
 
-### Phase 5 - Production
+- document conflicts
+- unresolved product decisions
+- unresolved implementation blockers
+- impact of each issue on bootstrap or delivery
+- whether the guide can proceed with an assumption or must stop and flag a blocker
 
-```
-✅ Build command + output verification
-✅ Environment differences (dev vs prod)
-✅ Deployment assumptions (Vercel/Netlify/Docker)
-✅ Pre‑deploy checklist
-```
+### 7. Locked v1 Scope And Version Boundaries
 
+Create a compact table that separates:
 
----
+- v1 live / pilot-launch scope
+- v1 feature-flagged but not pilot-launch-blocking scope
+- v1.1 scope
+- v2 scope
 
-## 3️⃣ WRITING STYLE \& ANTI‑PITFALL GUARDS
+Explicitly flag contradictions if different docs disagree.
 
-**Every step must include:**
+### 8. Architecture And Workspace Blueprint
 
-1. **Exact terminal command** + where to run it
-2. **Success criteria** ("Should see: Server running on :3000")
-3. **Common failure + fix** ("Port 3000 busy? Kill with: lsof -ti:3000")
-4. **Git commit command** with behavioral message
+Describe the future rebuild workspace that should be created from the specs.
 
-**Example step format:**
+Include:
 
-```
-1. Run: `npm install` (in project root)
-   ✅ Success: "added 142 packages"
-   ❌ If fails: Delete node_modules + package-lock.json, retry
-   💾 Commit: `git add . && git commit -m "feat: install deps"`
-```
+- proposed monorepo layout
+- app and package responsibilities
+- major data and service boundaries
+- where simulator logic lives versus React shell logic
+- where auth, DB, contracts, UI, telemetry, and AI packages should live
 
+### 9. Phase 1 - Workspace Setup (Zero To Editor)
 
----
+Explain from scratch, with Windows 11 as the primary path and short macOS/Linux notes only where helpful.
 
-## 4️⃣ APPENDIX - PROJECT‑SPECIFIC PROMPTS
+Include:
 
-**Include these 8 copy‑paste prompts, customized to this project:**
+- Git
+- Node.js LTS
+- Corepack / `pnpm`
+- Docker Desktop or equivalent local container runtime if proposed for local services
+- editor setup in Cursor or VS Code
+- how to trust the workspace
+- how to verify each install
 
-```
-1. "In [MAIN_FILE], explain the current architecture like I'm 5"
-2. "Propose 3‑step plan to add [FEATURE] touching only these files: ..."
-3. "Review my changes in [FILES] - bugs? Missing edge cases?"
-4. "Generate tests for [FUNCTION] using existing [TEST_FRAMEWORK]"
-5. "Refactor [FILE] for readability, no behavior change"
-6. "Fix this error: [PASTE_ERROR] in minimal diff"
-7. "Does [NEW_CODE] match project conventions in [CONVENTIONS_FILE]?"
-8. "Update README.md to reflect current implementation"
-```
+Important:
 
+- If a version is not pinned in the source package, do not invent one.
+- Say "current stable" where the docs leave versions open.
 
----
+### 10. Phase 2 - Bootstrap The Rebuild Workspace
 
-## 5️⃣ FINAL VERIFICATION (DO NOT SKIP)
+This phase must explicitly describe creating the new workspace implied by the specs.
 
-**Before outputting**, confirm:
+Include:
 
-```
-[ ] Every phase has numbered steps + checklist
-[ ] All commands match actual project files
-[ ] Test matrix has 3+ rows
-[ ] 8 appendix prompts are project‑specific
-[ ] No vague instructions ("etc.", "setup X")
-[ ] Git commits after every working change
-[ ] Common errors documented with fixes
-[ ] Single markdown file, no prompt references
-```
+- the proposed folder structure to create
+- the proposed root files to create
+- the proposed command surface
+- the proposed `.env` files
+- local Postgres and Redis setup if you recommend them
+- first-run workflow for web, API, worker, DB, and tests
 
-**Output ONLY the completed markdown guide.**
+Critical rule:
 
+- Any command, file, or script not already present in the source package must be labeled as a proposed bootstrap default, not as an existing repo command.
 
+For environment variables:
 
+- List only directly evidenced variables as confirmed when the source supports them.
+- Group the rest by purpose and label them as proposed defaults.
+- Never imply a secret value is known.
+
+### 11. Phase 3 - Safe Vibe-Coding Loop
+
+Structure this as:
+
+`Plan -> 1-2 files -> Test -> Inspect -> Commit`
+
+Do not recommend large-batch edits.
+
+This section must include:
+
+#### 3.1 Decision Framework
+
+How to choose the next task using locked scope, release priority, dependency order, and blocker status.
+
+#### 3.2 File Location Guide
+
+Where to work for:
+
+- web app UI
+- routing
+- auth and RBAC
+- DB schema and queries
+- AI orchestration
+- transcript logging
+- simulator runtime
+- simulation state machine
+- telemetry
+- notifications
+- admin/reporting
+
+#### 3.3 Guardrails Before Editing
+
+Require the reader to check whether the task touches:
+
+- tenant-scoped data
+- role gates
+- consent/privacy
+- audit logs
+- simulator thresholds
+- AI safety or transcript behavior
+- demo mode isolation
+
+#### 3.4 Review Loop After AI Suggestions
+
+Require explicit checks for:
+
+- invented files or commands
+- missing tenant guards
+- missing audit behavior
+- missing consent/privacy handling
+- missing simulator determinism constraints
+- missing AI context binding / transcript logging / refusal logic
+- feature-version drift
+
+#### 3.5 Before Commit
+
+Require:
+
+- smallest safe batch
+- test evidence
+- explicit risk check
+- behavioral commit message
+
+### 12. Phase 4 - Testing, Quality, And Release Gates
+
+Do not reduce this to a generic `unit/lint/e2e` table.
+
+Build a testing and release matrix that includes, where relevant:
+
+- lint
+- typecheck
+- unit
+- integration
+- simulator-specific
+- E2E
+- build
+- dependency vulnerability scan
+- secret scan
+- accessibility checks
+- migration checks
+- tenant isolation validation
+- AI guardrail and transcript tests
+- compliance / release-gate evidence
+
+Also include:
+
+- what each test type is validating in Myelin
+- when to run it
+- what a passing result means
+- what common failure modes imply
+
+### 13. Phase 5 - Build, Environments, And Deployment
+
+This section must remain honest about the limits of the source package.
+
+If provider-specific deployment files do not exist:
+
+- say so
+- keep deployment guidance high level
+- label it as assumption-based
+
+Cover:
+
+- `dev`, `stage`, and `prod` environment separation
+- build outputs expected from the proposed workspace
+- release blockers
+- rollback expectations
+- required evidence before production release
+
+### 14. Appendix - Myelin-Specific Copilot Prompts
+
+Provide copy-paste prompts tailored to this project.
+
+These prompts must reference real Myelin domains and tell the copilot which source files or contract files to read first.
+
+Include prompts for at least:
+
+- explaining the architecture
+- adding a tenant-safe API feature
+- reviewing an RBAC change
+- reviewing a POPIA / audit-impacting change
+- implementing an AI orchestration change
+- implementing transcript logging
+- implementing a simulator step rule
+- generating simulator-specific tests
+- reviewing a release candidate against Myelin release gates
+
+## Writing Rules
+
+Your guide must:
+
+- use plain language for a careful non-expert
+- be concrete and step-by-step
+- make the boundary between fact and assumption obvious
+- avoid vague phrases like "etc." or "set up X"
+- never pretend proposed files already exist
+- never pretend unresolved conflicts are settled
+- never ignore Myelin-specific contracts in favor of generic advice
+
+Whenever you show a command, include:
+
+1. where to run it
+2. whether it is confirmed from the source package or a proposed bootstrap command
+3. what success looks like
+4. common failure and next step
+
+If you mention a file, make clear whether it:
+
+- already exists in `primary_build_source`, or
+- is a proposed file to create in the future rebuild workspace
+
+## Final Verification Before You Answer
+
+Before outputting the guide, verify that all of the following are true:
+
+- the guide clearly says the current package is not a runnable app
+- confirmed facts and proposed defaults are separated
+- conflicts and open decisions are explicitly listed
+- no command is falsely presented as already existing when it does not
+- the guide preserves Myelin's tenant, privacy, audit, simulator, AI, accessibility, and release-gate constraints
+- feature version boundaries are explicit
+- testing coverage includes Myelin-specific risk areas
+- deployment guidance is honest about missing IaC / deployment manifests
+- the output is a single markdown document with no prompt commentary
+
+Output only the completed markdown guide.
