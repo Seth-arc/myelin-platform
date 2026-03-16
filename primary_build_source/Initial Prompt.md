@@ -55,6 +55,9 @@ Examples of the kind of conflicts you must surface if present:
 - Feature availability conflicts across `v1`, `v1.1`, and `v2`
 - Physics engine conflicts
 - Deployment/runtime conflicts
+- Upload-policy conflicts such as `MP4 only` vs `MP4/WebM`
+- Notification-policy conflicts such as quiet-hours requirements vs v1 decisions
+- Retention-policy conflicts across transcript, audit, and broader learner records
 - Any disagreement between prototype references and locked build documents
 
 ## Non-Negotiable Project Rules To Carry Forward
@@ -83,21 +86,33 @@ You must explicitly incorporate the following non-negotiables where relevant:
 - The AI coach must not provide direct graded answers before submission.
 - AI context binding, response governance, transcript logging, refusal behavior, escalation behavior, and retention rules are mandatory.
 - Transcript writes must happen before rendering AI responses.
+- AI prompt-injection defense is mandatory when any user-supplied content is included in prompts or system instructions.
+- AI responses that trigger policy flags must also be treated as incident-review events in the platform's operational model.
 - Safety/distress escalation SLA is 15 minutes.
 - Safety-critical AI responses require verification disclaimers and standard references.
 - Feature version awareness matters: the guide must not present later-version features as live if the docs do not align.
 - WebGL 2 is the baseline; the simulator must handle context loss, resize, and performance tiers.
 - Accessibility minimum is WCAG 2.2 Level A, with AA as the target for core surfaces.
+- Focus behavior, reduced motion, captions, keyboard access, and exact platform naming are part of the quality bar.
+- Product v1 language is English only unless a higher-priority source explicitly says otherwise.
+- AI learner-facing language should preserve the documented South African English / plain-English / Grade 8 readability constraints.
+- Retention classes must not be flattened into one rule. Preserve distinctions such as shorter AI transcript retention versus longer learner, financial, and audit retention where the source documents require that distinction.
+- Pilot KPI scorecards, baseline freeze rules, reporting cadence, and package entitlements affect delivery scope and must be represented honestly.
+- Observability is part of delivery, not post-launch polish: central logs, metrics, traces, alerting, and diagnosable evidence are required for critical workflows.
+- Runbooks are required before release readiness for operationally significant subsystems.
+- Source-of-truth docs and package/app READMEs must be updated when implementation materially changes the system.
 
 ## Relevant Skill Contracts
 
 When the guide touches any of these areas, treat the corresponding `docs/skills/*/mnt/user-data/outputs/.../SKILL.md` files as binding implementation contracts, not optional suggestions:
 
 - tenant isolation
+- demo mode isolation
 - data model entities
 - auth and RBAC
 - POPIA compliance
 - audit log schema
+- kpi scorecard contract
 - notification service
 - accessibility baseline
 - design system tokens
@@ -165,6 +180,10 @@ Produce only this markdown document:
 
 ## Architecture And Workspace Blueprint
 
+## Prototype-To-Production Traceability
+
+## Pilot Governance, KPI Scorecard, And Entitlements
+
 ## Phase 1 - Workspace Setup (Zero To Editor)
 
 ## Phase 2 - Bootstrap The Rebuild Workspace
@@ -174,6 +193,8 @@ Produce only this markdown document:
 ## Phase 4 - Testing, Quality, And Release Gates
 
 ## Phase 5 - Build, Environments, And Deployment
+
+## Observability, Incident Handling, And Runbooks
 
 ## Appendix - Myelin-Specific Copilot Prompts
 ```
@@ -266,7 +287,30 @@ Include:
 - where simulator logic lives versus React shell logic
 - where auth, DB, contracts, UI, telemetry, and AI packages should live
 
-### 9. Phase 1 - Workspace Setup (Zero To Editor)
+### 9. Prototype-To-Production Traceability
+
+Map the provided prototype/reference assets to the future rebuild architecture.
+
+Include:
+
+- which prototype or reference files are useful as implementation references
+- which future app surface, route, or service each reference most likely maps to
+- known prototype inconsistencies or drift that must not be copied blindly into production
+- a reminder that prototype HTML is reference material, not the canonical runtime model
+
+### 10. Pilot Governance, KPI Scorecard, And Entitlements
+
+Summarize the commercial and pilot-governance constraints that affect implementation order and release decisions.
+
+Include:
+
+- KPI families that are mandatory for pilot sign-off
+- baseline freeze and formula-change controls
+- reporting cadence and evidence expectations
+- package entitlement tiers and what they imply for rollout
+- any places where feature access is package-gated, approval-gated, or feature-flagged
+
+### 11. Phase 1 - Workspace Setup (Zero To Editor)
 
 Explain from scratch, with Windows 11 as the primary path and short macOS/Linux notes only where helpful.
 
@@ -285,7 +329,7 @@ Important:
 - If a version is not pinned in the source package, do not invent one.
 - Say "current stable" where the docs leave versions open.
 
-### 10. Phase 2 - Bootstrap The Rebuild Workspace
+### 12. Phase 2 - Bootstrap The Rebuild Workspace
 
 This phase must explicitly describe creating the new workspace implied by the specs.
 
@@ -308,7 +352,7 @@ For environment variables:
 - Group the rest by purpose and label them as proposed defaults.
 - Never imply a secret value is known.
 
-### 11. Phase 3 - Safe Vibe-Coding Loop
+### 13. Phase 3 - Safe Vibe-Coding Loop
 
 Structure this as:
 
@@ -371,7 +415,7 @@ Require:
 - explicit risk check
 - behavioral commit message
 
-### 12. Phase 4 - Testing, Quality, And Release Gates
+### 14. Phase 4 - Testing, Quality, And Release Gates
 
 Do not reduce this to a generic `unit/lint/e2e` table.
 
@@ -399,7 +443,7 @@ Also include:
 - what a passing result means
 - what common failure modes imply
 
-### 13. Phase 5 - Build, Environments, And Deployment
+### 15. Phase 5 - Build, Environments, And Deployment
 
 This section must remain honest about the limits of the source package.
 
@@ -417,7 +461,20 @@ Cover:
 - rollback expectations
 - required evidence before production release
 
-### 14. Appendix - Myelin-Specific Copilot Prompts
+### 16. Observability, Incident Handling, And Runbooks
+
+This section is mandatory.
+
+Cover:
+
+- logs, metrics, traces, and correlation IDs expected for critical workflows
+- what must be observable for API, queue, upload, simulator, and AI paths
+- incident logging expectations, including AI policy/safety incidents
+- minimum runbooks required before release readiness
+- rollback and previous-release redeploy expectations
+- how operational readiness differs from feature completeness
+
+### 17. Appendix - Myelin-Specific Copilot Prompts
 
 Provide copy-paste prompts tailored to this project.
 
@@ -442,10 +499,12 @@ Your guide must:
 - use plain language for a careful non-expert
 - be concrete and step-by-step
 - make the boundary between fact and assumption obvious
+- preserve exact platform naming when referring to product UI, workflow states, buttons, and system labels
 - avoid vague phrases like "etc." or "set up X"
 - never pretend proposed files already exist
 - never pretend unresolved conflicts are settled
 - never ignore Myelin-specific contracts in favor of generic advice
+- never flatten conflicting retention, upload, notification, or feature-availability policies into one invented rule
 
 Whenever you show a command, include:
 
@@ -466,11 +525,15 @@ Before outputting the guide, verify that all of the following are true:
 - the guide clearly says the current package is not a runnable app
 - confirmed facts and proposed defaults are separated
 - conflicts and open decisions are explicitly listed
+- upload, notification, retention, and version-boundary conflicts are surfaced where present
 - no command is falsely presented as already existing when it does not
 - the guide preserves Myelin's tenant, privacy, audit, simulator, AI, accessibility, and release-gate constraints
+- the guide includes prototype traceability, pilot governance, observability, and runbook expectations
+- language, localization, and AI copy constraints are explicit where relevant
 - feature version boundaries are explicit
 - testing coverage includes Myelin-specific risk areas
 - deployment guidance is honest about missing IaC / deployment manifests
+- documentation-update obligations are not omitted
 - the output is a single markdown document with no prompt commentary
 
 Output only the completed markdown guide.
