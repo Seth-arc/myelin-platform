@@ -145,7 +145,7 @@ Accountable owner: Sethu
 Build partner: GPT-5.3-Codex
 
 - Build escalation case queue and status model
-- Configure admin notifications (email, SMS, push)
+- Configure admin notifications (email and SMS in v1; push optional post-pilot)
 - Add SLA timers and breach alerts (`T+12`, `T+15`)
 - Publish triage runbook and handoff SOP
 

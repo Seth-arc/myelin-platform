@@ -72,9 +72,9 @@ This document records product and technical decisions from stakeholder Q&A. It s
 |-------|----------|
 | **Multi-tenant isolation** | Postgres **row-level security (RLS)** required (not application-level scoping only). |
 | **SSO** | Required for v1. Support as **generic as possible** (e.g. SAML 2.0 / OIDC so any compliant IdP can be used). |
-| **GraphQL** | In scope for v1 (for complex/mobile queries). |
+| **GraphQL** | Not required for bootstrap or pilot launch. Reassess after the REST domain model and dashboard query patterns stabilize. |
 | **File storage** | Still open (no constraint specified). |
-| **Notifications** | Email/SMS/push in scope for v1 (e.g. early warning, reminders to learners/employers). |
+| **Notifications** | Email and SMS required for v1 pilot launch. Push deferred until after pilot launch as a feature-flagged extension. |
 
 ---
 

@@ -58,8 +58,8 @@ Execution model:
 | SIM-002 | Simulator assessment telemetry | Step-level events, attempt outcomes, pass/fail evidence. | Student, Lecturer | P0 | v1 |
 | SIM-003 | AI-guided simulation mode | Optional guided instructions while preserving strict step validation. | Student | P0 | v1 |
 | AI-001 | Learning Coach text mode | Context-aware Q and A with safety-aligned guidance. | Student | P0 | v1 |
-| AI-002 | Guided media mode | Curated visual explanations and contextual references. | Student | P1 | v1.1 |
-| AI-003 | Advanced video interaction mode | Extended conversational/video coaching experience. | Student | P2 | v2 |
+| AI-002 | Guided media mode | Curated visual explanations and contextual references. | Student | P0 | v1 |
+| AI-003 | Live conversational mode | Feature-flagged voice + avatar/video coaching for approved tenants after readiness sign-off. | Student | P1 | v1 |
 | PORT-001 | e-Portfolio submissions | Upload, process, and track practical video evidence. | Student, Lecturer | P0 | v1 |
 | PORT-002 | Submission workflow states | Draft, submitted, review in progress, passed, rework required. | Student, Lecturer | P0 | v1 |
 | PEER-001 | Peer review assignment engine | Assign anonymized peer reviews using configurable rules. | Student, Lecturer | P0 | v1 |
@@ -158,7 +158,7 @@ Execution model:
 ### PORT-001 e-Portfolio submissions
 - Description: Learner practical evidence submission pipeline.
 - Key requirements:
-  - Upload formats include MP4 and WebM.
+  - Upload format is MP4 only in v1.
   - File size limits configurable (default support for 500 MB in v1 policy).
   - Virus scanning and safe storage before review.
 - Acceptance criteria:

@@ -181,7 +181,8 @@ Five gate categories. All blocking gates in all categories must pass.
 ### PA4 — Accessibility Baseline (Advisory)
 
 - Run axe or Lighthouse accessibility audit against learner dashboard, simulation screen, and result statement view
-- Advisory gate for v1: no WCAG 2.2 Level A violations (Level AA is the target milestone for v2)
+- Advisory gate for v1: zero WCAG 2.2 Level A violations.
+- WCAG 2.2 AA remains the target for all core surfaces and becomes mandatory before government/ministry-grade deployment.
 
 ### PA5 — Mobile Responsive Verification (Advisory)
 

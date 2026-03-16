@@ -246,7 +246,7 @@ Key fields:
 - `itemId` UUID FK → LearningItem
 - `version` integer (increments on resubmission; prior versions are retained)
 - `fileRef` string (signed storage URL or object key)
-- `fileType` enum: MP4 | WEBM
+- `fileType` enum: MP4
 - `fileSizeBytes` integer
 - `malwareScanStatus` enum: PENDING | CLEAN | QUARANTINED
 - `transcodeStatus` enum: PENDING | COMPLETE | FAILED

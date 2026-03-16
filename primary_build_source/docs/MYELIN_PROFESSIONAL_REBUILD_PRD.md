@@ -136,7 +136,7 @@ Key role capabilities:
 - Prospect demo mode based on core curriculum baseline units with safe, non-production demo data.
 - LOTO simulation production version with event tracking and deterministic assessment.
 - Controlled simulation pathway pack behind feature flags for pilot expansion (`PV`, `Mobile Repair`, `PCB Rework`) where approved.
-- AI learning coach (text-first production, guided media and controlled video mode).
+- AI learning coach (text mode and guided media required for v1 launch; live conversational video available as a controlled feature-flagged rollout after readiness sign-off).
 - e-Portfolio upload and submission workflow.
 - Peer review workflow with rubric scoring and moderation controls.
 - Workplace logbook with mentor sign-off.
@@ -284,6 +284,7 @@ Requirement IDs:
 | AI-004 | Conversation logs shall be stored with tenant isolation and retention policy. |
 | AI-005 | Learners shall be able to switch between text and guided media mode in-session. |
 | AI-006 | Unsafe or non-compliant guidance requests shall trigger refusal and safe alternative guidance. |
+| AI-007 | Live conversational mode may be enabled by feature flag for approved tenants after separate safety, latency, transcript, and operational readiness sign-off. |
 
 ### 9.5 e-Portfolio
 
@@ -453,7 +454,7 @@ Data principles:
 
 ### 13.1 API Style
 - REST for transactional operations.
-- GraphQL endpoint for complex learner dashboards and mobile-optimized queries.
+- REST is the required v1 API surface. GraphQL may be added later for complex learner dashboards and mobile-optimized queries after the REST domain model stabilizes.
 - Event bus for async workflows (notifications, transcoding, scoring jobs).
 
 ### 13.2 Representative API Domains
@@ -469,7 +470,7 @@ Data principles:
 
 ### 13.3 Contract Requirements
 - OpenAPI spec for REST endpoints.
-- Schema versioning for GraphQL.
+- If GraphQL is added later, apply explicit schema versioning and parity checks against the REST contract.
 - Idempotency keys for submission and event ingestion endpoints.
 - Tenant and actor identity in all request context.
 
@@ -505,8 +506,9 @@ Data principles:
 - Prospect demo mode must use synthetic or anonymized dataset only, with explicit prohibition on live tenant data exposure.
 
 ### 14.5 Accessibility
-- WCAG 2.2 AA baseline for web application surfaces.
-- Keyboard navigation for all core workflows.
+- WCAG 2.2 Level A is the minimum v1 release gate for web application surfaces.
+- WCAG 2.2 AA is the target for all core surfaces and required before government/ministry-grade deployment.
+- Keyboard access is required for all core workflows, simulator HUD controls, and documented simulator shortcuts.
 - Captions support for video content.
 - Reduced motion mode for intense animation contexts.
 
@@ -701,7 +703,7 @@ Minimum controls:
 
 1. Confirm v1 scope boundary between training platform modules and broader SIS/ERP ambitions captured in prior stakeholder notes.
 2. Confirm formal list of regulator export formats required at pilot launch.
-3. Confirm required level of AI video mode in v1 (full conversational video vs guided media mode).
+3. AI video scope for v1 is locked: live conversational mode is feature-flagged and not pilot-launch blocking.
 4. Confirm statement-of-results legal formatting requirements per institution/regulator.
 5. Confirm target pilot institutions and cutover timeline.
 

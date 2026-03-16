@@ -278,7 +278,7 @@ Use an 8px rhythm with 4px sub-steps:
 ## 10. Accessibility Standards
 
 ### 10.1 Contrast
-- Text and interactive elements should meet WCAG 2.2 AA contrast ratios.
+- Text and interactive elements must meet WCAG 2.2 Level A requirements in v1 and should meet WCAG 2.2 AA contrast targets on all core surfaces.
 - Avoid low-contrast muted text for required instructions.
 
 ### 10.2 Keyboard Support

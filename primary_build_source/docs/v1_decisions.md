@@ -55,7 +55,8 @@ v1 must support:
   - learner gets 3 retries
   - after 3 failed retries, escalate to lecturer engagement
   - lecturer can allow additional retry
-- Keyboard-only completion requirement: not required.
+- Sequential Tab-based completion of the 3D canvas is not required.
+- Keyboard access is required for all core workflows, simulator HUD controls, and documented simulator shortcuts.
 - Device support for full simulator:
   - desktops
   - laptops
@@ -71,10 +72,11 @@ v1 must support:
 
 ## 5. AI Coach Decisions (Locked)
 
-- Required in v1:
+- Required at pilot launch in v1:
   - text mode
   - guided media mode
-  - true live conversational video mode
+- Live conversational video mode remains in v1 scope but is feature-flagged and not pilot-launch blocking.
+- Live conversational video mode may be enabled only for approved tenants after separate safety, latency, transcript, and operational readiness sign-off.
 - AI must never provide direct answers to graded questions before submission.
 - If learner asks unsafe real-world guidance:
   - AI must advise against unsafe behavior
@@ -126,6 +128,7 @@ v1 must support:
 ## 8. Uploads, Files, and Media Decisions (Locked)
 
 - Allowed submission type: MP4 only.
+- WebM is not accepted in v1 unless this document is explicitly amended.
 - Upload cap: fixed 500 MB.
 - Upload/scan/transcode failure handling:
   - notify admin
@@ -140,10 +143,10 @@ v1 must support:
 
 ## 9. Notifications and Communications Decisions (Locked)
 
-- v1 channels:
+- v1 pilot-launch channels:
   - email
   - SMS
-  - push
+- Push notifications are deferred until after pilot launch as a feature-flagged extension.
 - Required v1 triggers:
   - signup welcome
   - course added to profile
@@ -168,7 +171,9 @@ v1 must support:
 - Remove `ITS Construct` branding from login, registration, and email surfaces.
 - Technical theme storage key: `myelin-theme`.
 - Language in v1: English only.
-- Accessibility baseline: WCAG 2.1 AA.
+- Accessibility release bar for v1: WCAG 2.2 Level A minimum.
+- Accessibility target for all core surfaces: WCAG 2.2 AA.
+- Government/ministry-grade deployment requires WCAG 2.2 AA sign-off.
 
 ---
 

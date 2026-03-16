@@ -124,7 +124,7 @@ AI Orchestrator Service
         +--> LLM Inference Service
         +--> Speech Services (ASR/TTS)
         +--> Avatar/Video Render Service
-        +--> Notification Service (email/SMS/push)
+        +--> Notification Service (email/SMS in v1; push optional post-pilot)
         +--> Core Platform DB (tenant, user, role, policy)
 ```
 
@@ -316,7 +316,7 @@ Auto-create escalation case when:
 SLA behavior:
 
 - Escalation case timer starts at case creation.
-- Admin notification fanout via email, SMS, push.
+- Admin notification fanout via email and SMS in v1; push optional post-pilot.
 - Breach alert at `T+12 min`; SLA breach at `T+15 min`.
 
 ### 9.4 Human Approval Matrix (Non-Negotiable)

@@ -15,7 +15,7 @@ Tau supports three response modes. The active mode is stored in the session stat
 |------|----|-----------|-------------|
 | Text | `TEXT` | Always on | Standard conversational text response, markdown-aware |
 | Guided media | `GUIDED_MEDIA` | Feature-flagged per tenant | Text response with embedded references to approved video/document content |
-| Live conversational | `LIVE_CONVERSATIONAL` | Feature-flagged, Operational/National tier only | Voice + avatar/video surface; real-time interaction |
+| Live conversational | `LIVE_CONVERSATIONAL` | Feature-flagged, Operational/National tier only; not pilot-launch blocking | Voice + avatar/video surface; real-time interaction after readiness sign-off |
 
 Mode availability is gated by tenant feature flags. The UI must check `tenant.featureFlags.aiAgentGuidedMedia` and `tenant.featureFlags.aiAgentLiveConversational` before rendering mode toggle controls.
 
@@ -131,7 +131,7 @@ Do not allow the agent to reference a URL that is not in the registry. If the ag
 
 ## Mode 3 — LIVE_CONVERSATIONAL
 
-Voice-enabled interaction with an avatar/video surface. This mode is a controlled feature — not available at Pilot tier by default.
+Voice-enabled interaction with an avatar/video surface. This mode is a controlled v1 feature — not pilot-launch blocking and not available at Pilot tier by default.
 
 v1 implementation requirements for live conversational mode:
 - Use a supported real-time voice API (STT → LLM → TTS pipeline, or a unified API)
