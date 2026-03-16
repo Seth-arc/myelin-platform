@@ -7,6 +7,7 @@ This folder is the consolidated source package for the professional rebuild.
 - `docs/`
   - `MYELIN_PROFESSIONAL_REBUILD_PRD.md`
   - `MYELIN_PROFESSIONAL_FEATURES.md`
+  - `MYELIN_ENGINEERING_STANDARDS_AND_QUALITY_BAR.md`
   - `MYELIN_UI_UX_STYLING_GUIDE.md`
   - `MYELIN_SIMULATION_BUILD_SINGLE_SOURCE_SPEC.md`
 
